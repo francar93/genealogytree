@@ -1,0 +1,132 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package classi;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Date;
+import utilita.Database;
+
+/**
+ *
+ * @author matteocapodicasa
+ */
+public class utente {
+    
+    public String nome;
+    public String cognome;
+    public Date dataNascita;
+    private final String id;
+    public String citta;
+    public String sesso;
+    public String email;
+    public String password;
+    public String info;
+    public String idPadre;
+    public String idMadre;
+    public String idPartner;
+    
+     /**
+     * Metodo costruttore
+     * @param utente      contiene i dati personali dell'utente
+     * @throws java.sql.SQLException
+     */
+    public utente(ResultSet utente) throws SQLException{
+
+        this.id             = utente.getString("id");
+        this.nome           = utente.getString("nome");
+        this.cognome        = utente.getString("cognome");
+        this.email          = utente.getString("email");
+        this.password       = utente.getString("password");
+        this.sesso          = utente.getString("sesso");
+        this.dataNascita    = utente.getDate("datanascita");
+        this.citta          = utente.getString("citta");
+        this.info           = utente.getString("info");
+        this.idMadre        = utente.getString("idmadre");
+        this.idPadre        = utente.getString("idpadre");
+        this.idPartner      = utente.getString("idpartner");
+    }
+    
+    public utente(String id, String nome, String cognome, String email, String password, String sesso, Date dataNascita, String citta, String info ){
+
+        this.id             = id;
+        this.nome           = nome;
+        this.cognome        = cognome;
+        this.email          = email;
+        this.password       = password;
+        this.sesso          = sesso;
+        this.dataNascita    = dataNascita;
+        this.citta          = citta;
+        this.info           = info;
+        this.idMadre        = null;
+        this.idPadre        = null;
+        this.idPartner      = null;
+    }
+     
+    
+//Metodi Get    
+    
+        public String getId(){
+            return this.id;
+        }
+
+        public String getNome(){
+            return this.nome;
+        }
+
+        public String getCognome(){
+            return this.cognome;
+        }
+
+        public String getEmail(){
+            return this.email;
+        }
+        
+        public String getPassword() throws SQLException{
+
+            ResultSet record = Database.selectRecord("utente", "id = '" + this.id + "'");
+            if(record.next()){
+                return record.getString("password"); 
+            }
+            return null;
+        }
+        
+        public String getSesso(){
+            return this.sesso;
+        }
+        
+        public Date getDataNascita(){
+            return this.dataNascita;
+        }
+
+
+        public String getCitta(){
+            return this.citta;
+        }
+
+
+        public String getInfo() {
+            return this.info;
+        }
+
+        public String getIdMadre() throws SQLException {
+            return this.idMadre;
+        }
+
+        public String getIdPadre() throws SQLException {
+            return this.idPadre;
+        }
+
+        public String getIdPartner() throws SQLException {
+            return this.idPartner;
+        }
+        
+//Metodi Set
+        
+        
+}
+
+
