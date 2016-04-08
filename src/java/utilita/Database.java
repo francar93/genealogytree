@@ -29,7 +29,7 @@ public class Database {
      */
     public static void connect() throws NamingException, SQLException{
         InitialContext ctx = new InitialContext();
-        DataSource ds = (DataSource) ctx.lookup("java:comp/env/caricamentodatidb");
+        DataSource ds = (DataSource) ctx.lookup("java:comp/env/genealogytree");
         Database.db  = ds.getConnection();
     }
     

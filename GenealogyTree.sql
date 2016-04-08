@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Creato il: Apr 07, 2016 alle 17:05
+-- Creato il: Apr 08, 2016 alle 11:47
 -- Versione del server: 10.1.9-MariaDB
 -- Versione PHP: 5.6.15
 
@@ -39,19 +39,26 @@ CREATE TABLE `richieste` (
 --
 
 CREATE TABLE `user` (
-  `nome` varbinary(50) NOT NULL,
+  `nome` varchar(50) NOT NULL,
   `cognome` varchar(50) NOT NULL,
   `datanascita` date NOT NULL,
   `id` varchar(10) NOT NULL,
-  `luogonascita` varchar(50) NOT NULL,
+  `citta` varchar(50) NOT NULL,
   `sesso` varchar(10) NOT NULL,
   `email` varchar(50) NOT NULL,
   `password` varchar(64) NOT NULL,
-  `infopersonali` text NOT NULL,
+  `info` text NOT NULL,
   `idmadre` varchar(10) NOT NULL,
   `idpadre` int(10) NOT NULL,
-  `idcompagno` varchar(10) NOT NULL
+  `idpartner` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dump dei dati per la tabella `user`
+--
+
+INSERT INTO `user` (`nome`, `cognome`, `datanascita`, `id`, `citta`, `sesso`, `email`, `password`, `info`, `idmadre`, `idpadre`, `idpartner`) VALUES
+('matteo', 'capodicasa', '0000-00-00', '', '', '', '', '', '', '', 0, '');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
