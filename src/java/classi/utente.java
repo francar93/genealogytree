@@ -7,7 +7,11 @@ package classi;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import utilita.DataUtil;
 import utilita.Database;
 
 /**
@@ -125,7 +129,67 @@ public class utente {
         }
         
 //Metodi Set
+        public void setDati(String nome, String cognome, String sesso, String dataNascita, String citta, String info) throws SQLException, ParseException{
+           
+            Map<String, Object> data = new HashMap<>();
+            data.put("nome", nome);
+            data.put("cognome", cognome);
+            data.put("sesso", sesso);
+            java.sql.Date sqlDate = DataUtil.stringToDate(dataNascita, "dd/MM/yyyy");
+            data.put("datanascita", DataUtil.dateToString(sqlDate));
+            data.put("citta", citta);
+            data.put("info", info);
+            /*
+            boolean remove_tree = false;
+            String old_gender = this.gender;
+            if(!gender.equals(old_gender)){
+                remove_tree = true;
+            }
+            */
+            
+            Database.updateRecord("user", data, "id = '" + this.getId() + "'");
+            /*
+            if(remove_tree){
+                // Rimuovi i filgi
+                UserList children = this.getChildren();
+                for(User child: children){
+                    child.removeParent(old_gender);
+                }
+                // Rimuovi il padre
+                this.removeParent("male");
+                // Rimuovi la madre
+                this.removeParent("female");
+                // Rimuovi il coniuge
+                this.removeSpouse();
+                
+                this.sendRefreshAck();
+            }
+            */
+            
+            this.nome = nome;
+            this.cognome = cognome;
+            this.sesso = sesso;
+            this.dataNascita = DataUtil.stringToDate(dataNascita, "dd/MM/yyyy");
+            this.citta = citta;
+            this.info = info;
+            
+
+        }
+
+        public void setEmail(String email) throws SQLException {
+            this.updateAttribute("email", email);
+            this.email = email;
+        }
+
+        public void setPassword(String password) throws SQLException {
+            this.updateAttribute("password", DataUtil.crypt(password));
+        }
         
+        private void updateAttribute(String attribute, Object value) throws SQLException{
+        Map<String, Object> data = new HashMap();
+        data.put(attribute, value);
+        Database.updateRecord("utente", data, "id = '" + this.id + "'");
+    }
         
 }
 
