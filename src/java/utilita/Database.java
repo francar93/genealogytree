@@ -64,6 +64,12 @@ public class Database {
         return records;
     }
     
+    public static boolean emailIn(String email) throws SQLException{
+        String query = "SELECT * FROM user WHERE email='"+ email +"'";
+        ResultSet in = Database.executeQuery(query);
+        return(in.next());
+     }
+    
     
     /**
      * Select record con condizione
