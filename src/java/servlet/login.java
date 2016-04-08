@@ -8,6 +8,7 @@ package servlet;
 import classi.utente;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
@@ -18,6 +19,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import utilita.Database;
 import static utilita.Database.emailIn;
 import utilita.FreeMarker;
 
@@ -63,11 +65,12 @@ public class login extends HttpServlet {
      *
      * @param request servlet request
      * @param response servlet response
+     * @return 
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected String doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
        // processRequest(request, response);
        
@@ -97,15 +100,35 @@ public class login extends HttpServlet {
            } catch (SQLException ex) {
                Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
            }
+ 
            
-            
         }else{
-           //qui ora bisogna controllare user e password sul db per vedere se ci sono oppure fare le effettive modifiche
-           // da continuare mi sono fermato qui....
+            //qui ora bisogna controllare user e password sul db per vedere se ci sono oppure fare le effettive modifiche
+             // da continuare mi sono fermato qui....
+            // FRANCESCO 
+           
+        try {
+           ResultSet in;
+           
+           String tab = "utente";
+           String query = "email=" + "'" + email + "'" + "AND password=" +  "'" + password +  "'" ; // aggiunta query FC
+           in = Database.selectRecord(tab,query);
+           
+           if(in.next() == false){
+               response.sendRedirect("login");      
+                // se non fa match con il db torna a login, con messaggio di errore da aggiugnere
+           }else{
+               response.sendRedirect("profilo");    
+                // qui per ora va a profilo che non esiste 
+           }
+        } catch (SQLException ex) {
+            Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
+            // FRANCESCO 
+           
+          
            
        }
     }
-
     /**
      * Returns a short description of the servlet.
      *
@@ -113,7 +136,8 @@ public class login extends HttpServlet {
      */
     @Override
     public String getServletInfo() {
-        return "Servlet per la gestione della login";
-    }
+        return "Short description";
+    }// </editor-fold>
 
+}
 }

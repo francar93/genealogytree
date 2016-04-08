@@ -19,6 +19,8 @@ import utilita.Database;
  * @author matteocapodicasa
  */
 public class utente {
+
+    
     
     public String nome;
     public String cognome;
@@ -69,7 +71,7 @@ public class utente {
         this.idPadre        = null;
         this.idPartner      = null;
     }
-     
+    
     
 //Metodi Get    
     
@@ -191,6 +193,30 @@ public class utente {
         Database.updateRecord("utente", data, "id = '" + this.id + "'");
     }
         
+        public static utente getUserById(String user_id){
+        utente user = null;
+        try {
+            if(user_id != null){
+                ResultSet record = Database.selectRecord("utente", "id = '" + user_id + "'");
+                if(record.next()){
+                    user =  new utente(record);
+                }
+            }
+        } catch (SQLException ex) {}
+        
+        return user;
+    } //FC
+        
+        public static String createUniqueUserId(int length){
+        String user_id;
+        do{
+            user_id = DataUtil.generateCode(length);
+        // Cicla fino a quando non esiste un utente con id uguale a quello appena generato
+        }while(utente.getUserById(user_id) != null);
+        
+        return user_id;
+        
+    } //FC
 }
 
 
