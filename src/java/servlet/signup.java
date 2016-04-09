@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import utilita.DataUtil;
 import utilita.Database;
 
 /**
@@ -69,7 +70,7 @@ public class signup extends HttpServlet {
         //processRequest(request, response);
         String nome            = request.getParameter("nome");
         String cognome         = request.getParameter("cognome");
-        //Date   data_nascita = request.getParameter(data_nascita);  mi fa errore perche Date non va bene se gli passo string giustamente ma se metto string fa errore al costruttore sotto -.-"fc
+        String data_nascita    = DataUtil.spaceTrim(request.getParameter("data_nascita"));
         String citta           = request.getParameter("citta");
         String sesso           = request.getParameter("sesso");
         String email           = request.getParameter("email");
@@ -82,13 +83,12 @@ public class signup extends HttpServlet {
         String telefono        = request.getParameter("telefono");
         String cell            = request.getParameter("cell");
         
-        if(email.equals("") || password.equals("") || name.equals("") || surname.equals("") || gender == null || birthdate.equals("")  || birthplace.equals("")){
+        if(email.equals("") || password.equals("") || nome.equals("") || cognome.equals("") || sesso == null || data_nascita.equals("")  || citta.equals("")){
             // stampa messaggio errore 
         }else{
             //altri controlli che farò domattina :D 
         }
-        
-        
+              
         
         Map<String, Object> data = new HashMap<>();
 
@@ -124,7 +124,7 @@ public class signup extends HttpServlet {
         
         
         
-       
+       // da aggiungere chiamata al metodo string to date
         
         utente new_user = new utente(user_id, nome, cognome, email, password, sesso, data_nascita, citta, info);
         // Prepara l'utente ad essere loggato (gestione della variabili si sessione)

@@ -103,7 +103,7 @@ public class login extends HttpServlet {
              // da continuare mi sono fermato qui....
             // FRANCESCO 
             try {
-           
+                // da creare un metodo nella classa database
                 ResultSet in;
            
            
