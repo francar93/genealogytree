@@ -1,5 +1,4 @@
 <#include "frame_public.html">
-<<<<<<< HEAD
 <div class="login-container s12">
     <div class="row login">
         <form class="col s12">
@@ -22,7 +21,6 @@
           </div>
         </form>
     </div>
-=======
 <div>
             <#if action == "signup" || action == "search">
                 <#assign other_action = "login">
@@ -33,28 +31,6 @@
             <a href="${other_action}">
                 ${other_action?cap_first}
             </a>
-</div>
-<div class="row login">
-    <form class="col s6" method="post" action="${action}">
-      <div class="row">
-        <div class="input-field col s6">
-          <input id="username" type="text" class="validate" name="email">
-          <label for="username">Username</label>
-        </div>
-      </div>
-      <div class="row">
-        <div class="input-field col s6">
-          <input id="password" type="text" class="validate" name="password">
-          <label for="password">Password</label>
-        </div>
-      </div>
-      <div class="row">
-        <button class="btn waves-effect waves-light" type="submit" name="action">Submit
-            <i class="material-icons right"></i>
-        </button>
-      </div>
-    </form>
->>>>>>> origin/master
 </div>
 <#if action == "signup">
 <div class="row signup">
@@ -104,9 +80,5 @@
         </div>
     </div>
 </div>
-<<<<<<< HEAD
 </#if>
-=======
- </#if>
->>>>>>> origin/master
 <#include "footer.html">
