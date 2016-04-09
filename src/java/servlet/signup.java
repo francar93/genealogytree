@@ -9,6 +9,7 @@ import classi.utente;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -70,7 +71,7 @@ public class signup extends HttpServlet {
         //processRequest(request, response);
         String nome            = request.getParameter("nome");
         String cognome         = request.getParameter("cognome");
-        String data_nascita    = DataUtil.spaceTrim(request.getParameter("data_nascita"));
+        String data_nascita    = request.getParameter("data_nascita");
         String citta           = request.getParameter("citta");
         String sesso           = request.getParameter("sesso");
         String email           = request.getParameter("email");
@@ -95,13 +96,13 @@ public class signup extends HttpServlet {
         //** Generatore utente
         
         // Genera l'id dell'utente
-        String user_id = utente.createUniqueUserId(10); //manca il metodo 
+        String user_id = utente.createUniqueUserId(10); 
         
         data.put("id",user_id);
         
         data.put("nome", nome);
         data.put("cognome", cognome);
-        data.put("data_nascita", data_nascita);
+        data.put("datanascita", data_nascita);
         data.put("citta", citta);
         data.put("sesso", sesso);
         data.put("email",email);
@@ -111,8 +112,6 @@ public class signup extends HttpServlet {
         data.put("idMadre",idMadre);
         data.put("idPartner",idPartner);
         
-        data.put("telefono", telefono);
-        data.put("cell", cell);
         
         
                 
@@ -123,10 +122,14 @@ public class signup extends HttpServlet {
         }
         
         
+        Date data_nascita1 = null;
+        try {
+            data_nascita1 = DataUtil.stringToDate(data_nascita, "dd/MM/yyyy");
+        } catch (ParseException ex) {
+            Logger.getLogger(signup.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
-       // da aggiungere chiamata al metodo string to date
-        
-        utente new_user = new utente(user_id, nome, cognome, email, password, sesso, data_nascita, citta, info);
+        utente new_user = new utente(user_id, nome, cognome, email, password, sesso, data_nascita1, citta, info);
         // Prepara l'utente ad essere loggato (gestione della variabili si sessione)
         HttpSession s = request.getSession(true);
         s.setAttribute("utente", user_id);
