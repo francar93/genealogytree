@@ -8,6 +8,7 @@ package servlet;
 import classi.utente;
 import java.io.IOException;
 import java.io.PrintWriter;
+import static java.lang.System.out;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -77,28 +78,42 @@ public class login extends HttpServlet {
        //recupero dell'utente e della password
        String email    = request.getParameter("email");
        String password = request.getParameter("password");
+      /*
+       Prova che ho fatto io (Matteo)
+       Map<String, Object> data = new HashMap<>();
        
+       data.put("email", email);
+       data.put("password", password);
+       
+       FreeMarker.process("stampa.html", data, response, getServletContext());
+       */
+      
        //controllo l'email e la passwore sul db: 
+       
        
        if((email.equals("") && password.equals(""))||(email.equals(""))){
            
-           try {
-               /* Nel caso in cui i due campi sono vuoti, oppure è vuota la email
-               * aggiungere un helper d'errore, ma comunque si rimane
-               * nella pagina di login
-               */
-               if(password.equals("") && emailIn(email)){
-                   /** Controllare se è stato registrato un utente da terzi con quella email,
-                    *  perchè se così fosse bisogna permettere all'utente di effettuare una
-                    *  vera e propria registrazione.
-                    *  Possibile soluzione è quella di creare una form precompilata con i dati esistenti e far
-                    *  registrare l'utente. la funzione emailIn si trova nel file Database e l'ho fatta io(Matteo)
-                    **/
-               }
-           } catch (SQLException ex) {
+           
+               // Nel caso in cui i due campi sono vuoti, oppure è vuota la email
+               //aggiungere un helper d'errore, ma comunque si rimane
+               //nella pagina di login
+               
+               
+       }
+             
+       try {
+       if(password.equals("") && emailIn(email)){
+                   //Controllare se è stato registrato un utente da terzi con quella email,
+                   //perchè se così fosse bisogna permettere all'utente di effettuare una
+                   //vera e propria registrazione.
+                   //Possibile soluzione è quella di creare una form precompilata con i dati esistenti e far
+                   //registrare l'utente. la funzione emailIn si trova nel file Database e l'ho fatta io(Matteo)
+                   
+       }
+       } catch (SQLException ex) {
                Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
            }
-       }else{
+       
             //qui ora bisogna controllare user e password sul db per vedere se ci sono oppure fare le effettive modifiche
              // da continuare mi sono fermato qui....
             // FRANCESCO 
@@ -129,15 +144,17 @@ public class login extends HttpServlet {
             // FRANCESCO 
            
        }
+            
     }
-}
+
  
     /**
      * Returns a short description of the servlet.
      *
      * @return a String containing servlet description
      */
-    @Override
+    
+       @Override
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
