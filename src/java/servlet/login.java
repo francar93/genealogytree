@@ -8,6 +8,7 @@ package servlet;
 import classi.utente;
 import java.io.IOException;
 import java.io.PrintWriter;
+import static java.lang.System.out;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -87,6 +88,7 @@ public class login extends HttpServlet {
                * aggiungere un helper d'errore, ma comunque si rimane
                * nella pagina di login
                */
+               //out.print("errore");
                if(password.equals("") && emailIn(email)){
                    /** Controllare se è stato registrato un utente da terzi con quella email,
                     *  perchè se così fosse bisogna permettere all'utente di effettuare una
