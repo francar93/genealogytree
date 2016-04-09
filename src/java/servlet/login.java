@@ -70,7 +70,7 @@ public class login extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected String doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
        // processRequest(request, response);
        
@@ -81,17 +81,15 @@ public class login extends HttpServlet {
        //controllo l'email e la passwore sul db: 
        
        if((email.equals("") && password.equals(""))||(email.equals(""))){
-            
+           
            try {
                /* Nel caso in cui i due campi sono vuoti, oppure è vuota la email
-                * aggiungere un helper d'errore, ma comunque si rimane
-                * nella pagina di login
-                */
-               
-               
+               * aggiungere un helper d'errore, ma comunque si rimane
+               * nella pagina di login
+               */
                if(password.equals("") && emailIn(email)){
                    /** Controllare se è stato registrato un utente da terzi con quella email,
-                    *  perchè se così fosse bisogna permettere all'utente di effettuare una 
+                    *  perchè se così fosse bisogna permettere all'utente di effettuare una
                     *  vera e propria registrazione.
                     *  Possibile soluzione è quella di creare una form precompilata con i dati esistenti e far
                     *  registrare l'utente. la funzione emailIn si trova nel file Database e l'ho fatta io(Matteo)
@@ -100,35 +98,40 @@ public class login extends HttpServlet {
            } catch (SQLException ex) {
                Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
            }
- 
-           
-        }else{
+       }else{
             //qui ora bisogna controllare user e password sul db per vedere se ci sono oppure fare le effettive modifiche
              // da continuare mi sono fermato qui....
             // FRANCESCO 
+            try {
            
-        try {
-           ResultSet in;
+                ResultSet in;
            
-           String tab = "utente";
-           String query = "email=" + "'" + email + "'" + "AND password=" +  "'" + password +  "'" ; // aggiunta query FC
-           in = Database.selectRecord(tab,query);
            
-           if(in.next() == false){
-               response.sendRedirect("login");      
-                // se non fa match con il db torna a login, con messaggio di errore da aggiugnere
-           }else{
-               response.sendRedirect("profilo");    
-                // qui per ora va a profilo che non esiste 
+                String tab = "utente";
+           
+                String query = "email=" + "'" + email + "'" + "AND password=" +  "'" + password +  "'" ; // aggiunta query FC
+           
+                in = Database.selectRecord(tab,query);
+           
+           
+                if(in.next() == false){
+               
+                    response.sendRedirect("login");      
+                    // se non fa match con il db torna a login, con messaggio di errore da aggiugnere
+           
+                }else{
+               
+                    response.sendRedirect("profilo");    
+                    // qui per ora va a profilo che non esiste 
            }
         } catch (SQLException ex) {
             Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
             // FRANCESCO 
            
-          
-           
        }
     }
+}
+ 
     /**
      * Returns a short description of the servlet.
      *
@@ -139,5 +142,5 @@ public class login extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-}
+
 }
