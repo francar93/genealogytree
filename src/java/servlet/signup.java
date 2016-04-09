@@ -8,6 +8,7 @@ package servlet;
 import classi.utente;
 import java.io.IOException;
 import java.io.PrintWriter;
+import static java.lang.System.out;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.Date;
@@ -20,6 +21,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.apache.commons.validator.EmailValidator;
 import utilita.DataUtil;
 import utilita.Database;
 
@@ -84,12 +86,55 @@ public class signup extends HttpServlet {
         String telefono        = request.getParameter("telefono");
         String cell            = request.getParameter("cell");
         
-        if(email.equals("") || password.equals("") || nome.equals("") || cognome.equals("") || sesso == null || data_nascita.equals("")  || citta.equals("")){
+     /*   if(email.equals("") || password.equals("") || nome.equals("") || cognome.equals("") || sesso == null || data_nascita.equals("")  || citta.equals("")){
             // stampa messaggio errore 
+            String messaggio = "errore campo vuoto";
+            out.println(messaggio);
+            
         }else{
-            //altri controlli che farò domattina :D 
+                boolean error = true;
+
+        // Se l'email non è valida
+                if(!(EmailValidator.getInstance().isValid(email))){
+                    String messaggio = "errore email";
+                    out.println(messaggio);
+            
+        // Se l'utente è già registrato
+                }else{
+                    utente new_utente = utente.getUserByEmail(email);
+                    if(new_utente != null){
+                        try {
+                            if(new_utente.getPassword() != null){
+                                String messaggio = "errore gia registrato";
+                                out.println(messaggio);
+                                // User already exist
+                            }
+                        } catch (SQLException ex) {
+                            Logger.getLogger(signup.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        }
+                    }
+                } 
         }
-              
+        
+    /**
+     *
+     * @param nome
+     */
+    /*public void controllinome (String nome){
+        if(nome.length() < 2 ){
+            String messaggio = "errore troppo corto";
+            out.println(messaggio);
+                              
+            
+        }else if(nome.length() > 50 ){
+            String messaggio = "errore troppo lungo";
+            out.println(messaggio);                                
+        }
+        }
+
+    */
+        
         
         Map<String, Object> data = new HashMap<>();
 
@@ -112,6 +157,9 @@ public class signup extends HttpServlet {
         data.put("idMadre",idMadre);
         data.put("idPartner",idPartner);
         
+        
+        
+                        
         
         
                 

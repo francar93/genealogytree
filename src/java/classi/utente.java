@@ -217,6 +217,26 @@ public class utente {
         return user_id;
         
     } //FC
+        /**
+     * Recupera un utente attraverso la sua e-mail
+     * @param user_email   email utente
+     * @return          
+     */
+    public static utente getUserByEmail(String user_email){
+        
+        try {
+            if(user_email != null){
+                try (ResultSet record = Database.selectRecord("utente", "email = '" + user_email + "'")) {
+                    if(record.next()){
+                        return new utente(record);
+                    }
+                }
+            
+            }
+        } catch (SQLException ex) { }
+        
+        return null;
+    } //FC 
 }
 
 
