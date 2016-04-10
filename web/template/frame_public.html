@@ -14,9 +14,22 @@ and open the template in the editor.
     </head>
     <body>
         <div class="header">
-            <div class="search-wrapper card">
+            <div class="logo">
+                <img src="template/img/logo.png" id="logo">
+            </div>
+            <div class="search-wrapper card search-nologin">
                 <input id="search"><i class="material-icons">input</i>
                 <div class="search-results"></div>
+            </div>
+            <div class="waves-effect waves-light btn login-signup">
+                <#if action == "signup" || action == "search">
+                    <#assign other_action = "login">
+                <#else>
+                    <#assign other_action = "signup">
+                </#if>
+                <a href="${other_action}" id="login-signup">
+                    ${other_action?cap_first}
+                </a>
             </div>
         </div>
         

@@ -11,6 +11,9 @@ body{
     background-image: url('../img/background.jpg');
     background-repeat: no-repeat;
 }
+.header{
+    height: 150px;
+}
 .row.login{
     max-width: 400px;
 }
@@ -20,6 +23,27 @@ body{
 .login-container{
     margin-top: 180px;
 }
-.search-wrapper{
+.login-signup{
+    position: relative;
+    float: right;
+    margin-top: 20px;
+    margin-right: 20px;
+}
+#login-signup{
+    color: white;
+}
+.search-nologin{
     width: 200px;
+    position: relative;
+    float: left;
+}
+.logo{
+    position: relative;
+    float: left;
+    width: 50px;
+    height: 50px;
+}
+#logo{
+    width: 50px;
+    height: 50px;
 }
