@@ -23,11 +23,11 @@ body{
 .login-container{
     margin-top: 180px;
 }
-.login-signup{
+.btn.login-signup{
     position: relative;
     float: right;
-    margin-top: 20px;
-    margin-right: 20px;
+    top: 15px;
+    right: 15px;
 }
 #login-signup{
     color: white;
@@ -36,12 +36,16 @@ body{
     width: 200px;
     position: relative;
     float: left;
+    top: 15px;
+    left: 10%;
 }
 .logo{
     position: relative;
     float: left;
     width: 50px;
     height: 50px;
+    top: 15px;
+    left: 15px;
 }
 #logo{
     width: 50px;
