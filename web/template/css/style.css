@@ -11,6 +11,9 @@ body{
     background-image: url('../img/background.jpg');
     background-repeat: no-repeat;
 }
+input{
+    color: white;
+}
 .header{
     height: 150px;
 }
