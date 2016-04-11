@@ -19,6 +19,10 @@
         <servlet-name>signup</servlet-name>
         <servlet-class>servlet.signup</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>logout</servlet-name>
+        <servlet-class>servlet.logout</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ContextInitializer</servlet-name>
         <url-pattern>/ContextInitializer</url-pattern>
@@ -34,6 +38,10 @@
     <servlet-mapping>
         <servlet-name>signup</servlet-name>
         <url-pattern>/signup</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>logout</servlet-name>
+        <url-pattern>/logout</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

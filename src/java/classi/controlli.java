@@ -27,16 +27,12 @@ public class controlli {
         
         if(email.equals("") || password.equals("") || nome.equals("") || cognome.equals("") || sesso == null || data_nascita.equals("")  || citta.equals("")){
             // stampa messaggio errore 
-            String messaggio = "errore campo vuoto";
-            out.println(messaggio);
-        }else{
+            }else{
                     utente new_utente = utente.getUserByEmail(email);
                     if(new_utente != null){
                         try {
                             if(new_utente.getPassword() != null){
-                                String messaggio = "errore gia registrato";
-                                out.println(messaggio);
-                                // User already exist
+                                // stampa messaggio utente registro gia
                             }
                         } catch (SQLException ex) {
                             Logger.getLogger(signup.class.getName()).log(Level.SEVERE, null, ex);
@@ -45,22 +41,21 @@ public class controlli {
                     }        
     }
             
-            // Se l'email non è valida
+            
     
     public static void controlloemail(String email){
         boolean error = true;
         if(!(EmailValidator.getInstance().isValid(email))){
-                        String messaggio = "errore email";
-                        out.println(messaggio);
+                        // Se l'email non è valida
         }else{
-            utente user = utente.getUserByEmail(email);
-            if(user != null){
+            utente utente1 = utente.getUserByEmail(email);
+            if(utente1 != null){
                 try {
-                    if(user.getPassword() != null){
+                    if(utente1.getPassword() != null){
                          // User already exist
                     }else{
-                        Database.deleteRecord("user", "id = '" + user.getId() + "'");
-                        Database.deleteRecord("request", "user_id = '" + user.getId() + "' OR relative_id = '" + user.getId() + "'");
+                        Database.deleteRecord("user", "id = '" + utente1.getId() + "'");
+                        Database.deleteRecord("request", "user_id = '" + utente1.getId() + "' OR relative_id = '" + utente1.getId() + "'");
                     error = false;
                     }
                 } catch (SQLException ex) {
@@ -73,13 +68,11 @@ public class controlli {
     
     public static void controllinome (String nome){
         if(nome.length() < 2 ){
-            String messaggio = "errore troppo corto";
-            out.println(messaggio);
-                              
+            // nome lungo                  
             
         }else if(nome.length() > 50 ){
-            String messaggio = "errore troppo lungo";
-            out.println(messaggio);                                
+            // nome corto
+            
         }
         }
 
@@ -87,11 +80,11 @@ public class controlli {
     
         boolean error = true;
         
-        // Se la password è lunga meno di sei caratteri
+            // Se la password è lunga meno di sei caratteri
         if(password.length() <6){
             // The password must be 6 characters at least
         
-        // Se la password non è alfanumerica
+            // Se la password non è alfanumerica
         }else if(!DataUtil.isAlphanumeric(password, false)){
              // The password must be alphanumeric
           
@@ -106,9 +99,10 @@ public class controlli {
         
         boolean error = false;
 
-        //Controllo su 'male' oppure 'female'
+        //Controllo su maschio e femmina
+        
         if(!sesso.equals("male") && !sesso.equals("female") ){
-            // You can be only male or female
+        // solo un sesso 
             error = true;
         }
         
@@ -121,7 +115,7 @@ public class controlli {
 
         //Check solo caratteri
         if(!(DataUtil.isAlphanumeric(citta, true))){
-            // The birthplace must be alphanumeric
+        // The birthplace must be alphanumeric
             error = true;
         }
 
