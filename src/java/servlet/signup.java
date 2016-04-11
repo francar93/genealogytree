@@ -5,7 +5,9 @@
  */
 package servlet;
 
+import classi.controlli;
 import classi.utente;
+import static freemarker.template.utility.NullArgumentException.check;
 import java.io.IOException;
 import java.io.PrintWriter;
 import static java.lang.System.out;
@@ -83,59 +85,13 @@ public class signup extends HttpServlet {
         String idMadre         = request.getParameter("idMadre");
         String idPartner         = request.getParameter("idPartner");
         
-        String telefono        = request.getParameter("telefono");
-        String cell            = request.getParameter("cell");
+       /* 
+        controlli.campivuoti(email, password, nome, cognome, sesso, data_nascita, citta);
+        controlli.controlloemail(email);
+        controlli.controllinome(nome);
+       */
         
-     /*   if(email.equals("") || password.equals("") || nome.equals("") || cognome.equals("") || sesso == null || data_nascita.equals("")  || citta.equals("")){
-            // stampa messaggio errore 
-            String messaggio = "errore campo vuoto";
-            out.println(messaggio);
-            
-        }else{
-                boolean error = true;
-
-        // Se l'email non è valida
-                if(!(EmailValidator.getInstance().isValid(email))){
-                    String messaggio = "errore email";
-                    out.println(messaggio);
-            
-        // Se l'utente è già registrato
-                }else{
-                    utente new_utente = utente.getUserByEmail(email);
-                    if(new_utente != null){
-                        try {
-                            if(new_utente.getPassword() != null){
-                                String messaggio = "errore gia registrato";
-                                out.println(messaggio);
-                                // User already exist
-                            }
-                        } catch (SQLException ex) {
-                            Logger.getLogger(signup.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                        }
-                    }
-                } 
-        }
-        
-    /**
-     *
-     * @param nome
-     */
-    /*public void controllinome (String nome){
-        if(nome.length() < 2 ){
-            String messaggio = "errore troppo corto";
-            out.println(messaggio);
-                              
-            
-        }else if(nome.length() > 50 ){
-            String messaggio = "errore troppo lungo";
-            out.println(messaggio);                                
-        }
-        }
-
-    */
-        
-        
+       
         Map<String, Object> data = new HashMap<>();
 
         //** Generatore utente
@@ -157,12 +113,8 @@ public class signup extends HttpServlet {
         data.put("idMadre",idMadre);
         data.put("idPartner",idPartner);
         
-        
-        
-                        
-        
-        
-                
+             
+                                
         try {
             Database.insertRecord("utente", data);
         } catch (SQLException ex) {
@@ -187,7 +139,7 @@ public class signup extends HttpServlet {
             
         
         response.sendRedirect("logged");
-        
+       
     }
 
     /**
