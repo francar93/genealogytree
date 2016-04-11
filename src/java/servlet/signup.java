@@ -26,6 +26,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.validator.EmailValidator;
 import utilita.DataUtil;
 import utilita.Database;
+import utilita.Messaggi;
 
 /**
  *
@@ -83,13 +84,24 @@ public class signup extends HttpServlet {
         String info            = request.getParameter("info");
         String idPadre         = request.getParameter("idPadre");
         String idMadre         = request.getParameter("idMadre");
-        String idPartner         = request.getParameter("idPartner");
+        String idPartner       = request.getParameter("idPartner");
         
+        
+        Messaggi flag;
        /* 
-        controlli.campivuoti(email, password, nome, cognome, sesso, data_nascita, citta);
-        controlli.controlloemail(email);
-        controlli.controllinome(nome);
-       */
+        if(controlli.campivuoti(email, password, nome, cognome, sesso, data_nascita, citta);){
+        flag = new Messaggi("bo1", true);
+        }else{
+        
+        flag = controlli.controlloemail(email);
+        if(!flag.isError(){
+                
+        flag = controlli.controllinome(nome);
+        }}}
+       
+        if(!flag.isError()){
+        
+        */
         
        
         Map<String, Object> data = new HashMap<>();
@@ -139,8 +151,8 @@ public class signup extends HttpServlet {
             
         
         response.sendRedirect("logged");
-       
     }
+    
 
     /**
      * Returns a short description of the servlet.
