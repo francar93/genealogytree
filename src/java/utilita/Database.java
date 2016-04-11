@@ -41,18 +41,6 @@ public class Database {
         Database.db.close();
     }
     
-    public static boolean inserimento(String nome, String cognome, String data_nascita, String citta, String telefono, String cell) throws SQLException{
-        
-        String query ="INSERT INTO utente VALUES ("+ nome +","+ cognome +","+ data_nascita +","+ citta +","+ telefono +","+ cell +")";
-        
- 
-           return Database.updateQuery(query);
-            //s1.executeQuery(query);
-            
-        
-        // Esecuzione query
-       
-    }
     
     public static ResultSet selectRecord1(String table) throws SQLException {
         // Generazione query
@@ -69,6 +57,11 @@ public class Database {
         ResultSet in = Database.executeQuery(query);
         return(in.next());
      }
+    
+    public static ResultSet controlloEmailPassword(String email, String password) throws SQLException{
+        String query = "SELECT * FROM  user WHERE email=" + "'" + email + "'" + "AND password=" +  "'" + password +  "'" ;
+        return Database.executeQuery(query);
+    }
     
     
     /**

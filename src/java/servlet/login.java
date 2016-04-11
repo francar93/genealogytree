@@ -119,15 +119,7 @@ public class login extends HttpServlet {
             // FRANCESCO 
             try {
                 // da creare un metodo nella classa database
-                ResultSet in;
-           
-           
-                String tab = "utente";
-           
-                String query = "email=" + "'" + email + "'" + "AND password=" +  "'" + password +  "'" ; // aggiunta query FC
-           
-                in = Database.selectRecord(tab,query);
-           
+                ResultSet in = Database.controlloEmailPassword(email,password);
            
                 if(in.next() == false){
                
