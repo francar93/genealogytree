@@ -1,4 +1,5 @@
 <#include "frame_public.html">
+<#if action == "login">
 <div class="login-container s12">
     <div class="row login">
         <form class="col s12" action="${action}" method="post">
@@ -16,7 +17,7 @@
           </div>
           <div class="row submit">
               <!--lorè ho aggiunto questa cosa per i messaggi di errore, formattala come vuoi-->
-              <i></i><p>${message.msg!}</p>
+            <p>${message.msg!}</p>
             <button class="btn waves-effect waves-light" type="submit" name="action">Submit
                 <i class="material-icons right"></i>
             </button>
@@ -24,53 +25,61 @@
         </form>
     </div>
 </div>
+</#if>
 <#if action == "signup">
 <div class="row signup">
-    <div class="row">
-        <div class="input-field col s6">
-            <input id="first_name" type="text" class="validate" name="nome">
-            <label for="first_name">First Name</label>
+    <form class="col s12" action="${action}" method="post">
+        <div class="row">
+            <div class="input-field col s12">
+                <input id="first_name" type="text" class="validate" name="nome">
+                <label for="first_name">First Name</label>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="input-field col s6">
-            <input id="last_name" type="text" class="validate" name="cognome">
-            <label for="last_name">Last Name</label>
+        <div class="row">
+            <div class="input-field col s12">
+                <input id="last_name" type="text" class="validate" name="cognome">
+                <label for="last_name">Last Name</label>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="input-field col s6">
-            <input placeholder="DD/MM/YY" id="birthday" type="text" class="validate" name="datanascita">
-            <label for="birthday">Birthday</label>
+        <div class="row">
+            <div class="input-field col s12">
+                <input placeholder="DD/MM/YY" id="birthday" type="text" class="validate" name="datanascita">
+                <label for="birthday">Birthday</label>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="input-field col s6">
-            <input id="birthplace" type="text" class="validate" name="citta">
-            <label for="birthplace">Birthplace</label>
+        <div class="row">
+            <div class="input-field col s12">
+                <input id="birthplace" type="text" class="validate" name="citta">
+                <label for="birthplace">Birthplace</label>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="input-field col s6">
-            <select class="browser-default" name="sesso">
-                <option value="" disabled selected>Choose your gender</option>
-                <option value="M">Male</option>
-                <option value="F">Female</option>
-            </select>
+        <div class="row">
+            <div class="input-field col s12">
+                <select class="browser-default" name="sesso">
+                    <option value="" disabled selected>Choose your gender</option>
+                    <option value="M">Male</option>
+                    <option value="F">Female</option>
+                </select>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="input-field col s6">
-            <input id="email" type="email" class="validate" name="email">
-            <label for="email">Email</label>
+        <div class="row">
+            <div class="input-field col s12">
+                <input id="email" type="email" class="validate" name="email">
+                <label for="email">Email</label>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="input-field col s6">
-            <input id="password" type="password" class="validate" name="password">
-            <label for="password">Password</label>
+        <div class="row">
+            <div class="input-field col s12">
+                <input id="password" type="password" class="validate" name="password">
+                <label for="password">Password</label>
+            </div>
         </div>
-    </div>
+        <div class="row submit">
+            <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+                <i class="material-icons right"></i>
+            </button>
+        </div>
+    </form>
 </div>
 </#if>
 <#include "footer.html">
