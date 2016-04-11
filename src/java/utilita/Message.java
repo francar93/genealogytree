@@ -44,6 +44,7 @@ public final class Message {
         map.put("usr_1", "User does not exist");
         map.put("usr_2", "User already exist");
         map.put("usr_3", "No user found");
+        map.put("usr_4", "User logged");
         /* NOME */
         map.put("name_1", "The name must be alphanumeric");
         map.put("name_2", "The name is too short");

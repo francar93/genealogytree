@@ -9,6 +9,7 @@ import classi.utente;
 import java.io.IOException;
 import java.io.PrintWriter;
 import static java.lang.System.out;
+import java.net.URLEncoder;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -23,6 +24,7 @@ import javax.servlet.http.HttpSession;
 import utilita.Database;
 import static utilita.Database.emailIn;
 import utilita.FreeMarker;
+import utilita.Message;
 
 /**
  *
@@ -48,6 +50,8 @@ public class login extends HttpServlet {
             if(action == null || (action.equals("login") && action.equals("signup"))) action = "login";
             // Inserisci l'azione nel data-model
             data.put("action", action);
+            
+            data.put("message", new Message(request.getParameter("msg"), true));
 
             data.put("script", "login");
 
@@ -90,16 +94,23 @@ public class login extends HttpServlet {
       
        //controllo l'email e la passwore sul db: 
        
+       //Controllo. Si tratta di una richiesta AJAX?
+        //boolean ajax = "XMLHttpRequest".equals(request.getHeader("X-Requested-With"));
+        //boolean quick_signup = false;
+        String msg = null;
+        boolean error = true;
        
-       if((email.equals("") && password.equals(""))||(email.equals(""))){
+      
+       if(email.equals("") || password.equals("")){
            
+           msg ="usr_1";
            
                // Nel caso in cui i due campi sono vuoti, oppure è vuota la email
                //aggiungere un helper d'errore, ma comunque si rimane
                //nella pagina di login
                
-               
-       }
+       }    
+       
              
        try {
        if(password.equals("") && emailIn(email)){
@@ -122,13 +133,22 @@ public class login extends HttpServlet {
                 ResultSet in = Database.controlloEmailPassword(email,password);
            
                 if(in.next() == false){
-               
-                    response.sendRedirect("login");      
+                    if(email.equals("") || password.equals("")){
+                        msg="usr_1";
+                    }else{
+                    
+                    msg ="usr_3";
+                    }
+                    //response.sendRedirect("login?msg=" + URLEncoder.encode(msg, "UTF-8"));
+                    //response.sendRedirect("login");      
                     // se non fa match con il db torna a login, con messaggio di errore da aggiugnere
            
                 }else{
-               
-                    response.sendRedirect("profilo");    
+                    error = false;
+                    msg ="usr_4";
+                    //response.sendRedirect("login?msg=" + URLEncoder.encode(msg, "UTF-8"));
+                    
+                    
                     // qui per ora va a profilo che non esiste 
            }
         } catch (SQLException ex) {
@@ -136,8 +156,16 @@ public class login extends HttpServlet {
             // FRANCESCO 
            
        }
+            if(error){
+                response.sendRedirect("login?msg=" + URLEncoder.encode(msg, "UTF-8"));
+            }else{
+                response.sendRedirect("login?msg=" + URLEncoder.encode(msg, "UTF-8"));
+            }
             
-    }
+       
+}
+            
+//}
 
  
     /**
