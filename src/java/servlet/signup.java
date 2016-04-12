@@ -50,7 +50,6 @@ public class signup extends HttpServlet {
      */
    
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -87,9 +86,6 @@ public class signup extends HttpServlet {
         String email           = request.getParameter("email");
         String password        = request.getParameter("password");
         String info            = request.getParameter("info");
-        String idPadre         = request.getParameter("idPadre");
-        String idMadre         = request.getParameter("idMadre");
-        String idPartner       = request.getParameter("idPartner");
         
         
         Message check;
@@ -100,15 +96,15 @@ public class signup extends HttpServlet {
         }else{
 
             // Controllo dell'email
-            check = controlli.checkEmail(email);
+            check = controlli.controlloemail(email);
             if(!check.isError()) {
 
                 // Controllo della password
-                check = controlli.checkPassword(password);
+                check = controlli.controllopassword(password);
                 if(!check.isError()) {
 
                     // Controllo di dati
-                    check = controlli.checkData(nome, cognome, sesso, data_nascita, citta);
+                    check = controlli.controllodati(nome, cognome, sesso, data_nascita, citta);
 
         }}}
 
@@ -121,7 +117,6 @@ public class signup extends HttpServlet {
         
         // Genera l'id dell'utente
         String user_id = utente.createUniqueUserId(10); 
-        
         data.put("id",user_id);
         
         data.put("nome", nome);
@@ -144,14 +139,13 @@ public class signup extends HttpServlet {
                                 
         try {
             Database.insertRecord("user", data);
+            // creo un nuovo oggetto
             utente new_user = new utente(user_id, nome, cognome, email, password, sesso, data_nascita1, citta, info);
             // Prepara l'utente ad essere loggato (gestione della variabili di sessione)
             HttpSession s = request.getSession(true);
             s.setAttribute("utente", new_user);
             
-        } catch (SQLException ex) {
-            Logger.getLogger(signup.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        } catch (SQLException ex) {}
         
             // Reindirizzamento alla pagina del profilo dell'utente se va a buon fine
             response.sendRedirect("profilo");      

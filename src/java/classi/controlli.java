@@ -25,7 +25,7 @@ import utilita.Message;
 public class controlli {
     
     
-    public static boolean campivuoti (String email, String password, String nome, String cognome, String sesso, String data_nascita, String citta ){
+    public static boolean campivuoti(String email, String password, String nome, String cognome, String sesso, String data_nascita, String citta ){
         
         if(email.equals("") || password.equals("") || nome.equals("") || cognome.equals("") || sesso == null || data_nascita.equals("")  || citta.equals("")){
             return true;
@@ -47,124 +47,41 @@ public class controlli {
     public static boolean emaildb(String email) throws SQLException{
         return (emailIn(email));
     }
-    
-    
-    
-    public static void controllinome (String nome){
-        if(nome.length() < 2 ){
-            // nome lungo                  
-            
-        }else if(nome.length() > 50 ){
-            // nome corto
-            
-        }
-        }
-
-    public static void checkpassword(String password){
-    
-        boolean error = true;
-        
-            // Se la password è lunga meno di sei caratteri
-        if(password.length() <6){
-            // The password must be 6 characters at least
-        
-            // Se la password non è alfanumerica
-        }else if(!DataUtil.isAlphanumeric(password, false)){
-             // The password must be alphanumeric
-          
-        }else{
-            error = false;
-        }
-
-        
-    }
-    public static void checksesso (String sesso){
-    
-        
-        boolean error = false;
-
-        //Controllo su maschio e femmina
-        
-        if(!sesso.equals("male") && !sesso.equals("female") ){
-        // solo un sesso 
-            error = true;
-        }
-        
-        
-    }
-    public static void checkcitta(String citta){
-    
-        
-        boolean error = false;
-
-        //Check solo caratteri
-        if(!(DataUtil.isAlphanumeric(citta, true))){
-        // The birthplace must be alphanumeric
-            error = true;
-        }
-
-    }
-    
-    public static void checkdatanascita(String data_nascita){
-        
-        
-        boolean error = true;
-        
-        if(!DataUtil.validateDateFormat(data_nascita)){
-            // The date isn't in the right format
-        }else{
-            // Converti la data da String a Date
-            Date date;
-            try {
-                date = DataUtil.stringToDate(data_nascita, "dd/MM/yyyy");
-                if(DataUtil.validateDateRange(date)){
-                    error = false;
-                }
-            } catch (ParseException ex) {
-                 // The date in not valid
-            }
-            // Se la data non rientra nel range valido
-            
-        }
-    }
-    
-    
-    
-    
-     public static Message checkData(String name, String surname, String gender, String birthdate, String birthplace){
+       
+    public static Message controllodati(String nome, String cognome, String sesso, String data_nascita, String citta){
        
             Message check = new Message("dt_ok", false);
             
-            if(name.equals("") || surname.equals("") || gender == null || birthdate.equals("")  || birthplace.equals("")){
+            if(nome.equals("") || cognome.equals("") || sesso == null || data_nascita.equals("")  || citta.equals("")){
                 check = new Message("fld", true); // All fields required
 
                 // Se la data di nascita non è valida
                 }else {
 
                     // Controllo del nome
-                    check = checkName(name, "name");
+                    check = controllonome(nome, "nome");
                     if(!check.isError()) {
 
                         // Controllo del cognome
-                        check = checkName(surname, "surname");
+                        check = controllonome(cognome, "cognome");
                         if(!check.isError()) {
 
                             // Controllo del sesso
-                            check = checkGender(gender);
+                            check = controllosesso(sesso);
                             if(!check.isError()) {
 
                                 // Controllo della città di nascita
-                                check = checkBirthplace(birthplace);
+                                check = controllocitta(citta);
                                 if(!check.isError()) {
 
                                     // Controllo della data di nascita
-                                    check = checkBirthdate(birthdate);
+                                    check = controllodata(data_nascita);
             }}}}}
             
             return check; 
             
     }
-    public static Message checkEmail(String email){
+    public static Message controlloemail(String email){
         
         String msg = null;
         boolean error = true;
@@ -197,7 +114,7 @@ public class controlli {
 
     } 
 
-    public static Message checkPassword(String toCheck){
+    public static Message controllopassword(String toCheck){
     
         String msg = null;
         boolean error = true;
@@ -217,7 +134,7 @@ public class controlli {
         return new Message(msg, error);
     }
     
-    public static Message checkName(String toCheck, String field){
+    public static Message controllonome(String toCheck, String field){
 
         String msg = null;
         boolean error = true;
@@ -241,13 +158,13 @@ public class controlli {
 
     }
         
-    public static Message checkGender(String toCheck){
+    public static Message controllosesso(String toCheck){
     
         String msg = null;
         boolean error = false;
 
         //Controllo su 'male' oppure 'female'
-        if(!toCheck.equals("male") && !toCheck.equals("female") ){
+        if(!toCheck.equals("maschio") && !toCheck.equals("femmina") ){
             msg = "gnd"; // You can be only male or female
             error = true;
         }
@@ -256,7 +173,7 @@ public class controlli {
       
     }
     
-    public static Message checkBirthplace(String toCheck){
+    public static Message controllocitta(String toCheck){
     
         String msg = null;
         boolean error = false;
@@ -270,7 +187,7 @@ public class controlli {
         return new Message(msg, error);
     }
     
-    public static Message checkBirthdate(String toCheck){
+    public static Message controllodata(String toCheck){
         
         String msg = null;
         boolean error = true;
