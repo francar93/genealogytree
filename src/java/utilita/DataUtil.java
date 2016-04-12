@@ -1,6 +1,7 @@
 package utilita;
 
 
+import classi.utente;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Date;
@@ -153,4 +154,9 @@ public class DataUtil {
         for (int i = 0; i < length; i++) sb.append(chars[random.nextInt(chars.length)]);
         return  sb.toString();
     }
+    
+    /*
+    */ 
+    
+   
 }

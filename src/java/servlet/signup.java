@@ -6,11 +6,15 @@
 package servlet;
 
 import classi.controlli;
+import static classi.controlli.campivuoti;
+import static classi.controlli.emaildb;
+import static classi.controlli.emailvalida;
 import classi.utente;
 import static freemarker.template.utility.NullArgumentException.check;
 import java.io.IOException;
 import java.io.PrintWriter;
 import static java.lang.System.out;
+import java.net.URLEncoder;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.Date;
@@ -26,6 +30,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.validator.EmailValidator;
 import utilita.DataUtil;
 import utilita.Database;
+import utilita.Message;
 import utilita.Messaggi;
 
 /**
@@ -87,24 +92,30 @@ public class signup extends HttpServlet {
         String idPartner       = request.getParameter("idPartner");
         
         
-        Messaggi flag;
-       /* 
-        if(controlli.campivuoti(email, password, nome, cognome, sesso, data_nascita, citta);){
-        flag = new Messaggi("bo1", true);
+        Message check;
+       
+        // Se non sono stati compilati tutti i campi
+        if(email.equals("") || password.equals("") || nome.equals("") || cognome.equals("") || sesso == null || data_nascita.equals("")  || citta.equals("")){
+            check = new Message("fld", true);
         }else{
-        
-        flag = controlli.controlloemail(email);
-        if(!flag.isError(){
-                
-        flag = controlli.controllinome(nome);
+
+            // Controllo dell'email
+            check = controlli.checkEmail(email);
+            if(!check.isError()) {
+
+                // Controllo della password
+                check = controlli.checkPassword(password);
+                if(!check.isError()) {
+
+                    // Controllo di dati
+                    check = controlli.checkData(nome, cognome, sesso, data_nascita, citta);
+
         }}}
-       
-        if(!flag.isError()){
-        
-        */
-        
-       
-        Map<String, Object> data = new HashMap<>();
+
+        // Se è stato riscontrato un errore, 
+        if(!check.isError()){
+            
+            Map<String, Object> data = new HashMap<>();
 
         //** Generatore utente
         
@@ -115,45 +126,45 @@ public class signup extends HttpServlet {
         
         data.put("nome", nome);
         data.put("cognome", cognome);
-        data.put("datanascita", data_nascita);
         data.put("citta", citta);
         data.put("sesso", sesso);
         data.put("email",email);
         data.put("password",password);
         data.put("info",info);
-        data.put("idPadre",idPadre);
-        data.put("idMadre",idMadre);
-        data.put("idPartner",idPartner);
-        
-             
-                                
-        try {
-            Database.insertRecord("utente", data);
-        } catch (SQLException ex) {
-            Logger.getLogger(signup.class.getName()).log(Level.SEVERE, null, ex);
-        }
         
         
         Date data_nascita1 = null;
         try {
             data_nascita1 = DataUtil.stringToDate(data_nascita, "dd/MM/yyyy");
+            data.put("datanascita", data_nascita1);
         } catch (ParseException ex) {
+            Logger.getLogger(signup.class.getName()).log(Level.SEVERE, null, ex);
+        
+        }     
+                                
+        try {
+            Database.insertRecord("user", data);
+            utente new_user = new utente(user_id, nome, cognome, email, password, sesso, data_nascita1, citta, info);
+            // Prepara l'utente ad essere loggato (gestione della variabili di sessione)
+            HttpSession s = request.getSession(true);
+            s.setAttribute("utente", new_user);
+            
+        } catch (SQLException ex) {
             Logger.getLogger(signup.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        utente new_user = new utente(user_id, nome, cognome, email, password, sesso, data_nascita1, citta, info);
-        // Prepara l'utente ad essere loggato (gestione della variabili si sessione)
-        HttpSession s = request.getSession(true);
-        s.setAttribute("utente", user_id);
-
+            // Reindirizzamento alla pagina del profilo dell'utente se va a buon fine
+            response.sendRedirect("profilo");      
+        }else{
+            // Messaggio errore
         
-        // Reindirizzamento alla pagina del profilo dell'utente
-            
-        
-        response.sendRedirect("logged");
+            response.sendRedirect("signup?msg=" + URLEncoder.encode(check.getCode(), "UTF-8"));
+        }
+         
     }
     
-
+    
+        
     /**
      * Returns a short description of the servlet.
      *
