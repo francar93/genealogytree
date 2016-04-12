@@ -32,7 +32,6 @@ import utilita.DataUtil;
 import utilita.Database;
 import utilita.Message;
 import utilita.Messaggi;
-
 /**
  *
  * @author carus
@@ -40,18 +39,7 @@ import utilita.Messaggi;
 public class signup extends HttpServlet {
 
     /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-   
-
-    /**
-     * Handles the HTTP <code>GET</code> method.
+     * Caricamento pagina di signup
      *
      * @param request servlet request
      * @param response servlet response
@@ -59,14 +47,13 @@ public class signup extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-         request.setAttribute("action", "signup");
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setAttribute("action", "signup");
         request.getRequestDispatcher("login").forward(request, response);
     }
 
     /**
-     * Handles the HTTP <code>POST</code> method.
+     * Gestione della registrazione di un utente
      *
      * @param request servlet request
      * @param response servlet response
@@ -74,10 +61,7 @@ public class signup extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        
-        //processRequest(request, response);
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String nome            = request.getParameter("nome");
         String cognome         = request.getParameter("cognome");
         String data_nascita    = request.getParameter("data_nascita");
@@ -85,22 +69,27 @@ public class signup extends HttpServlet {
         String sesso           = request.getParameter("sesso");
         String email           = request.getParameter("email");
         String password        = request.getParameter("password");
-        String info            = request.getParameter("info");
+        
+        String msg = null;
+        Boolean prova = false;
+        Message check = new Message(msg,prova);
         
         
-        Message check;
-       
         // Se non sono stati compilati tutti i campi
         if(email.equals("") || password.equals("") || nome.equals("") || cognome.equals("") || sesso == null || data_nascita.equals("")  || citta.equals("")){
             check = new Message("fld", true);
         }else{
 
-            // Controllo dell'email
-            check = controlli.controlloemail(email);
+            try {
+                // Controllo dell'email
+                check = controlli.controlloemail(email);
+            } catch (SQLException ex) {
+                Logger.getLogger(signup.class.getName()).log(Level.SEVERE, null, ex);
+            }
             if(!check.isError()) {
 
                 // Controllo della password
-                check = controlli.controllopassword(password);
+                 check = controlli.controllopassword(password);
                 if(!check.isError()) {
 
                     // Controllo di dati
@@ -113,52 +102,52 @@ public class signup extends HttpServlet {
             
             Map<String, Object> data = new HashMap<>();
 
-        //** Generatore utente
-        
-        // Genera l'id dell'utente
-        String user_id = utente.createUniqueUserId(10); 
-        data.put("id",user_id);
-        
-        data.put("nome", nome);
-        data.put("cognome", cognome);
-        data.put("citta", citta);
-        data.put("sesso", sesso);
-        data.put("email",email);
-        data.put("password",password);
-        data.put("info",info);
-        
-        
-        Date data_nascita1 = null;
-        try {
-            data_nascita1 = DataUtil.stringToDate(data_nascita, "dd/MM/yyyy");
-            data.put("datanascita", data_nascita1);
-        } catch (ParseException ex) {
-            Logger.getLogger(signup.class.getName()).log(Level.SEVERE, null, ex);
-        
-        }     
-                                
-        try {
-            Database.insertRecord("user", data);
-            // creo un nuovo oggetto
-            utente new_user = new utente(user_id, nome, cognome, email, password, sesso, data_nascita1, citta, info);
-            // Prepara l'utente ad essere loggato (gestione della variabili di sessione)
-            HttpSession s = request.getSession(true);
-            s.setAttribute("utente", new_user);
+            // Genera l'id dell'utente
+            String user_id = utente.createUniqueUserId(10); 
+            data.put("id",user_id);
+
+            data.put("nome", nome);
+            data.put("cognome", cognome);
+            data.put("citta", citta);
+            data.put("sesso", sesso);
+            data.put("email",email);
+            data.put("password",password);
+            data.put("info","");
+
+            Date data_nascita1 = null;
+            try {
+                data_nascita1 = DataUtil.stringToDate(data_nascita, "dd/MM/yyyy");
+                data.put("data_nascita", data_nascita1);
+            } catch (ParseException ex) { }
             
-        } catch (SQLException ex) {}
-        
-            // Reindirizzamento alla pagina del profilo dell'utente se va a buon fine
-            response.sendRedirect("profilo");      
+
+            try {
+                Database.insertRecord("user", data);
+                // Creo l'oggetto riservato all'utente
+                utente new_user = new utente(user_id, nome, cognome, email, password, sesso, data_nascita1, citta,"");
+                // Prepara l'utente ad essere loggato (gestione della variabili di sessione)
+                HttpSession s = request.getSession(true);
+                s.setAttribute("utente", new_user);
+
+                response.sendRedirect("profilo");
+                
+                
+                
+            } catch (SQLException ex) {
+                response.sendRedirect("signup?msg=Error");
+            }
+
         }else{
-            // Messaggio errore
-        
-            response.sendRedirect("signup?msg=" + URLEncoder.encode(check.getCode(), "UTF-8"));
+            
+            
+                
+                // Vai alla pagina di signup mostrando l'errore
+                response.sendRedirect("signup?msg=" + URLEncoder.encode(check.getCode(), "UTF-8"));
+            
+            
         }
-         
     }
-    
-    
-        
+
     /**
      * Returns a short description of the servlet.
      *
@@ -166,7 +155,7 @@ public class signup extends HttpServlet {
      */
     @Override
     public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
+        return "Servlet per la gestione della registrazione";
+    }
 
 }

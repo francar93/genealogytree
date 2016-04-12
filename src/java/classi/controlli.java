@@ -81,7 +81,7 @@ public class controlli {
             return check; 
             
     }
-    public static Message controlloemail(String email){
+    public static Message controlloemail(String email) throws SQLException{
         
         String msg = null;
         boolean error = true;
@@ -92,7 +92,14 @@ public class controlli {
             
         // Se l'utente è già registrato
         }else{
-            utente user = utente.getUserByEmail(email);
+            
+            if(emaildb(email)){
+                msg = "eml_1";
+            }else{
+                error = false;
+            }
+            
+            /*utente user = utente.getUserByEmail(email);
             if(user != null){
                 try {
                     if(user.getPassword() != null){
@@ -108,7 +115,7 @@ public class controlli {
                 }
             }else{
                 error = false;
-            }
+            }*/
         }
         return new Message(msg, error);
 
