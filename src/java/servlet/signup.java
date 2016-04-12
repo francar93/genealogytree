@@ -74,8 +74,6 @@ public class signup extends HttpServlet {
         Boolean prova = false;
         Message check = new Message(msg,prova);
         
-        
-        // Se non sono stati compilati tutti i campi
         if(email.equals("") || password.equals("") || nome.equals("") || cognome.equals("") || sesso == null || data_nascita.equals("")  || citta.equals("")){
             check = new Message("fld", true);
         }else{
@@ -83,23 +81,20 @@ public class signup extends HttpServlet {
             try {
                 // Controllo dell'email
                 check = controlli.controlloemail(email);
-            } catch (SQLException ex) {
-                Logger.getLogger(signup.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            if(!check.isError()) {
-
-                // Controllo della password
-                 check = controlli.controllopassword(password);
-                if(!check.isError()) {
-
-                    // Controllo di dati
-                    check = controlli.controllodati(nome, cognome, sesso, data_nascita, citta);
+                }catch (SQLException ex) {}
+            
+                    if(!check.isError()) {
+                    // Controllo della password
+                    check = controlli.controllopassword(password);
+                            if(!check.isError()) {
+                            // Controllo di dati
+                            check = controlli.controllodati(nome, cognome, sesso, data_nascita, citta);
 
         }}}
 
-        // Se è stato riscontrato un errore, 
+           
+        
         if(!check.isError()){
-            
             Map<String, Object> data = new HashMap<>();
 
             // Genera l'id dell'utente
@@ -113,38 +108,31 @@ public class signup extends HttpServlet {
             data.put("email",email);
             data.put("password",password);
             data.put("info","");
-
+            
             Date data_nascita1 = null;
+            
             try {
                 data_nascita1 = DataUtil.stringToDate(data_nascita, "dd/MM/yyyy");
                 data.put("data_nascita", data_nascita1);
             } catch (ParseException ex) { }
             
-
             try {
                 Database.insertRecord("user", data);
                 // Creo l'oggetto riservato all'utente
                 utente new_user = new utente(user_id, nome, cognome, email, password, sesso, data_nascita1, citta,"");
                 // Prepara l'utente ad essere loggato (gestione della variabili di sessione)
+                
                 HttpSession s = request.getSession(true);
                 s.setAttribute("utente", new_user);
-
+                
                 response.sendRedirect("profilo");
-                
-                
                 
             } catch (SQLException ex) {
                 response.sendRedirect("signup?msg=Error");
-            }
-
+            }    
         }else{
-            
-            
-                
                 // Vai alla pagina di signup mostrando l'errore
                 response.sendRedirect("signup?msg=" + URLEncoder.encode(check.getCode(), "UTF-8"));
-            
-            
         }
     }
 
