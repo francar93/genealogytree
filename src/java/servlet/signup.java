@@ -5,19 +5,14 @@
  */
 package servlet;
 
-import classi.controlli;
-import static classi.controlli.campivuoti;
-import static classi.controlli.emaildb;
-import static classi.controlli.emailvalida;
 import classi.utente;
-import static freemarker.template.utility.NullArgumentException.check;
 import java.io.IOException;
 import java.io.PrintWriter;
 import static java.lang.System.out;
-import java.net.URLEncoder;
+import java.sql.Date;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
@@ -27,33 +22,51 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import org.apache.commons.validator.EmailValidator;
 import utilita.DataUtil;
 import utilita.Database;
-import utilita.Message;
-import utilita.Messaggi;
+import utilita.FreeMarker;
+
 /**
  *
- * @author carus
+ * @author matteocapodicasa
  */
 public class signup extends HttpServlet {
 
     /**
-     * Caricamento pagina di signup
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
      *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setAttribute("action", "signup");
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            
+        }
+    }
+
+    /**
+     * Handles the HTTP <code>GET</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+   
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+         request.setAttribute("action", "signup");
         request.getRequestDispatcher("login").forward(request, response);
     }
 
     /**
-     * Gestione della registrazione di un utente
+     * Handles the HTTP <code>POST</code> method.
      *
      * @param request servlet request
      * @param response servlet response
@@ -61,80 +74,88 @@ public class signup extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String nome            = request.getParameter("nome");
-        String cognome         = request.getParameter("cognome");
-        String data_nascita    = request.getParameter("data_nascita");
-        String citta           = request.getParameter("citta");
-        String sesso           = request.getParameter("sesso");
-        String email           = request.getParameter("email");
-        String password        = request.getParameter("password");
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         
-        String msg = null;
-        Boolean prova = false;
-        Message check = new Message(msg,prova);
+        //processRequest(request, response);
+        String nome            = DataUtil.spaceTrim(request.getParameter("nome"));
+        String cognome         = DataUtil.spaceTrim(request.getParameter("cognome"));
+        String data_nascita    = request.getParameter("datanascita").trim();
+        String citta           = DataUtil.spaceTrim(request.getParameter("citta").trim());
+        String email           = request.getParameter("email").trim();
+        String sesso           = request.getParameter("sesso").trim();
+        String password        = request.getParameter("password").trim();
+       
         
-        if(email.equals("") || password.equals("") || nome.equals("") || cognome.equals("") || sesso == null || data_nascita.equals("")  || citta.equals("")){
-            check = new Message("fld", true);
-        }else{
+        
+      
+        Map<String, Object> data = new HashMap<>();
 
+        //** Generatore utente
+        
+        // Genera l'id dell'utente
+        String user_id = utente.createUniqueUserId(10);
+        
+     
+        
+        data.put("nome", nome);
+        data.put("cognome", cognome);
+        //data.put("datanascita", data_nascita);
+        data.put("id",user_id);
+        data.put("citta", citta);
+        data.put("sesso", sesso);
+        data.put("email", email);
+        data.put("password", password);
+        data.put("info", "");
+       
+        
+        Date sqlDate = null;
             try {
-                // Controllo dell'email
-                check = controlli.controlloemail(email);
-                }catch (SQLException ex) {}
-            
-                    if(!check.isError()) {
-                    // Controllo della password
-                    check = controlli.controllopassword(password);
-                            if(!check.isError()) {
-                            // Controllo di dati
-                            check = controlli.controllodati(nome, cognome, sesso, data_nascita, citta);
-
-        }}}
-
-           
-        
-        if(!check.isError()){
-            Map<String, Object> data = new HashMap<>();
-
-            // Genera l'id dell'utente
-            String user_id = utente.createUniqueUserId(10); 
-            data.put("id",user_id);
-
-            data.put("nome", nome);
-            data.put("cognome", cognome);
-            data.put("citta", citta);
-            data.put("sesso", sesso);
-            data.put("email",email);
-            data.put("password",password);
-            data.put("info","");
-            
-            Date data_nascita1 = null;
-            
-            try {
-                data_nascita1 = DataUtil.stringToDate(data_nascita, "dd/MM/yyyy");
-                data.put("data_nascita", data_nascita1);
+                sqlDate = DataUtil.stringToDate(data_nascita, "dd/MM/yyyy");
+                data.put("datanascita", DataUtil.dateToString(sqlDate));
             } catch (ParseException ex) { }
-            
-            try {
-                Database.insertRecord("user", data);
-                // Creo l'oggetto riservato all'utente
-                utente new_user = new utente(user_id, nome, cognome, email, password, sesso, data_nascita1, citta,"");
-                // Prepara l'utente ad essere loggato (gestione della variabili di sessione)
-                
-                HttpSession s = request.getSession(true);
-                s.setAttribute("utente", new_user);
-                
-                response.sendRedirect("profilo");
-                
-            } catch (SQLException ex) {
-                response.sendRedirect("signup?msg=Error");
-            }    
-        }else{
-                // Vai alla pagina di signup mostrando l'errore
-                response.sendRedirect("signup?msg=" + URLEncoder.encode(check.getCode(), "UTF-8"));
+        
+        
+        
+        try {
+            Database.insertRecord("user", data);
+        } catch (SQLException ex) {
+            Logger.getLogger(signup.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
+        
+       
+        
+        
+        
+       response.sendRedirect("profilo");
+        
+                /*
+        try {
+            Database.insertRecord("user", data);
+        } catch (SQLException ex) {
+            Logger.getLogger(signup.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        String query="INSERT INTO user (nome, cognome, datanascita, id, citta, sesso, email, password, info, idmadre, idpadre, idpartner) VALUE"+"'"+nome+"'"+"'"+cognome+"'"+data_nascita+"'"+"'"+user_id+"'"+"'"+citta+"'"+"'"+sesso+"'"+"'"+email+"'"+"'"+password+"'"+info+"'"+idPadre+"'"+idMadre+"'"+idPartner+"'";
+
+        
+        
+        
+        String query="INSER INTO user (nome, cognome, id, citta, sesso, email, password) VALUE"+"'"+nome+"'"+"'"+cognome+"'"+"'"+user_id+"'"+"'"+citta+"'"+"'"+sesso+"'"+"'"+email+"'"+"'"+password+"'";
+        try {
+            Database.inserimento(query);
+        } catch (SQLException ex) {
+            Logger.getLogger(signup.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        // Reindirizzamento alla pagina del profilo dell'utente
+            
+        
+        //response.sendRedirect("logged");
+                */
+        
+    } 
 
     /**
      * Returns a short description of the servlet.
@@ -143,7 +164,7 @@ public class signup extends HttpServlet {
      */
     @Override
     public String getServletInfo() {
-        return "Servlet per la gestione della registrazione";
-    }
+        return "Short description";
+    }// </editor-fold>
 
 }
