@@ -6,6 +6,7 @@
 package utilita;
 
 import com.mysql.jdbc.Connection;
+import static java.lang.System.out;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -58,10 +59,40 @@ public class Database {
         return(in.next());
      }
     
-    public static ResultSet controlloEmailPassword(String email, String password) throws SQLException{
+    public static boolean controlloEmailPassword(String email, String password) throws SQLException{
         String query = "SELECT * FROM  user WHERE email=" + "'" + email + "'" + "AND password=" +  "'" + password +  "'" ;
+        ResultSet in = Database.executeQuery(query);
+        return(in.next());
+    }
+    
+     public static ResultSet controlloProfilo(String email) throws SQLException{
+        String query = "SELECT * FROM  user WHERE email=" + "'" + email + "'";
         return Database.executeQuery(query);
     }
+     
+    
+     
+      public static boolean controlloPassword(String email) throws SQLException{
+        String query = "SELECT password FROM user WHERE email='"+ email +"'";
+        ResultSet in = Database.executeQuery(query);
+        
+        String password = null;
+        
+        while(in.next()) {
+     
+        password = in.getString(1);
+
+        if(in.wasNull()) {
+          password = "";
+        }
+      
+        }
+        return(password.equals(""));
+        
+     
+    }
+     
+     
     
     
     /**

@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package utilita;
 
 import java.util.HashMap;
@@ -5,75 +10,79 @@ import java.util.Map;
 
 /**
  *
- * @author Marco
+ * @author moira
  */
-public final class Message {
+public class Message {
     private final String code;
-    private final boolean error;
-    private final static Map<String, String> map;
+    private final Boolean error;
+    private final static Map<String,String> map;
     private final String msg;
-
-    public String getMsg() {
+     
+    public String getMsg(){
         return this.msg;
     }
-
-    public Message(String code, boolean error) {
-        this.code = code;
-        this.error = error;
-        this.msg = map.get(this.code);
-    }
-
-    public String getCode() {
+    
+    public String getCode(){
         return this.code;
     }
-
-    public boolean isError() {
+    
+    public Boolean isError(){
         return this.error;
     }
-
-    public String toJSON() {
-        String error_string = this.error ? "true" : "false";
+    
+    public Message(String code,boolean error){
+        this.code=code;
+        this.error=error;
+        this.msg=map.get(this.code);   
+    }
+    
+    public String stringa(){
+        String error_string = this.error ? "true": "false";       
         return "{\"message\":\"" + this.msg + "\", \"error\":\"" + error_string + "\"}";
     }
-
+   
     static{
-        map = new HashMap<>();
-        /*GENERIC ERROR*/
-        map.put("err", "There was an error");
-        /* USER */
-        map.put("usr_1", "User does not exist");
-        map.put("usr_2", "User already exist");
-        map.put("usr_3", "No user found");
-        map.put("usr_4", "User logged");
-        /* NOME */
-        map.put("name_1", "The name must be alphanumeric");
-        map.put("name_2", "The name is too short");
-        map.put("name_3", "The name is too long");
-        /* COGNOME */
-        map.put("surname_1", "The surname must be alphanumeric");
-        map.put("surname_2", "The surname is too short");
-        map.put("surname_3", "The surname is too long");
-        /* SESSO */
-        map.put("gnd", "You can be only male or female");
-        /* LUOGO DI NASCITA */
-        map.put("plc", "The birthplace must be alphanumeric");
-        /* DATA DI NASCITA */
-        map.put("date_1", "The birthdate isn't in the right format");
-        map.put("date_2", "The birthdate in not valid");
-        map.put("dt_ok", "Data changed");
-        /* EMAIL  */
-        map.put("eml_1", "Current email is not valid");
-        map.put("eml_2", "Confirm email is not valid");
-        map.put("eml_3", "Email is not valid");
-        map.put("eml_ok", "Email changed");
-        /* PASSWORD  */
-        map.put("psw", "Incorrect password");
-        map.put("psd_1", "Current passwrod is not valid");
-        map.put("psd_2", "Confirm passwrod is not valid");
-        map.put("psd_3", "The password must be 6 characters at least");
-        map.put("psd_4", "The password must be alphanumeric");
-        map.put("psd_ok", "Password changed");
-         /* FOTO */
+        
+        map= new HashMap<>();
+        //errore generico
+        map.put("err", "Si è rilevato un errore");
+        //errore User
+        
+        map.put("usr_0", "Inserisci tutti i campi");
+        map.put("usr_1", "Utente già esistente");
+        map.put("usr_2", "Utente non esistente");
+        map.put("usr_3", "Utente non trovato");
+        map.put("usr_4", "Utente loggato");
+        //errore Nome
+        map.put("name_1", "Il nome deve essere alfanumerico");
+        map.put("name_2", "Il nome è corto");
+        map.put("name_3", "Il nome è lungo");
+        //errore Cognome
+        map.put("surname_1", "Il nome deve essere alfanumerico");
+        map.put("surname_2", "Il nome è corto");
+        map.put("surname_3", "Il nome è lungo");
+        //errore Data di Nascita
+        map.put("date_1", "Formato non valido");
+        map.put("date_2", "Data non valida");
+        map.put("dt_ok", "Data modificata");
+        //errore Città
+        map.put("plc", "La città deve essere alfanumerica");
+        //errore Sesso
+        map.put("gnd", "Puoi scegliere solo maschio o femmina");
+        //errore Email
+        map.put("eml_1", "L'e-mail corrente non è valida");
+        map.put("eml_2", "L'e-mail confermata non è valida");
+        map.put("eml_3", "L'e-mail non è valida");
+        map.put("eml_ok", "L'e-mail è stata modificata");
+        //errore Password
+        map.put("psw", "Password errata");
+        map.put("psd_1", "La password non è valida");
+        map.put("psd_2", "La password confermata non è valida");
+        map.put("psd_3", "La password deve contenere almeno 6 caratteri");
+        map.put("psd_4", "La password deve essere alfanumerica");
+        map.put("psd_ok", "La password è stata modificata");
+        map.put("psd_5","inserisci la password");
+        /* FOTO */
         map.put("pho_slt", "Please, select a photo");
         map.put("pho_ok", "Photo Uploaded Successfully");
         map.put("pho_err", "Photo Uploaded Failed");
@@ -89,7 +98,6 @@ public final class Message {
         map.put("fld", "All fields are required");
         map.put("inv", "User invited");
         map.put("basic_add", "Relative added to your tree");
-        
         /* NotAllowedException */
         map.put("yourself",     "Not allowed: you can't add yourself as relative");
         /* SPOUSE */
@@ -134,10 +142,10 @@ public final class Message {
         map.put("sib_1",        "Not allowed: this user can't be add as sibling, because this relationship is not verificable");
         map.put("sib_2",        "Not allowed: this user can't be your sibling, because you have different parents");
         map.put("sib_3",        "Not allowed: this user can't be your sibling, beacause you can't have the same parents");
-            
-            
-    }
-
-   
-
+    
+                }
+    
+        
+        
+    
 }
