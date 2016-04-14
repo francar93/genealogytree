@@ -15,7 +15,6 @@ import org.apache.commons.validator.EmailValidator;
 import servlet.signup;
 import utilita.DataUtil;
 import utilita.Database;
-import static utilita.Database.emailIn;
 import utilita.Message;
 
 /**
@@ -45,7 +44,7 @@ public class controlli {
     }
     
     public static boolean emaildb(String email) throws SQLException{
-        return (emailIn(email));
+        return (Database.emailIn(email));
     }
        
     public static Message controllodati(String nome, String cognome, String sesso, String data_nascita, String citta){

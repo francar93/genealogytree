@@ -14,7 +14,7 @@ import java.util.Map;
  */
 public class Message {
     private final String code;
-    private final Boolean error;
+    private final boolean error;
     private final static Map<String,String> map;
     private final String msg;
      
@@ -36,7 +36,7 @@ public class Message {
         this.msg=map.get(this.code);   
     }
     
-    public String stringa(){
+    public String toJSON(){
         String error_string = this.error ? "true": "false";       
         return "{\"message\":\"" + this.msg + "\", \"error\":\"" + error_string + "\"}";
     }
