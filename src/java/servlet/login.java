@@ -83,8 +83,8 @@ public class login extends HttpServlet {
 
         String msg = null;
         boolean error = true;
-        int flag=0;
-         if ((email.equals("") && password.equals(""))||email.equals("")) {
+        int flag = 0;
+        if ((email.equals("") && password.equals("")) || email.equals("")) {
 
             msg = "usr_0";
 
@@ -92,109 +92,53 @@ public class login extends HttpServlet {
 
             try {
                 if (password.equals("")) {
-                    
-                    
-                    
-                    if(Database.emailIn(email)){
-                        
-                        
-                        
-                        if(Database.controlloPassword(email)){
-                            
+
+                    if (Database.emailIn(email)) {
+
+                        if (Database.controlloPassword(email)) {
+
                             //deve andare a profilo precompilato
-                            
-                            flag=1;
-                         
-                        }else{
-                            
-                            msg="psd_5";
-                             
+                            flag = 1;
+
+                        } else {
+
+                            msg = "psd_5";
+
                             //l'utente deve inserire la password
                         }
-                    }else{
-                        
+                    } else {
+
                         //l'email non esiste
-                        msg="usr_2";
-                        
+                        msg = "usr_2";
+
                     }
-                }else{
-                 
-                      if(Database.controlloEmailPassword(email, password)){
-                          flag=2;//login normale
-                      
-                      }else{
-                          msg="usr_3";
-                          //user e password errate
-                      }
-                         
-                } 
-            } catch (SQLException ex) {
-                Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
-         }
-         
-         switch(flag){
-             
-             case 1 : response.sendRedirect("profilopre");
-             break;
-             
-             case 2 : response.sendRedirect("profilo");
-             break;
-             
-             default: response.sendRedirect("login?msg=" + URLEncoder.encode(msg, "UTF-8"));
-             
-         }
-         
-            
-            /*
-         if(flag==1){
-              
-             response.sendRedirect("profilopre");
-             
-         }else{
-         response.sendRedirect("login?msg=" + URLEncoder.encode(msg, "UTF-8"));
-         }
-         
-         
-         
-         
-         
-         
-            try {
-                // da creare un metodo nella classa database
-                ResultSet in = Database.controlloEmailPassword(email, password);
+                } else if (Database.controlloEmailPassword(email, password)) {
+                    flag = 2;//login normale
 
-                if (in.next() == false) {
-
-                    msg = "usr_3";
-
-                    //response.sendRedirect("login?msg=" + URLEncoder.encode(msg, "UTF-8"));
-                    //response.sendRedirect("login");      
-                    // se non fa match con il db torna a login, con messaggio di errore da aggiugnere
                 } else {
-
-                    error = false;
-
-                    msg = "usr_4";
-                    //response.sendRedirect("login?msg=" + URLEncoder.encode(msg, "UTF-8"));
-
-                    //qui per ora va a profilo che non esiste 
+                    msg = "usr_3";
+                    //user e password errate
                 }
-
             } catch (SQLException ex) {
                 Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
-                // FRANCESCO 
             }
-        }  
-         
-        if (error) {
-            response.sendRedirect("login?msg=" + URLEncoder.encode(msg, "UTF-8"));
-        } else {
-            response.sendRedirect("login?msg=" + URLEncoder.encode(msg, "UTF-8"));
+
         }
-         
-       */  
+
+        switch (flag) {
+
+            case 1:
+                response.sendRedirect("profilopre");
+                break;
+
+            case 2:
+                response.sendRedirect("profilo");
+                break;
+
+            default:
+                response.sendRedirect("login?msg=" + URLEncoder.encode(msg, "UTF-8"));
+
+        }
 
     }
 

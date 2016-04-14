@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Creato il: Apr 08, 2016 alle 11:47
+-- Creato il: Apr 14, 2016 alle 16:15
 -- Versione del server: 10.1.9-MariaDB
 -- Versione PHP: 5.6.15
 
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `GenealogyTree`
+-- Database: `genealogytree`
 --
 
 -- --------------------------------------------------------
@@ -39,18 +39,18 @@ CREATE TABLE `richieste` (
 --
 
 CREATE TABLE `user` (
-  `nome` varchar(50) NOT NULL,
-  `cognome` varchar(50) NOT NULL,
-  `datanascita` date NOT NULL,
-  `id` varchar(10) NOT NULL,
-  `citta` varchar(50) NOT NULL,
-  `sesso` varchar(10) NOT NULL,
-  `email` varchar(50) NOT NULL,
-  `password` varchar(64) NOT NULL,
+  `nome` varchar(50) DEFAULT NULL,
+  `cognome` varchar(50) DEFAULT NULL,
+  `datanascita` date DEFAULT NULL,
+  `id` varchar(50) NOT NULL,
+  `citta` varchar(50) DEFAULT NULL,
+  `sesso` varchar(50) DEFAULT NULL,
+  `email` varchar(50) DEFAULT NULL,
+  `password` varchar(64) DEFAULT NULL,
   `info` text NOT NULL,
-  `idmadre` varchar(10) NOT NULL,
-  `idpadre` int(10) NOT NULL,
-  `idpartner` varchar(10) NOT NULL
+  `idmadre` varchar(50) DEFAULT NULL,
+  `idpadre` varchar(50) DEFAULT NULL,
+  `idpartner` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -58,7 +58,23 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`nome`, `cognome`, `datanascita`, `id`, `citta`, `sesso`, `email`, `password`, `info`, `idmadre`, `idpadre`, `idpartner`) VALUES
-('matteo', 'capodicasa', '0000-00-00', '', '', '', '', '', '', '', 0, '');
+(NULL, NULL, NULL, '', NULL, NULL, 'luca@gmail.com', NULL, '', NULL, NULL, NULL),
+('Matteo', 'Capodicasa', '1992-09-05', '1', 'Pianella', 'M', 'matteo.capodicasa@gmail.com', 'ciao', 'asfadass', '2', '3', '4'),
+('Francesco', 'Caruso', '1993-12-30', '181IQZP3P6', 'Lanciano', 'M', 'francesco.caruso@gmail.com', 'ciaociao', '', NULL, NULL, NULL),
+('Moira', 'Di Silvio', '1993-05-22', 'ERZQPROMB4', 'Lanciano', 'F', 'moira.disilvio@gmai.com', 'Ciaoooooo', '', NULL, NULL, NULL),
+('fikygusgfty', 'gykutfy', '1992-09-05', 'P9AZBILUN3', 'gkavsd', 'M', 'adsgfdhggs@gmail.com', 'ciaociao', '', NULL, NULL, NULL);
+
+--
+-- Indici per le tabelle scaricate
+--
+
+--
+-- Indici per le tabelle `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `id` (`id`),
+  ADD UNIQUE KEY `email` (`email`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
