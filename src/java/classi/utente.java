@@ -227,7 +227,7 @@ public class utente {
         
         try {
             if(user_email != null){
-                try (ResultSet record = Database.selectRecord("utente", "email = '" + user_email + "'")) {
+                try (ResultSet record = Database.selectRecord("user", "email = '" + user_email + "'")) {
                     if(record.next()){
                         return new utente(record);
                     }
@@ -241,11 +241,12 @@ public class utente {
     
     
     public void initSession(HttpSession session){
+        
        
-        utente id_utente = utente.getUserById(this.id);
+
         
         // Inserisci l'utente corrente nella variabile di sessione
-        session.setAttribute("utente_loggato", id_utente);
+        session.setAttribute("utente_loggato", this.id);
     }
 
 } 

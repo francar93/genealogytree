@@ -130,6 +130,15 @@ public class signup extends HttpServlet {
             } catch (SQLException ex) {
                 Logger.getLogger(signup.class.getName()).log(Level.SEVERE, null, ex);
             }
+            
+            HttpSession session = request.getSession(true);
+            
+            utente loggato= utente.getUserByEmail(email);
+                
+            String id = loggato.getId();
+               
+            session.setAttribute("id",id);
+             
             response.sendRedirect("profilo");
         
         }else{
