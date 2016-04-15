@@ -14,6 +14,7 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 import utilita.DataUtil;
 import utilita.Database;
+import classi.listautenti;
 
 /**
  *
@@ -248,6 +249,103 @@ public class utente {
         // Inserisci l'utente corrente nella variabile di sessione
         session.setAttribute("utente_loggato", this.id);
     }
+    
+    //funzioni per reperire gli oggetti dei parenti come: madre, padre e partner
+   
+    
+    
+        /**
+        * Recupera il padre o la madre
+        * @return
+        * @throws java.sql.SQLException
+        */
+    private utente getGenitore(String sesso) throws SQLException{
+           String genitore;
+           // Se bisogna restituire il genitore femmina
+           if(sesso.equals("femmina")){
+               // Restituire la madre
+               return utente.getUserById(this.getIdMadre());
+           }else{
+               // Altrimenti, restituire il padre
+               return utente.getUserById(this.getIdPadre());
+           }        
+       }
+    
+        /**
+        * Recupera il partner
+        * @return
+        * @throws java.sql.SQLException
+        */
+    
+    private utente getPartner() throws SQLException{
+        
+        return  utente.getUserById(this.getIdPartner());
+          
+       }
+    
+        /**
+        * Recupera il padre e la madre
+        * @return
+        * @throws java.sql.SQLException
+        */
+        public listautenti getParents() throws SQLException{
+           listautenti parent = new listautenti();
+           // Aggiunta della madre
+           parent.add(this.getGenitore("maschio"));
+           // Aggiunta del padre
+           parent.add(this.getGenitore("femmina"));
+           return parent;
+       }
+        
+        /**
+         * Recupera i figli
+         * @return  lista con tutti i figli di un utente
+         * @throws java.sql.SQLException
+         */
+        public listautenti getFigli() throws SQLException{
+            listautenti figli = new listautenti();
+
+            ResultSet record = Database.selectRecord("user", "idpadre = '" + this.id + "' OR idmadre = '" + this.id + "'");
+            // Aggiungo ogni figlio trovato alla lista
+            while(record.next()){    
+                figli.add(new utente(record));
+            }
+            record.close();
+
+            return figli;    
+        }
+        
+        /**
+         * Recupera fratelli e sorelle di sangue
+         * @return
+         * @throws java.sql.SQLException
+         */
+        public listautenti getFratelloSorella() throws SQLException {
+
+            listautenti fratellanza = new listautenti();
+            /*
+            user papa = this.getRelative("father");
+            user mamma = this.getRelative("mother");
+
+            // Se l'utente ha entrambi i genitori
+            if(father != null && mother != null) {
+                // Recupera figli del padre
+                UserList father_children = father.getChildren();
+                // Recupera figli della madre
+                UserList mother_children = mother.getChildren();
+                // Per ogni figlio del padre
+                for (User father_child : father_children) {
+                    // Se è anche figlio della madre ed è diverso dall'utente corrente
+                    if(mother_children.contains(father_child) && !father_child.equals(this)){
+                        // Aggiungilo tra i fratelli di sangue
+                        siblings.add(father_child);
+                    }
+                }
+            } 
+                  */
+            // Ritorna figli recuperati
+            return fratellanza;
+        }
 
 } 
 
