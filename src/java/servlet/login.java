@@ -6,6 +6,7 @@
 package servlet;
 
 import classi.utente;
+import static classi.utente.getUserByEmail;
 import java.io.IOException;
 import java.io.PrintWriter;
 import static java.lang.System.out;
@@ -21,7 +22,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import utilita.Database;
 import utilita.Database;
 import utilita.FreeMarker;
 import utilita.Message;
@@ -132,6 +132,9 @@ public class login extends HttpServlet {
                 break;
 
             case 2:
+                utente ut_loggato = getUserByEmail(email);
+                ut_loggato.initSession(request.getSession());
+                
                 response.sendRedirect("profilo");
                 break;
 

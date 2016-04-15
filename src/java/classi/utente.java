@@ -11,6 +11,7 @@ import java.text.ParseException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import javax.servlet.http.HttpSession;
 import utilita.DataUtil;
 import utilita.Database;
 
@@ -236,7 +237,17 @@ public class utente {
         } catch (SQLException ex) { }
         
         return null;
-    } //FC 
-}
+    }
+    
+    
+    public void initSession(HttpSession session){
+       
+        utente id_utente = utente.getUserById(this.id);
+        
+        // Inserisci l'utente corrente nella variabile di sessione
+        session.setAttribute("utente_loggato", id_utente);
+    }
+
+} 
 
 

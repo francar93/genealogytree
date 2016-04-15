@@ -23,6 +23,10 @@
         <servlet-name>logout</servlet-name>
         <servlet-class>servlet.logout</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>profilo</servlet-name>
+        <servlet-class>utilita.profilo</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ContextInitializer</servlet-name>
         <url-pattern>/ContextInitializer</url-pattern>
@@ -42,6 +46,10 @@
     <servlet-mapping>
         <servlet-name>logout</servlet-name>
         <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>profilo</servlet-name>
+        <url-pattern>/profilo</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
