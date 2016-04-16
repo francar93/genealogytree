@@ -135,9 +135,9 @@ public class signup extends HttpServlet {
             
             utente loggato= utente.getUserByEmail(email);
                 
-            String id = loggato.getId();
+            //String id = loggato.getId();
                
-            session.setAttribute("id",id);
+            session.setAttribute("id",loggato);
              
             response.sendRedirect("profilo");
         

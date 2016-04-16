@@ -125,8 +125,8 @@ public class controlli {
         String msg = null;
         boolean error = true;
         
-        // Se la password è lunga meno di sei caratteri
-        if(toCheck.length() <6){
+        // Se la password è lunga meno di 4 caratteri
+        if(toCheck.length() <4){
             msg = "psd_3"; // The password must be 6 characters at least
         
         // Se la password non è alfanumerica

@@ -41,12 +41,12 @@ public class profilo extends HttpServlet {
             
             //Se è stata generata la sessione
             if(session != null){
-               String id_utente = (String) session.getAttribute("id");
+               //String id_utente = (String) session.getAttribute("id");
                
                
                Map<String, Object> data = new HashMap<>();
                
-               data.put("id", id_utente);
+               data.put("id", session.getAttribute("id"));
                
                FreeMarker.process("provastampadb.html", data, response, getServletContext());
                

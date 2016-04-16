@@ -138,7 +138,7 @@ public class login extends HttpServlet {
                 
                 String id = loggato.getId();
                
-                session.setAttribute("id",id);
+                session.setAttribute("id",loggato);
                 
                 response.sendRedirect("profilo");
                 

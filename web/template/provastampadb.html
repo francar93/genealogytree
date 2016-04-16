@@ -11,8 +11,17 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <h3>l'id dell'utente loggato è</h3>
-        <h3>${id}</h3>
+        <h1>l'id dell'utente loggato è</h1>
+        <h3>${id.id?capitalize}</h3>
+        <h3>${id.nome?capitalize}</h3>
+        <h3>${id.cognome?capitalize}</h3>
+        <h3>${id.citta?capitalize}</h3>
+        <h1>suo padre</h1>
+        <!--
+        <h3>${padre.id?capitalize}</h3>
+        <h3>${padre.nome?capitalize}</h3>
+        <h3>${padre.cognome?capitalize}</h3>
+        <h3>${padre.citta?capitalize}</h3>-->
         <h1><a href="logout">clicca qui se vuoi uscire</a></h1>
         
        

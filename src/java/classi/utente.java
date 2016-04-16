@@ -199,7 +199,7 @@ public class utente {
         utente user = null;
         try {
             if(user_id != null){
-                ResultSet record = Database.selectRecord("utente", "id = '" + user_id + "'");
+                ResultSet record = Database.selectRecord("user", "id = '" + user_id + "'");
                 if(record.next()){
                     user =  new utente(record);
                 }
@@ -244,10 +244,11 @@ public class utente {
         * Recupera il padre o la madre
         * @return
         * @throws java.sql.SQLException
+        * @param sesso
         */
-    private utente getGenitore(String sesso) throws SQLException{
-           String genitore;
-           // Se bisogna restituire il genitore femmina
+    public utente getGenitore(String sesso) throws SQLException{
+           //String genitore;
+           // Se bisogna restituire la madre
            if(sesso.equals("femmina")){
                // Restituire la madre
                return utente.getUserById(this.getIdMadre());
@@ -449,7 +450,7 @@ public class utente {
         private void updateAttribute(String attribute, Object value) throws SQLException{
         Map<String, Object> data = new HashMap();
         data.put(attribute, value);
-        Database.updateRecord("utente", data, "id = '" + this.id + "'");
+        Database.updateRecord("user", data, "id = '" + this.id + "'");
     }
         
         public void initSession(HttpSession session){

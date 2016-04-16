@@ -78,7 +78,7 @@ public class Message {
         map.put("psw", "Password errata");
         map.put("psd_1", "La password non è valida");
         map.put("psd_2", "La password confermata non è valida");
-        map.put("psd_3", "La password deve contenere almeno 6 caratteri");
+        map.put("psd_3", "La password deve contenere almeno 4 caratteri");
         map.put("psd_4", "La password deve essere alfanumerica");
         map.put("psd_ok", "La password è stata modificata");
         map.put("psd_5","inserisci la password");
