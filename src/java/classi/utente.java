@@ -75,7 +75,7 @@ public class utente {
     }
     
     
-//Metodi Get    
+        //<editor-fold defaultstate="collapsed" desc="metodi get">    
     
         public String getId(){
             return this.id;
@@ -131,8 +131,9 @@ public class utente {
         public String getIdPartner() throws SQLException {
             return this.idPartner;
         }
+        //</editor-fold>
         
-//Metodi Set
+        //<editor-fold defaultstate="collapsed" desc="metodi set">
         public void setDati(String nome, String cognome, String sesso, String dataNascita, String citta, String info) throws SQLException, ParseException{
            
             Map<String, Object> data = new HashMap<>();
@@ -188,13 +189,14 @@ public class utente {
         public void setPassword(String password) throws SQLException {
             this.updateAttribute("password", DataUtil.crypt(password));
         }
+        //</editor-fold>
         
-        private void updateAttribute(String attribute, Object value) throws SQLException{
-        Map<String, Object> data = new HashMap();
-        data.put(attribute, value);
-        Database.updateRecord("utente", data, "id = '" + this.id + "'");
-    }
-        
+        //<editor-fold defaultstate="collapsed" desc="metodi per il reperimento dell'utenza"> 
+     /**
+     * Recupera un utente attraverso il suo id
+     * @param user_id   email utente
+     * @return          
+     */
         public static utente getUserById(String user_id){
         utente user = null;
         try {
@@ -207,19 +209,9 @@ public class utente {
         } catch (SQLException ex) {}
         
         return user;
-    } //FC
+    }
         
-        public static String createUniqueUserId(int length){
-        String user_id;
-        do{
-            user_id = DataUtil.generateCode(length);
-        // Cicla fino a quando non esiste un utente con id uguale a quello appena generato
-        }while(utente.getUserById(user_id) != null);
-        
-        return user_id;
-        
-    } //FC
-        /**
+    /**
      * Recupera un utente attraverso la sua e-mail
      * @param user_email   email utente
      * @return          
@@ -239,22 +231,18 @@ public class utente {
         
         return null;
     }
+    //</editor-fold>
     
+        //<editor-fold defaultstate="collapsed" desc="metodi reperimento parentela">
     
-    public void initSession(HttpSession session){
-        
-       
-
-        
-        // Inserisci l'utente corrente nella variabile di sessione
-        session.setAttribute("utente_loggato", this.id);
-    }
+    /*
+     *qui sono state create tutte le funzioni che servono per il reperimento dei parenti
+     *all'interno del db, gli elementi di ritorno delle funzioni possono essere:
+     *       - singoli oggetti della classe utente.
+     *       - liste di oggetti della classe utente, racchiusi nel formato listautenti
+     */
     
-    //funzioni per reperire gli oggetti dei parenti come: madre, padre e partner
-   
-    
-    
-        /**
+    /**
         * Recupera il padre o la madre
         * @return
         * @throws java.sql.SQLException
@@ -277,7 +265,7 @@ public class utente {
         * @throws java.sql.SQLException
         */
     
-    private utente getPartner() throws SQLException{
+        private utente getPartner() throws SQLException{
         
         return  utente.getUserById(this.getIdPartner());
           
@@ -288,13 +276,13 @@ public class utente {
         * @return
         * @throws java.sql.SQLException
         */
-        public listautenti getParents() throws SQLException{
-           listautenti parent = new listautenti();
+        public listautenti getGenitori() throws SQLException{
+           listautenti genitori = new listautenti();
            // Aggiunta della madre
-           parent.add(this.getGenitore("maschio"));
+           genitori.add(this.getGenitore("maschio"));
            // Aggiunta del padre
-           parent.add(this.getGenitore("femmina"));
-           return parent;
+           genitori.add(this.getGenitore("femmina"));
+           return genitori;
        }
         
         /**
@@ -316,6 +304,30 @@ public class utente {
         }
         
         /**
+        * Recupera un utente
+        * @param parentela      grado di parentela
+        * @return
+        * @throws SQLException
+        */
+        public utente getByParentela(String parentela) throws SQLException{
+        utente effettivo = null;
+        
+        switch(parentela){
+
+            case "madre":       effettivo = this.getGenitore("maschio");    break;    
+            case "padre":       effettivo = this.getGenitore("femmina");      break;
+            
+            case "compagno":
+            case "marito": 
+            case "moglie":      effettivo = this.getPartner();            break;
+                
+        }
+        
+        return effettivo;
+        
+    }
+        
+        /**
          * Recupera fratelli e sorelle di sangue
          * @return
          * @throws java.sql.SQLException
@@ -323,29 +335,142 @@ public class utente {
         public listautenti getFratelloSorella() throws SQLException {
 
             listautenti fratellanza = new listautenti();
-            /*
-            user papa = this.getRelative("father");
-            user mamma = this.getRelative("mother");
+            
+            utente papa = this.getByParentela("padre");
+            utente mamma = this.getByParentela("madre");
 
             // Se l'utente ha entrambi i genitori
-            if(father != null && mother != null) {
+            if(papa != null && mamma != null) {
                 // Recupera figli del padre
-                UserList father_children = father.getChildren();
+                listautenti figli_papa = papa.getFigli();
                 // Recupera figli della madre
-                UserList mother_children = mother.getChildren();
+                listautenti figli_mamma = mamma.getFigli();
                 // Per ogni figlio del padre
-                for (User father_child : father_children) {
+                for (utente figlio_papa : figli_papa) {
                     // Se è anche figlio della madre ed è diverso dall'utente corrente
-                    if(mother_children.contains(father_child) && !father_child.equals(this)){
+                    if(figli_mamma.contains(figlio_papa) && !figlio_papa.equals(this)){
                         // Aggiungilo tra i fratelli di sangue
-                        siblings.add(father_child);
+                        fratellanza.add(figlio_papa);
                     }
                 }
             } 
-                  */
+                  
             // Ritorna figli recuperati
             return fratellanza;
         }
+        
+        
+        /**
+         * Recupera gli antenati
+         * @return
+         * @throws java.sql.SQLException
+         */
+        public listautenti getAntenati() throws SQLException{
+            listautenti antenati = new listautenti();
+            listautenti genitori = this.getGenitori();
+
+            // Per ogni genitore
+            for (utente genitore : genitori) { 
+                // Aggiungilo alla lista
+                antenati.add(genitore);
+                // Ricerca ricorsivamente i genitori alla lista
+                antenati.addAll(genitore.getAntenati());
+            }
+
+            return antenati;
+        }
+        
+        
+        /**
+         * Recupera antenati con filtro sul sesso
+         * @param sesso    Sesso degli antenati
+         * @return
+         * @throws java.sql.SQLException
+         */
+        public listautenti getAntenati(String sesso) throws SQLException{
+            listautenti antenati = new listautenti();
+            listautenti genitori = this.getGenitori();
+            // Per ogni genitore
+            for (utente genitore : genitori) { 
+                if(genitore.getSesso().equals(sesso)){
+                    // Aggiungilo alla lista
+                    antenati.add(genitore);
+                }
+
+                // Ricerca ricorsivamente i genitori alla lista
+                antenati.addAll(genitore.getAntenati(sesso));
+            }
+            return antenati;
+        }
+        
+        /**
+         * Recupera i discendenti
+         * @return
+         * @throws java.sql.SQLException
+         */
+        private listautenti getDiscendenti() throws SQLException {
+            listautenti discendenti = new listautenti();
+            listautenti figli = this.getFigli();
+            // Per ogni figlio
+            for (utente figlio : figli) {  
+                // Aggiungilo alla lista
+                discendenti.add(figlio);
+                // Aggiungi ricrosivamente i figli alla lista
+                discendenti.addAll(figlio.getDiscendenti());
+            }
+            return discendenti;
+        }
+        
+        
+        /**
+         * Recupero dei discendenti con filtro sul sesso
+         * @param sesso    Sesso dei discendenti
+         * @return
+         * @throws java.sql.SQLException
+         */
+        public listautenti getDiscendenti(String sesso) throws SQLException {
+            listautenti discendenti = new listautenti();
+            listautenti figli = this.getFigli();
+            // Per ogni figlio
+            for (utente figlio : figli) {  
+                if(figlio.getSesso().equals(sesso)){
+                    // Aggiungilo alla lista
+                    discendenti.add(figlio);
+                }
+                // Aggiungi ricrosivamente i figli alla lista
+                discendenti.addAll(figlio.getDiscendenti(sesso));
+            }
+            return discendenti;
+        }
+        
+        
+        
+        //</editor-fold>
+        
+        //<editor-fold defaultstate="collapsed" desc="metodi vari">
+        private void updateAttribute(String attribute, Object value) throws SQLException{
+        Map<String, Object> data = new HashMap();
+        data.put(attribute, value);
+        Database.updateRecord("utente", data, "id = '" + this.id + "'");
+    }
+        
+        public void initSession(HttpSession session){
+        // Inserisci l'utente corrente nella variabile di sessione
+        session.setAttribute("utente_loggato", this.id);
+    }
+        
+        
+        public static String createUniqueUserId(int length){
+        String user_id;
+        do{
+            user_id = DataUtil.generateCode(length);
+        // Cicla fino a quando non esiste un utente con id uguale a quello appena generato
+        }while(utente.getUserById(user_id) != null);
+        
+        return user_id;
+        
+    } 
+        //</editor-fold>
 
 } 
 
