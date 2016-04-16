@@ -25,7 +25,7 @@
     </servlet>
     <servlet>
         <servlet-name>profilo</servlet-name>
-        <servlet-class>utilita.profilo</servlet-class>
+        <servlet-class>servlet.profilo</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ContextInitializer</servlet-name>

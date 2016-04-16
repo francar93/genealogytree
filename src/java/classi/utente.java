@@ -21,8 +21,6 @@ import classi.listautenti;
  * @author matteocapodicasa
  */
 public class utente {
-
-    
     
     public String nome;
     public String cognome;
