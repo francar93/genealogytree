@@ -16,6 +16,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import utilita.FreeMarker;
+import classi.utente;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -41,12 +45,25 @@ public class profilo extends HttpServlet {
             
             //Se è stata generata la sessione
             if(session != null){
-               //String id_utente = (String) session.getAttribute("id");
-               
+               String id_utente = (String) session.getAttribute("id");
                
                Map<String, Object> data = new HashMap<>();
                
-               data.put("id", session.getAttribute("id"));
+               //recupero utente loggato
+               utente loggato = utente.getUserById(id_utente);
+               
+               //recupero del padre
+               utente padre=null;
+            try {
+                
+                padre = utente.getUserById(loggato.getIdPadre());
+            } catch (SQLException ex) {
+                Logger.getLogger(profilo.class.getName()).log(Level.SEVERE, null, ex);
+            }
+               
+               
+               data.put("id", loggato);
+               data.put("padre", padre);
                
                FreeMarker.process("provastampadb.html", data, response, getServletContext());
                
