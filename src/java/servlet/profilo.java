@@ -54,14 +54,13 @@ public class profilo extends HttpServlet {
                
                //recupero del padre
                utente padre=null;
+               
             try {
-                
-                padre = utente.getUserById(loggato.getIdPadre());
+                padre = loggato.getGenitore("maschio");
             } catch (SQLException ex) {
                 Logger.getLogger(profilo.class.getName()).log(Level.SEVERE, null, ex);
             }
-               
-               
+            
                data.put("id", loggato);
                data.put("padre", padre);
                
