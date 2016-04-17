@@ -40,39 +40,36 @@ public class profilo extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        HttpSession session = request.getSession(false);  
-            
-            //Se è stata generata la sessione
-            if(session != null){
-               String id_utente = (String) session.getAttribute("id");
-               
-               Map<String, Object> data = new HashMap<>();
-               
-               //recupero utente loggato
-               utente loggato = utente.getUserById(id_utente);
-               
-               //recupero del padre
-               utente padre=null;
-               
+
+        HttpSession session = request.getSession(false);
+
+        //Se è stata generata la sessione
+        if (session != null) {
+            String id_utente = (String) session.getAttribute("id");
+
+            Map<String, Object> data = new HashMap<>();
+
+            //recupero utente loggato
+            utente loggato = utente.getUserById(id_utente);
+
+            //recupero del padre
+            utente padre = null;
+
             try {
                 padre = loggato.getGenitore("maschio");
             } catch (SQLException ex) {
                 Logger.getLogger(profilo.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
-               data.put("id", loggato);
-               data.put("padre", padre);
-               
-               FreeMarker.process("provastampadb.html", data, response, getServletContext());
-               
-                 
-                 
-                
-            }else{
-                 response.sendRedirect("login?msg=" + URLEncoder.encode("log", "UTF-8"));
-            }
-        
+
+            data.put("id", loggato);
+            data.put("padre", padre);
+
+            FreeMarker.process("provastampadb.html", data, response, getServletContext());
+
+        } else {
+            response.sendRedirect("login?msg=" + URLEncoder.encode("log", "UTF-8"));
+        }
+
     }
 
     /**
