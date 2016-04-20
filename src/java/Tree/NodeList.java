@@ -16,14 +16,14 @@ import java.util.ListIterator;
  * @author matteocapodicasa
  */
 public class NodeList extends LinkedList<treenode>{
-    /** Verifica se in una lista di nodi è presente un utente
+     /** Verifica se in una lista di nodi è presente un utente
      *
      * @param user
      * @return 
      */ 
     public boolean contains(utente user){
         for(treenode element: this){
-            if(element.getuser().equals(user)) return true;
+            if(element.getUser().equals(user)) return true;
         }
         return false;
     }
@@ -40,7 +40,7 @@ public class NodeList extends LinkedList<treenode>{
         boolean deleted = false;
         // Per ogni utente ({user}) nella breadcrumb (dal primo all'ultimo inserito)
         while(iter.hasNext()){
-            user = ((treenode) iter.next()).getuser();
+            user = ((treenode) iter.next()).getUser();
             // Se {user} è stato già verficato, passa all'utente successivo
             try {
                 // Recupera il nucleo familiare di {user}
@@ -49,14 +49,14 @@ public class NodeList extends LinkedList<treenode>{
                 iterator_reverse = this.listIterator(this.size());
                 // Per ogni utente ({user_to_check}) della breadcrumb (dall'ulitmo al primo inserito)
                 while(iterator_reverse.hasPrevious()) {
-                    user_to_check = ((treenode) iterator_reverse.previous()).getuser();
+                    user_to_check = ((treenode) iterator_reverse.previous()).getUser();
                     // Se {user_to_check} è uguale a {user}, esci dal ciclo perchè sono stati verificati tutti gli utenti potenzialmente rimuovibili
                     if(user.equals(user_to_check)) break;
                     // Se {user_to_check} fa parte del nucleo familiare di {user} 
                     if(family_core.contains(user_to_check)){
                         // Per ogni utente da eliminare
                         while(iter.hasNext()){
-                            user_to_delete = ((treenode) iter.next()).getuser();
+                            user_to_delete = ((treenode) iter.next()).getUser();
                             // Se non è uguale a {user_to_check}
                             if(!user_to_delete.equals(user_to_check)){
                                 // Rimuovilo

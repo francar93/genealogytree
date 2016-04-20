@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Creato il: Apr 14, 2016 alle 16:15
+-- Creato il: Apr 20, 2016 alle 15:38
 -- Versione del server: 10.1.9-MariaDB
 -- Versione PHP: 5.6.15
 
@@ -59,10 +59,17 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`nome`, `cognome`, `datanascita`, `id`, `citta`, `sesso`, `email`, `password`, `info`, `idmadre`, `idpadre`, `idpartner`) VALUES
 (NULL, NULL, NULL, '', NULL, NULL, 'luca@gmail.com', NULL, '', NULL, NULL, NULL),
-('Matteo', 'Capodicasa', '1992-09-05', '1', 'Pianella', 'M', 'matteo.capodicasa@gmail.com', 'ciao', 'asfadass', '2', '3', '4'),
+('Matteo', 'Capodicasa', '1992-09-05', '1', 'Pianella', 'M', 'matteo.capodicasa@gmail.com', 'ciao', 'asfadass', '32QT7NNMT6', 'I8CMNU6CRC', '4'),
 ('Francesco', 'Caruso', '1993-12-30', '181IQZP3P6', 'Lanciano', 'M', 'francesco.caruso@gmail.com', 'ciaociao', '', NULL, NULL, NULL),
+('Loredana', 'D''Alfonso', '1962-08-06', '32QT7NNMT6', 'Pescara', 'F', 'loredanadalfonso@gmail.com', 'ciao', '', NULL, NULL, NULL),
+('valerio', 'd''aurelio', '1996-04-23', '4ALI5R3CZ4', 'Como', 'M', 'valerio@univaq.it', 'Ciaociao', '', NULL, NULL, NULL),
 ('Moira', 'Di Silvio', '1993-05-22', 'ERZQPROMB4', 'Lanciano', 'F', 'moira.disilvio@gmai.com', 'Ciaoooooo', '', NULL, NULL, NULL),
-('fikygusgfty', 'gykutfy', '1992-09-05', 'P9AZBILUN3', 'gkavsd', 'M', 'adsgfdhggs@gmail.com', 'ciaociao', '', NULL, NULL, NULL);
+('Fausto', 'Capodicasa', '1957-05-12', 'I8CMNU6CRC', 'Pescara', 'M', 'faustocapodicasa@libero.it', 'ciao', '', NULL, NULL, NULL),
+('Luca', 'di giacomo', '1993-12-30', 'IH3AV8N72C', 'lugano', 'M', 'digiacomo@gmail.com', 'Ciaociao', '', NULL, NULL, NULL),
+('Chiara', 'Capodicasa', '2007-09-12', 'IROD17GPB6', 'Pescara', 'F', 'chiaracapodicasa@gmail.com', 'ciaociao', '', NULL, NULL, NULL),
+('Dario', 'Tenuta', '1992-04-11', 'LDAOE60LNC', 'Crotone', 'M', 'dariotenuta@gmail.com', 'ciaociao', '', NULL, NULL, NULL),
+('fikygusgfty', 'gykutfy', '1992-09-05', 'P9AZBILUN3', 'gkavsd', 'M', 'adsgfdhggs@gmail.com', 'ciaociao', '', NULL, NULL, NULL),
+('Fabrizio', 'Capodicasa', '1996-07-11', 'PFPFCN0QIU', 'Pescara', 'M', 'fabriziocapodicasa@gmai.com', 'ciao', '', NULL, NULL, NULL);
 
 --
 -- Indici per le tabelle scaricate

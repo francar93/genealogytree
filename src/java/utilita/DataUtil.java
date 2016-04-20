@@ -1,7 +1,6 @@
 package utilita;
 
 
-import classi.utente;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Date;

@@ -6,7 +6,6 @@
 package Tree;
 
 import java.sql.SQLException;
-import Tree.NodeList;
 import classi.listautenti;
 import classi.utente;
 
@@ -16,8 +15,8 @@ import classi.utente;
  */
 public class genetree {
     
-// Contiene l'albero genealogico
-    private NodeList family_tree;
+    // Contiene l'albero genealogico
+    private final NodeList family_tree;
 
     public NodeList getFamily_tree() {
         return family_tree;
@@ -65,13 +64,15 @@ public class genetree {
         if(index >= this.family_tree.size()) return;
         
         // Recupera il prossimo user da analizzare con relativa etichetta
-        utente user = this.family_tree.get(index).getuser();
-        String label = this.family_tree.get(index).getlabel();
+        utente user = this.family_tree.get(index).getUser();
+        String label = this.family_tree.get(index).getLabel();
         
         // Aggiungi la madre
-        this.add(user.getByParentela("mother"), label, "mother");
+        this.add(user.getByParentela("madre"), label, "mother");
         // Aggiungi il padre
-        this.add(user.getByParentela("father"), label, "father");
+        //da non mettere this.family_tree.add(new treenode(user.getRelative("father"), "father"));
+        
+        this.add(user.getByParentela("padre"), label, "father");
         
         // Aggiungi i figlie/figlie
         for(utente child: user.getFigli()){
@@ -86,7 +87,7 @@ public class genetree {
         
         // Aggiungi i fratelli/sorelle
         for(utente sibling: user.getFratelliSorelle()){
-            if(sibling.getSesso().equals("M")){
+            if(sibling.getSesso().equals("m")){
                 // Aggiungi i figli
                 this.add(sibling, label, "brother");
             }else{
@@ -95,12 +96,12 @@ public class genetree {
             }
         }
 
-        if(user.getSesso().equals("M")){
+        if(user.getSesso().equals("m")){
             // Aggiungi la moglie
-            this.add(user.getByParentela("wife"), label, "wife");
+            this.add(user.getByParentela("moglie"), label, "wife");
         }else{
             // Aggiungi il marito
-            this.add(user.getByParentela("husband"), label, "husband");
+            this.add(user.getByParentela("marito"), label, "husband");
         }
         
         // Valuta il prossimo utente
@@ -111,7 +112,7 @@ public class genetree {
         if(new_relative != null){
             // Se l'utente non è stato ancora valutato
             if(!this.family_tree.contains(new_relative)){
-                String new_label = treenode.getnewlabel(label, degree);
+                String new_label = treenode.getNewLabel(label, degree);
                 this.family_tree.add(new treenode(new_relative, new_label));
             }
         }
@@ -136,12 +137,12 @@ public class genetree {
         relatives.addAll(user.getGenitori());
         relatives.addAll(user.getFratelliSorelle());
         relatives.addAll(user.getFigli());
-        relatives.add(user.getByParentela("spouse"));
+        relatives.add(user.getByParentela("partner"));
         
         // Per ogni membro del nucleo familiare, recupero il nodo dell'albero corrispodente
         for(utente relative: relatives){
             for(treenode node: this.family_tree){
-                if(relative.getId().equals(node.getuser().getId())){
+                if(relative.getId().equals(node.getUser().getId())){
                     family.add(node);
                 }
             }
@@ -153,16 +154,23 @@ public class genetree {
         
     }   
     
+    public utente prova(){
+        if(this.family_tree.get(1).getUser() != null){
+            return this.family_tree.get(1).getUser();
+        }
+        return null;
+    }
+    
     public treenode getUser(utente user){
         for(treenode element: this.family_tree){
-            if(element.getuser().equals(user)) return element;
+            if(element.getUser().equals(user)) return element;
         }
         return null;
     }
     
     public treenode getUserById(String id){
         for(treenode element: this.family_tree){
-            if(element.getuser().getId().equals(id)) return element;
+            if(element.getUser().getId().equals(id)) return element;
         }
         return null;
     }
@@ -171,12 +179,11 @@ public class genetree {
         NodeList relatives = new NodeList();
         for(utente relative: users){
             for(treenode element: this.family_tree){
-                if(element.getuser().equals(relative)) relatives.add(element);
+                if(element.getUser().equals(relative)) relatives.add(element);
             }
         }
         
         return relatives;
     }
+
 }
-
-

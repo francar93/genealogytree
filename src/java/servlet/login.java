@@ -132,14 +132,20 @@ public class login extends HttpServlet {
 
             case 2:
                 
-                HttpSession session = request.getSession(true);
+                
                
                 utente loggato= utente.getUserByEmail(email);
+                loggato.initSession2(request.getSession());
                 
+                
+                /*rimetti questo se non va la modifica sopra ^
+                HttpSession session = request.getSession(true);
+                utente loggato= utente.getUserByEmail(email);
+
                 String id = loggato.getId();
                
                 session.setAttribute("id",id);
-                
+                */
                 response.sendRedirect("profilo");
                 
                 break;

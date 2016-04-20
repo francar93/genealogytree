@@ -12,7 +12,6 @@ import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.commons.validator.EmailValidator;
-import servlet.signup;
 import utilita.DataUtil;
 import utilita.Database;
 import utilita.Message;

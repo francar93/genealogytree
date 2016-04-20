@@ -22,28 +22,37 @@ public final class treenode {
         this.label = label;
         this.user = user;
 }
-    public String getlabel() {
+    public String getLabel() {
         return this.label;
 }
-    public utente getuser() {
+    public utente getUser() {
         return this.user;
 }
     
-    public static String getnewlabel ( String label, String relationship){
-       if(label.contains("io")) return relationship;
-           
-       if((label.contains("bis-nonna") || label.contains("bis-nonna")) && (relationship.equals("madre") || relationship.equals("padre"))){
-            return label.replace("bis-","bis-bis-");
-       }
-    String new_label = "";
-        boolean acquisito = false;
+    public static String getNewLabel ( String label, String relationship){
+       if(label.contains("You")) return relationship;
+        
+         // Se l'utente non ha una label, allora non l'avranno tutti gli utenti che aggiungerà all'albero
+        if(label.equals("")) return "";
+
+        // Se bisogna aggiungere un genitore di un nonno/a o un figlio di un nipote,
+        if(((label.contains("great-grandmother") || label.contains("great-grandfather")) && (relationship.equals("mother") || relationship.equals("father")))
+                || 
+            (((label.contains("great-grandson") || label.contains("great-granddaughter")) && (relationship.equals("son") || relationship.equals("daughter"))))){
+                        
+            // Ritorna la label originale aggiungendo solamente un altro "great-"
+            return label.replace("great-", "great-great-");          
+        }  
+        
+        String new_label = "";
+        boolean in_law = false;
         
         // Se è un parente acquisito
-        if (label.contains("-acquisito")) {
+        if(label.contains("-in-law")){
             // Elimina la dicitura "-in-law"
-            label = label.replace("-acquisito", "");
+            label = label.replace("-in-law", "");
             // Segnala che è stata eliminata la dicitura "-in-law" cosi da poterla riaggiungere in seguito
-            acquisito = true;
+            in_law = true;
         }
      
     switch(relationship){
@@ -228,15 +237,13 @@ public final class treenode {
                 break;
         }
     
-
         // Se è un parente acquisito, aggiungi la dicitura "-in-law"
-        if(acquisito && !new_label.equals("") && !new_label.contains("-acquisito")){
-            new_label = new_label + "-acquisito";
+        if(in_law && !new_label.equals("") && !new_label.contains("-in-law")){
+            new_label = new_label + "-in-law";
         }
            
         return new_label;
     }
-
 @Override
     public int hashCode() {
         int hash = 7;

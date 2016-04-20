@@ -130,7 +130,7 @@ public class signup extends HttpServlet {
             } catch (SQLException ex) {
                 Logger.getLogger(signup.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
+            /*
             HttpSession session = request.getSession(true);
             
             utente loggato= utente.getUserByEmail(email);
@@ -138,6 +138,10 @@ public class signup extends HttpServlet {
             String id = loggato.getId();
                
             session.setAttribute("id",id);
+            */
+            
+            utente loggato= utente.getUserByEmail(email);
+            loggato.initSession2(request.getSession());
              
             response.sendRedirect("profilo");
         

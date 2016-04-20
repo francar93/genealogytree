@@ -12,20 +12,29 @@ and open the template in the editor.
     </head>
     <body>
         <h1>l'id dell'utente loggato è</h1>
-       <!-- <h3>${id}</h3>  -->
-        <h3>${id.id?capitalize}</h3>
-        <h3>${id.nome?capitalize}</h3>
-        <h3>${id.cognome?capitalize}</h3>
-        <h3>${id.citta?capitalize}</h3>
-        <h1>suo padre</h1>
-       
-        <h3>${padre.id?capitalize}</h3>
-        <h3>${padre.nome?capitalize}</h3>
-        <h3>${padre.cognome?capitalize}</h3>
-        <h3>${padre.citta?capitalize}</h3>
-        <h1><a href="logout">clicca qui se vuoi uscire</a></h1>
-       
         
+        <h3>io</h3>
+        
+        <h3>${io.user.id?capitalize}</h3>
+        <h3>${io.user.nome?capitalize}</h3>
+        <h3>${io.user.cognome?capitalize}</h3>
+        <h3>${io.user.citta?capitalize}</h3>
+      
+        <h3>padre</h3>
+        
+        <h3>${father.user.id?capitalize}</h3>
+        <h3>${father.user.nome?capitalize}</h3>
+        <h3>${father.user.cognome?capitalize}</h3>
+        <h3>${father.user.citta?capitalize}</h3>
+     
+        <h3>madre</h3>
+        
+        <h3>${mother.user.id?capitalize}</h3>
+        <h3>${mother.user.nome?capitalize}</h3>
+        <h3>${mother.user.cognome?capitalize}</h3>
+        <h3>${mother.user.citta?capitalize}</h3>
+        
+              <h1><a href="logout">clicca qui se vuoi uscire</a></h1>
        
     </body>
 </html>
