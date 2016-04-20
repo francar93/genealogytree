@@ -631,9 +631,7 @@ public class utente {
         }
     
     //</editor-fold>
-        
        
-        
         //<editor-fold defaultstate="collapsed" desc="Gestione albero genealogico nella cache">
         
         /**
