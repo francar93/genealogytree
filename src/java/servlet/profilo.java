@@ -6,6 +6,7 @@
 package servlet;
 
 
+import Tree.NodeList;
 import Tree.genetree;
 import Tree.treenode;
 import java.io.IOException;
@@ -116,25 +117,25 @@ public class profilo extends HttpServlet {
                     try {
                         mother = family_tree.getUser(user_current.getByParentela("madre"));
                     } catch (SQLException ex) { }
-                    /*
+                    
                     // Recupero del coniuge
-                    TreeNode spouse = null;
+                    treenode spouse = null;
                     try {
-                        spouse = family_tree.getUser(user_current.getRelative("spouse"));
+                        spouse = family_tree.getUser(user_current.getByParentela("partner"));
                     } catch (SQLException ex) { }
 
                     // Recupero dei fratelli
                     NodeList siblings = null;
                     try {
-                        siblings = family_tree.getUsers(user_current.getSiblings());
+                        siblings = family_tree.getUsers(user_current.getFratelliSorelle());
                     } catch (SQLException ex) { }
 
                     // Recupero dei figli
                     NodeList children = null;
                     try {
-                        children = family_tree.getUsers(user_current.getChildren());
+                        children = family_tree.getUsers(user_current.getFigli());
                     } catch (SQLException ex) { }
-                    */
+                    
 
                     /* Inserimento dei parenti nel data-model */
                     
@@ -152,7 +153,18 @@ public class profilo extends HttpServlet {
                     */
                 
                     //utente padre = father.getuser();
-                   // data.put("forse", forse);
+                    // data.put("forse", forse);
+                    data.put("user_logged", user_logged);
+                    data.put("user_current", user_current);
+                    data.put("relative_grade", relative_grade);
+
+                    data.put("siblings", siblings);
+                    data.put("children", children);
+
+                    data.put("spouse", spouse);
+                    
+                    data.put("mother", mother);
+                    
                     data.put("io", io);
                     data.put("father", father);
                     data.put("mother", mother);
@@ -163,6 +175,16 @@ public class profilo extends HttpServlet {
             
             
                     FreeMarker.process("provastampadb.html", data, response, getServletContext());
+                }else{
+                    
+                    StringBuffer requestURL = request.getRequestURL();
+                    if (request.getQueryString() != null) {
+                        requestURL.append("?").append(request.getQueryString());
+                    }
+                    String completeURL = requestURL.toString();
+                    // Vai alla pagina di login e mostra messaggio di errore
+                    response.sendRedirect(completeURL);
+                    
                 }
             
         } else {

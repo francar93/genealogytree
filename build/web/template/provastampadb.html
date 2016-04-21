@@ -15,24 +15,35 @@ and open the template in the editor.
         
         <h3>io</h3>
         
-        <h3>${io.user.id?capitalize}</h3>
-        <h3>${io.user.nome?capitalize}</h3>
-        <h3>${io.user.cognome?capitalize}</h3>
-        <h3>${io.user.citta?capitalize}</h3>
+        <h3>${user_current.id?capitalize}</h3>
+        <h3>${user_current.nome?capitalize}</h3>
+        <h3>${user_current.cognome?capitalize}</h3>
+        <h3>${user_current.citta?capitalize}</h3>
       
         <h3>padre</h3>
         
-        <h3>${father.user.id?capitalize}</h3>
-        <h3>${father.user.nome?capitalize}</h3>
-        <h3>${father.user.cognome?capitalize}</h3>
-        <h3>${father.user.citta?capitalize}</h3>
-     
+        <#if father??>
+        <a href="profile?id=${father.user.id}">
+        
+            <h3>${father.user.id?capitalize}</h3>
+            <h3>${father.user.nome?capitalize}</h3>
+            <h3>${father.user.cognome?capitalize}</h3>
+            <h3>${father.user.citta?capitalize}</h3>
+        
+        </a>
+        </#if>
+        
         <h3>madre</h3>
         
+        <#if mother??>
         <h3>${mother.user.id?capitalize}</h3>
         <h3>${mother.user.nome?capitalize}</h3>
         <h3>${mother.user.cognome?capitalize}</h3>
         <h3>${mother.user.citta?capitalize}</h3>
+        </#if>
+        
+        <h3>figli</h3>
+        
         
               <h1><a href="logout">clicca qui se vuoi uscire</a></h1>
        

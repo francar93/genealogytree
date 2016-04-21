@@ -51,7 +51,7 @@ public class Message {
         map.put("usr_0", "Inserisci tutti i campi");
         map.put("usr_1", "Utente già esistente");
         map.put("usr_2", "Utente non esistente");
-        map.put("usr_3", "Utente non trovato");
+        map.put("usr_3", "Password errata");
         map.put("usr_4", "Utente loggato");
         //errore Nome
         map.put("name_1", "Il nome deve essere alfanumerico");
