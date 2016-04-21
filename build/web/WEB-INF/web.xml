@@ -27,6 +27,10 @@
         <servlet-name>profilo</servlet-name>
         <servlet-class>servlet.profilo</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ricercanolog</servlet-name>
+        <servlet-class>servlet.ricercanolog</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ContextInitializer</servlet-name>
         <url-pattern>/ContextInitializer</url-pattern>
@@ -50,6 +54,10 @@
     <servlet-mapping>
         <servlet-name>profilo</servlet-name>
         <url-pattern>/profilo</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ricercanolog</servlet-name>
+        <url-pattern>/ricercanolog</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
