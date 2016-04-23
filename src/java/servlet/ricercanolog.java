@@ -75,24 +75,14 @@ public class ricercanolog extends HttpServlet {
         HttpSession session=request.getSession(false);
         Message check = new Message(null, false);
         
-        //Se è stato effettuato il login...
-        if(session!=null) { 
-            // Verifica se l'albero genealogico nella cache è aggiornato
-            utente user_logged = (utente)session.getAttribute("user_logged");
-            user_logged.checkFamilyTreeCache(session);
-            data.put("family_tree", (genetree)session.getAttribute("family_tree"));
-            data.put("user_logged", (utente)session.getAttribute("user_logged"));
-        } 
+      
         
         
             
             /* Ricerca dalla search bar */
-            input_filter.put("name", "");
-            input_filter.put("surname", "");
-            input_filter.put("birthplace", "");
-            input_filter.put("birthdate", "");
+            
              
-            String input = request.getParameter("search-bar-input");
+            String input = request.getParameter("cerca-nologin");
             if(!input.equals("")){
                 // Se la stringa da cercare è alfanumerica
                 if(!DataUtil.isAlphanumeric(input, true)){
