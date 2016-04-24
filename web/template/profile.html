@@ -8,12 +8,12 @@
             </div>
         </div>
         <div class="profile-name">
-            Nome & Cognome
+            ${user_current.nome?capitalize} ${user_current.cognome?capitalize}
         </div>
         <div class="profile-info">
             INFORMAZIONI<br>
             <span id="profilo-data-nascita">Data di nascita:</span><br>
-            <span id="profilo-luogo-nascita">Luogo di nascita:</span>
+            <span id="profilo-luogo-nascita">Luogo di nascita:${user_current.citta?capitalize}</span>
         </div>
     </div>
 </div>

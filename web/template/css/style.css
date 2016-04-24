@@ -76,7 +76,7 @@ input{
     float: right;
 }
 .box-profile-container{
-    border: 1px solid red;
+    border: 2px solid red;
     margin: 35px;
     height: 100%;
 }
@@ -100,7 +100,7 @@ input{
 .profile-info{
     text-align: center;
     color: white;
-    border: 1px solid red;
+    border: 2px solid red;
     width: 60%;
     position: relative;
     left: 20%;
