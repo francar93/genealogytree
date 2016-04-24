@@ -65,4 +65,44 @@ input{
     padding-left: 10px;
     margin-bottom: 0;
 }
-
+.container-left{
+    width: 50%;
+    height: 400px;
+    float: left;
+}
+.container-right{
+    width: 50%;
+    height: 400px;
+    float: right;
+}
+.box-profile-container{
+    border: 1px solid red;
+    margin: 35px;
+    height: 100%;
+}
+#profile-img{
+    height: 100px;
+    width: 100px;
+}
+.img-profile{
+    position: relative;
+    left: 50%;
+    top: 20px;
+    margin-left: -50px; /*margine negativo calcolato con meta di 100 px img*/
+}
+.box-img-profile{
+    height: 140px;  /*140 px calcolati con 100 px img + 20px top + 20 per dare margine bottom*/
+}
+.profile-name{
+    text-align: center;
+    color: white;
+}
+.profile-info{
+    text-align: center;
+    color: white;
+    border: 1px solid red;
+    width: 60%;
+    position: relative;
+    left: 20%;
+    top: 20px;
+}
