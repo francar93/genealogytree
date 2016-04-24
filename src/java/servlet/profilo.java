@@ -174,7 +174,7 @@ public class profilo extends HttpServlet {
             
             
             
-                    FreeMarker.process("provastampadb.html", data, response, getServletContext());
+                    FreeMarker.process("profile.html", data, response, getServletContext());
                 }else{
                     
                     StringBuffer requestURL = request.getRequestURL();

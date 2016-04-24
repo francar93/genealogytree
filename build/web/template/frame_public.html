@@ -23,14 +23,22 @@ and open the template in the editor.
                 </form>
             </div>
             <div class="waves-effect waves-light btn login-signup">
-                <#if action == "signup" || action == "search">
-                    <#assign other_action = "login">
-                <#else>
-                    <#assign other_action = "signup">
-                </#if>
-                <a href="${other_action}" id="login-signup">
-                    ${other_action?cap_first}
-                </a>
+                <#if user_logged??>
+                    
+                    <a href="profile" class="btn btn-primary pull-right ellipsis">
+                        ${user_logged.nome}
+                    </a>
+
+                    <#else>
+                        <#if action == "signup" || action == "search">
+                            <#assign other_action = "login">
+                        <#else>
+                            <#assign other_action = "signup">
+                        </#if>
+                    <a href="${other_action}" id="login-signup">
+                        ${other_action?cap_first}
+                    </a>
+                </#if> 
             </div>
         </div>
         
