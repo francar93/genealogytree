@@ -74,6 +74,7 @@ input{
     width: 50%;
     height: 400px;
     float: right;
+    margin-bottom: 20px;
 }
 .box-profile-container{
     border: 2px solid red;
@@ -105,4 +106,13 @@ input{
     position: relative;
     left: 20%;
     top: 20px;
+}
+#profile-data-nascita{
+    text-align: left;
+    margin-top: 10px;
+    margin-left: 6px;
+}
+#profile-luogo-nascita{
+    text-align: left;
+    margin-left: 6px;
 }
