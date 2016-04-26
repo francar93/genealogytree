@@ -22,14 +22,19 @@ and open the template in the editor.
                     <input type="text" placeholder="Cerca" name="cerca-nologin" id="search">
                 </form>
             </div>
-            <div class="waves-effect waves-light btn login-signup">
+            
                 <#if user_logged??>
                     
-                    <a href="profile" class="btn btn-primary pull-right ellipsis">
+                    <a href="profilo" class="btn btn-primary pull-right ellipsis waves-effect waves-light btn login-signup">
                         ${user_logged.nome}
+                    </a>
+                   
+                    <a href="logout" class="btn btn-primary pull-right ellipsis waves-effect waves-light btn login-signup">
+                        logout
                     </a>
 
                     <#else>
+                    <div class="waves-effect waves-light btn login-signup">
                         <#if action == "signup" || action == "search">
                             <#assign other_action = "login">
                         <#else>
