@@ -31,6 +31,14 @@
         <servlet-name>ricercanolog</servlet-name>
         <servlet-class>servlet.ricercanolog</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>profilopre</servlet-name>
+        <servlet-class>servlet.profilopre</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>addparent</servlet-name>
+        <servlet-class>servlet.addparent</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ContextInitializer</servlet-name>
         <url-pattern>/ContextInitializer</url-pattern>
@@ -58,6 +66,14 @@
     <servlet-mapping>
         <servlet-name>ricercanolog</servlet-name>
         <url-pattern>/ricercanolog</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>profilopre</servlet-name>
+        <url-pattern>/profilopre</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>addparent</servlet-name>
+        <url-pattern>/addparent</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
