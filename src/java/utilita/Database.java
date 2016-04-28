@@ -297,11 +297,12 @@ public class Database {
     
     public static listautenti search(String input) throws SQLException{
         listautenti result = new listautenti();
-        String condition = "(CONCAT(nome, ' ', cognome) COLLATE UTF8_GENERAL_CI LIKE '%" + input + "%' "
+       /* String condition = "(CONCAT(nome, ' ', cognome) COLLATE UTF8_GENERAL_CI LIKE '%" + input + "%' "
                       + "OR CONCAT(cognome, ' ', nome) COLLATE UTF8_GENERAL_CI LIKE '%" + input + "%')"
                       // Includi gli utenti non verificati ma escludi quelli invitati che non hanno ancora fatto la registrazione
-                    + "AND ((email IS NOT NULL AND password IS NOT NULL) OR (email IS NULL AND password IS NULL))";
-        
+                    + "AND ((email IS NOT NULL AND password IS NOT NULL))";
+        */
+       String condition = "nome= '"+input+"'OR cognome='"+input+"'";
         
             ResultSet record = Database.selectRecord("user", condition);
             while(record.next()){

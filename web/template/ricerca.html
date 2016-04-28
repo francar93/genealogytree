@@ -12,5 +12,19 @@ and open the template in the editor.
     </head>
     <body>
         <div>TODO write content</div>
+      <#if results??>
+       
+            <#list results as user> 
+                <h3>${user.nome?capitalize} ${user.cognome?capitalize}</h3>
+            </#list>
+            
+      <#else>
+            <h3>nulla</h3>
+      </#if>
+      
+      <div>TODO write content</div>
+           
+           
+        
     </body>
 </html>
