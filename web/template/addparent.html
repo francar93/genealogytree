@@ -1,10 +1,10 @@
 <#include "frame_public.html">
 <div class="row signup">
-    <form class="col s12" action="profilopre" method="post">
+    <form class="col s12" action="addparent" method="post">
         <div class="row">
-            <#if message??>
-            <p id="error-msg">${message.msg!}</p>
-            </#if>
+            <div class="<#if !(message.msg??)>hide</#if>">
+            <p>${message.msg!}</p>
+            </div>
             <div class="input-field col s12">
                 <input id="first_name" type="text" class="validate" name="nome">
                 <label for="first_name">First Name</label>
@@ -41,12 +41,6 @@
             <div class="input-field col s12">
                 <input id="email" type="email" class="validate" name="email">
                 <label for="email">Email</label>
-            </div>
-        </div>
-        <div class="row">
-            <div class="input-field col s12">
-                <input id="password" type="password" class="validate" name="password">
-                <label for="password">Password</label>
             </div>
         </div>
         
