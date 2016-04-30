@@ -42,11 +42,21 @@ public class profilopre extends HttpServlet {
         
         
         //Se è stata generata la sessione
-        if(session != null){
-            utente user_logged = (utente)session.getAttribute("user_logged");
-            data.put("user_logged", user_logged);
-                   
-            FreeMarker.process("addparent.html", data, response, getServletContext());
+        if(session == null){ 
+
+            String action = (String) request.getAttribute("action");
+            // Se l'azione non è stata definita o non è valida, impostala come l'azione di login
+            if (action == null || (action.equals("login") && action.equals("signup"))) {
+                action = "login";
+            }
+            // Inserisci l'azione nel data-model
+            data.put("action", action);
+
+            data.put("message", new Message(request.getParameter("msg"), true));
+
+            data.put("script", "login");
+
+            FreeMarker.process("profilopre.html", data, response, getServletContext());
         }else {
             response.sendRedirect("login?msg=" + URLEncoder.encode("log", "UTF-8"));
         }
@@ -66,92 +76,44 @@ public class profilopre extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession(false);
-        if(session != null){
+        if(session == null){
             
-            String nome            = DataUtil.spaceTrim(request.getParameter("nome"));
-            String cognome         = DataUtil.spaceTrim(request.getParameter("cognome"));
-            String data_nascita    = request.getParameter("datanascita").trim();
-            String citta           = DataUtil.spaceTrim(request.getParameter("citta").trim());
+            String password        = request.getParameter("password").trim();
             String email           = request.getParameter("email").trim();
-            String sesso           = request.getParameter("sesso");
-
+        
             Message check = null;
-
-            if(email.equals("") || nome.equals("") || cognome.equals("") || sesso.equals("vuoto") || data_nascita.equals("")  || citta.equals("")){
+        
+            if(password.equals("")){
                 check = new Message("fld", true);
             }else{
-
-                try {
-                    // Controllo dell'email
-                    check = controlli.controlloemail(email);
-                } catch (SQLException ex) {
-                    Logger.getLogger(signup.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                if(!check.isError()) {
-
-                        // Controllo di dati
-                        check = controlli.controllodati(nome, cognome, sesso, data_nascita, citta);
-
-            }}
-
-
-
-            if(!check.isError()){
-
-
-                Map<String, Object> data = new HashMap<>();
-
-
-                //** Generatore utente
-
-                // Genera l'id dell'utente
-                String user_id = utente.createUniqueUserId(10);
-
-
-                data.put("nome", nome);
-                data.put("cognome", cognome);
-                data.put("id",user_id);
-                data.put("citta", citta);
-                data.put("sesso", sesso);
-                data.put("email", email);
-                data.put("info", "");
-
-
-                Date sqlDate = null;
-                    try {
-                        sqlDate = DataUtil.stringToDate(data_nascita, "dd/MM/yyyy");
-                        data.put("datanascita", DataUtil.dateToString(sqlDate));
-                    } catch (ParseException ex) { }
-
-
-
-                try {
-                    Database.insertRecord("user", data);
-                } catch (SQLException ex) {
-                    Logger.getLogger(signup.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                /*
-                HttpSession session = request.getSession(true);
-
-                utente loggato= utente.getUserByEmail(email);
-
-                String id = loggato.getId();
-
-                session.setAttribute("id",id);
-                */
-
-                //utente loggato= utente.getUserByEmail(email);
-                //loggato.initSession2(request.getSession());
-                   
-                // da scrivere l'inserivmento come parente mio 
-                
-                response.sendRedirect("profilo");
-
-            }else{
-
-                response.sendRedirect("profilopre?msg=" + URLEncoder.encode(check.getCode(), "UTF-8"));
-
+                // Controllo della password
+                check = controlli.controllopassword(password);
+                              
             }
+        if(!check.isError()){
+            
+        
+            Map<String, Object> data = new HashMap<>();
+            data.put("password", password);
+            
+                try {
+                    Database.updateRecord("user", data, "password = ' " + password + " ' ");
+                } catch (SQLException ex) {
+                    Logger.getLogger(profilopre.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            
+        
+            utente loggato= utente.getUserByEmail(email);
+            loggato.initSession2(request.getSession());
+             
+            response.sendRedirect("profilo");
+        
+        }else{
+            
+            response.sendRedirect("profilopre?msg=" + URLEncoder.encode(check.getCode(), "UTF-8"));
+            
+        }
+        
         }else {
             response.sendRedirect("login?msg=" + URLEncoder.encode("log", "UTF-8"));
         }    
