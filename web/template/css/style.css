@@ -116,3 +116,7 @@ input{
     text-align: left;
     margin-left: 6px;
 }
+.container-left.search{
+    width: 33.33%;
+    height: 200px;
+}
