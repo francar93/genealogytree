@@ -14,8 +14,8 @@ and open the template in the editor.
     </head>
     <body>
       <#if results??>
-       
-        <#list results as user> 
+            <div class="container search">
+        <#list results as user>
             <div class="container-left search">
                 <div class="box-profile-container">
                     <div class="box-img-profile">
@@ -29,6 +29,7 @@ and open the template in the editor.
                 </div>
             </div>
         </#list>
+            </div>
             
       <#else>
             <h3>nulla</h3>

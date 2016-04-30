@@ -3,13 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/carus/OneDrive/Documents/GitHub/genealogytree/src/java/servlet/login.java</file>
-            <file>file:/C:/Users/carus/OneDrive/Documents/GitHub/genealogytree/web/template/login.html</file>
-            <file>file:/C:/Users/carus/OneDrive/Documents/GitHub/genealogytree/src/java/servlet/profilopre.java</file>
-            <file>file:/C:/Users/carus/OneDrive/Documents/GitHub/genealogytree/src/java/utilita/Database.java</file>
-            <file>file:/C:/Users/carus/OneDrive/Documents/GitHub/genealogytree/web/template/profilopre.html</file>
-            <file>file:/C:/Users/carus/OneDrive/Documents/GitHub/genealogytree/src/java/servlet/addparent.java</file>
-            <file>file:/C:/Users/carus/OneDrive/Documents/GitHub/genealogytree/src/java/servlet/signup.java</file>
+            <file>file:/C:/Users/Lorenzo/genealogytree/src/java/servlet/ricercanolog.java</file>
+            <file>file:/C:/Users/Lorenzo/genealogytree/web/template/frame_public.html</file>
+            <file>file:/C:/Users/Lorenzo/genealogytree/web/template/css/style.css</file>
+            <file>file:/C:/Users/Lorenzo/genealogytree/web/template/ricerca.html</file>
+            <file>file:/C:/Users/Lorenzo/genealogytree/web/template/profile.html</file>
         </group>
     </open-files>
 </project-private>

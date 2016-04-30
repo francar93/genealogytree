@@ -117,6 +117,9 @@ input{
     margin-left: 6px;
 }
 .container-left.search{
-    width: 33.33%;
     height: 200px;
+    margin-top: 20px;
+}
+.container.search{
+    width: 60%;
 }
