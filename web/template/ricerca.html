@@ -9,8 +9,33 @@ and open the template in the editor.
         <title>TODO supply a title</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link type="text/css" rel="stylesheet" href="template/css/materialize.min.css"  media="screen,projection"/>
+        <link type="text/css" rel="stylesheet" href="template/css/style.css"/>
     </head>
     <body>
-        <div>TODO write content</div>
+      <#if results??>
+            <div class="container search">
+        <#list results as user>
+            <div class="container-left search">
+                <div class="box-profile-container">
+                    <div class="box-img-profile">
+                        <div class="img-profile">
+                            <img src="#" id="profile-img">
+                        </div>
+                    </div>
+                    <div class="profile-name">
+                        <h5>${user.nome?capitalize} ${user.cognome?capitalize}</h5>
+                    </div>
+                </div>
+            </div>
+        </#list>
+            </div>
+            
+      <#else>
+            <h3>nulla</h3>
+      </#if>
+           
+           
+        
     </body>
 </html>

@@ -22,6 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import utilita.DataUtil;
 import utilita.Database;
+import utilita.FreeMarker;
 import utilita.Message;
 
 /**
@@ -70,7 +71,7 @@ public class ricercanolog extends HttpServlet {
         
         listautenti results = new listautenti();
         Map<String, Object> data = new HashMap<>();
-        Map<String, String> input_filter = new HashMap<>();
+        //Map<String, String> input_filter = new HashMap<>();
         //Gestione sessione
         HttpSession session=request.getSession(false);
         Message check = new Message(null, false);
@@ -85,9 +86,9 @@ public class ricercanolog extends HttpServlet {
             String input = request.getParameter("cerca-nologin");
             if(!input.equals("")){
                 // Se la stringa da cercare è alfanumerica
-                if(!DataUtil.isAlphanumeric(input, true)){
-                    check = new Message("alp", false);
-                }else{
+                //if(!DataUtil.isAlphanumeric(input, true)){
+                  //  check = new Message("alp", false);
+                //}else{
                     
                     
                     try {
@@ -98,10 +99,12 @@ public class ricercanolog extends HttpServlet {
                     }
                     
                     
-                }
-                data.put("searching", input);
+                //}
+                data.put("results", results);
+                FreeMarker.process("ricerca.html", data, response, getServletContext());
+                //response.sendRedirect("ricerca");
             }else{
-                response.sendRedirect("search");
+                response.sendRedirect("login");
             }
             
             
