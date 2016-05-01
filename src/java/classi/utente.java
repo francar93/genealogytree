@@ -5,6 +5,7 @@
  */
 package classi;
 
+import Tree.NodeList;
 import Tree.genetree;
 import Tree.treenode;
 import java.sql.ResultSet;
@@ -17,6 +18,7 @@ import javax.servlet.http.HttpSession;
 import utilita.DataUtil;
 import utilita.Database;
 import java.util.Objects;
+import utilita.NotAllowedException;
 
 /**
  *
@@ -131,6 +133,17 @@ public class utente {
         public String getIdPartner() throws SQLException {
             return this.idPartner;
         }
+        //aka getNumRelatives
+        public int getParentele() throws SQLException {
+
+            /* Il numero di parenti può essere modificato anche da altri utenti, per cui è necessario prelevare il valore ogni volta dal database*/
+            ResultSet record = Database.selectRecord("user", "id = '" + this.id + "'");
+            if(record.next()){
+                return record.getInt("parentele");
+            }
+
+            return 0;
+        }
         //</editor-fold>
         
         //<editor-fold defaultstate="collapsed" desc="metodi set">
@@ -188,6 +201,32 @@ public class utente {
 
         public void setPassword(String password) throws SQLException {
             this.updateAttribute("password", DataUtil.crypt(password));
+        }
+        
+        /**
+         * Aggiorna il numero di parenti collegati
+         * @throws java.sql.SQLException
+         */
+        
+        //aka setNumRelatives
+        public void setParentele() throws SQLException {
+            // Recupero i parenti dell'utente corrente
+            NodeList family_tree = this.getFamilyTree().getFamily_tree();
+
+            // Calcola il numero di parenti (-1 per non considerare l'utente stesso)
+            int tree_size = family_tree.size() - 1;
+
+            Map<String, Object> data = new HashMap<>();
+            data.put("parentele", tree_size);
+
+            // Generazione della condizione: bisogna aggiornare i numeri di parenti ad ogni membro dell'albero genealogico
+            String condition = "";
+            for(treenode user: family_tree){
+                condition = condition + "id = '" + user.getUser().getId() + "' OR ";
+            }
+            condition = condition.substring(0, condition.length()-4);
+            // Aggoirna il numero di parenti
+            Database.updateRecord("user", data, condition);
         }
         //</editor-fold>
         
@@ -447,7 +486,7 @@ public class utente {
         
         
         //</editor-fold>
-   
+        
         //<editor-fold defaultstate="collapsed" desc="metodi vari">
         private void updateAttribute(String attribute, Object value) throws SQLException{
         Map<String, Object> data = new HashMap();
@@ -678,6 +717,388 @@ public class utente {
 
         }
        
+    //</editor-fold>
+      
+        
+        
+        
+        
+        //<editor-fold defaultstate="collapsed" desc="metodi aggiunta parentela">
+    
+        /**
+         * Aggiungi un parente
+         * Nota:    prima di aggiungere un parente vengono effettuati prima i dovuti controlli
+         * @param relative          parente da aggiunre
+         * @param relationship      grado di parentela
+         * @throws SQLException
+         * @throws NotAllowedException
+         */
+        public void setRelative(utente relative, String relationship) throws SQLException, NotAllowedException{
+            // Verifica se l'aggiunta può essere fatta
+            //-------da rimettere per vedere se effettivamente si può aggiungere -----------this.canAddLike(relative, relationship);
+
+            switch(relationship){
+
+                case "parent": this.setParent(relative);     break;
+
+                case "child": this.setChild(relative);       break;
+
+                case "sibling": this.setSibling(relative);   break;
+
+                case "spouse": this.setSpouse(relative);     break;
+
+                default: throw new NotAllowedException("tmp");
+            }
+            
+            this.sendRefreshAck();
+
+        }
+        /**
+         * Aggiungi il padre o la madre
+         * @param user  genitore da aggiungere
+         * @throws java.sql.SQLException
+         * @throws it.collaborative_genealogy.exception.NotAllowedException
+         */
+        private void setParent(utente user) throws SQLException, NotAllowedException{
+
+            if(user.getSesso().equals("female")){
+                this.updateAttribute("mother_id", user.getId());
+            }else{
+                this.updateAttribute("father_id", user.getId());
+            }
+
+            // Aggiorna numero parenti
+            //-------da aggiungere per agg il num di parenti-----this.setNumRelatives();
+
+        }
+        
+        /**
+         * Inserisci il coniuge
+         * @param spouse
+         * @throws it.collaborative_genealogy.exception.NotAllowedException
+         * @throws java.sql.SQLException
+         */
+        private void setSpouse(utente spouse) throws NotAllowedException, SQLException{
+
+            // Aggiungi il coniuge
+            this.updateAttribute("spouse_id", spouse.getId());
+
+            // Se non è già stato fatto, cambia anche il coniuge dell'utente appena aggiunto
+            if(spouse.getPartner() == null) {
+                spouse.setSpouse(this);
+            }           
+
+            // Aggiorna numeri parenti
+            //-------da aggiungere per agg il num di parenti-----this.setNumRelatives();
+
+        }
+        
+        /**
+         * Inserisci un figlio
+         * @param user  figlio da inserire
+         * @throws it.collaborative_genealogy.exception.NotAllowedException
+         * @throws java.sql.SQLException
+         */
+        private void setChild(utente user) throws NotAllowedException, SQLException{
+            // Imposta l'utente corrente come genitore
+            user.setParent(this);
+        }
+        
+        /**
+         * Aggiungi un fratello o una sorella
+         * @param sibling  utente da aggiungere
+         * @throws java.sql.SQLException
+         * @throws it.collaborative_genealogy.exception.NotAllowedException
+         */
+        private void setSibling(utente sibling) throws SQLException, NotAllowedException {
+
+            utente u1 = this;
+            utente u2 = sibling;
+            listautenti u1_parents;
+            listautenti u2_parents;
+            utente u1_parent = null;
+            utente u2_parent = null;
+
+            do{
+                // Recupera i genitori dei due utenti
+                u1_parents = u1.getGenitori();
+                u2_parents = u2.getGenitori();
+                // Recupera il numero di genitori dei due utenti
+                int u1_size = u1_parents.size();
+                int u2_size = u2_parents.size();
+                // Se {u1} non ha parenti
+                if(u1_size == 0){
+                    for(utente parent: u2_parents){
+                        u1.setParent(parent);
+                    }
+                }
+
+                if(u1_size == 1 && u2_size == 2){
+                    // Recupera il genitore di {u2} che non ha {u1}
+                    utente other_parent;
+                    if(u1.getByParentela("mother") != null){
+                        other_parent = u2.getByParentela("father");
+                    }else{
+                        other_parent = u2.getByParentela("mother");
+                    }
+
+                    u1.setParent(other_parent);
+                }
+
+                /* 
+                    Le due condizioni vanno considerate anche con gli utenti a parti invertite, 
+                    perciò si fa lo swap dei due utenti
+                    Alla termine di questa operazione, i due utenti avranno gli stessi genitori
+                */
+
+                if(u1.equals(sibling)) break;
+
+                // Swappa utenti
+                u1 = sibling;
+                u2 = this;
+
+            }while(true);
+
+        }
+
+    //</editor-fold>
+        
+        //<editor-fold defaultstate="collapsed" desc="Controlli per le aggiunte di parentela">
+        
+        /**
+         * Verifica se un dato utente può essere aggiunto come parente
+         * @param user      user da aggiungere
+         * @param relationship    grado di parentela
+         * @throws java.sql.SQLException
+         * @throws it.collaborative_genealogy.exception.NotAllowedException
+         */
+        private void canAddLike(utente user, String relationship) throws SQLException, NotAllowedException {
+            
+            // Se l'utente prova ad aggiungere se stesso
+            if(this.equals(user)) throw new NotAllowedException("yourself");
+            
+            switch(relationship){
+
+                case "parent": this.canAddLikeParent(user);     break;
+
+                case "child": this.canAddLikeChild(user);       break;
+
+                case "sibling": this.canAddLikeSibling(user);   break;
+
+                case "spouse": this.canAddLikeSpouse(user);     break;
+
+                default: throw new NotAllowedException("tmp");
+            }
+
+        }
+   
+        //<editor-fold defaultstate="collapsed" desc="Metodi ausiliari. NON utilizzare al di fuori di canAddLike">
+            /**
+         * Verifica se un dato utente può essere aggiunto come genitore
+         * @param user      utente da aggiungere
+         * @param gender    sesso del genitore per definire se si vuole aggiungere un padre o una madre
+         * @return          true se l'utente è stato aggiunto come coniuge, false altrimenti
+         */
+            private void canAddLikeParent(utente user) throws SQLException, NotAllowedException {
+                try{
+                    // Se {user} è già genitore dell'utente
+                    utente parent = this.getGenitore(user.getSesso());
+                    if(parent != null && parent.equals(user)) throw new NotAllowedException("your");
+                    
+                    // Se l'utente hà gia un genitore dello stesso sesso
+                    if(this.getGenitore(user.getSesso()) != null) throw new NotAllowedException("alr");
+
+                    String user_gender = user.getSesso();
+                    // Se {user} è tra i fratelli/sorelle    
+                    if(this.getFratelliSorelle().contains(user)) throw new NotAllowedException("sib");
+
+                    // Se {user} è un discendente
+                    listautenti offsprings = this.getDiscendenti(user_gender);        
+                    if(offsprings.contains(user)) throw new NotAllowedException("off");
+                    
+                    // Se {user} è un antenato
+                    listautenti ancestors = this.getAntenati(user_gender);
+                    if(ancestors.contains(user)) throw new NotAllowedException("anc");
+
+                        
+                }catch(NotAllowedException ex){
+                    if(user.getSesso().equals("female")){
+                        throw new NotAllowedException("mot_" + ex.getMessage());
+                    }else{
+                        throw new NotAllowedException("fat_" + ex.getMessage());
+                    }
+                }
+            }
+            /**
+             * Verifica se un dato utente può essere aggiunto come coniuge
+             * @return  true se l'utente è stato aggiunto come coniuge, false altrimenti
+             */
+            private void canAddLikeSpouse(utente user) throws SQLException, NotAllowedException {
+
+                /* 
+                    Più in generale, si verifica se due utenti possono avere (o aver avuto) una relazione sentimentale di qualsiasi tipo (e di conseguenza se possono avere figli comuni)
+                    Per ipotesi non sono accettate relazioni sentimentali tra:
+                        1. fratelli;
+                        2. utente con i suoi antenati, e di conseguenza anche con i suoi discendenti; 
+                        3. utenti dello stesso sesso
+                */
+
+                // Se l'utente corrente e/o {user} hanno già un coniuge
+                if(this.getPartner() != null || user.getPartner() != null) throw new NotAllowedException("sp_alr");
+
+                // Se {user} ha lo stesso sesso
+                if(this.sesso.equals(user.getSesso())) throw new NotAllowedException("sp_gen");
+
+                // Se {user} è già il coniuge
+                if(this.getPartner() != null && this.getPartner().equals(user)) throw new NotAllowedException("sp_your");
+
+                // Se {user} è tra i fratelli/sorelle
+                listautenti siblings = this.getFratelliSorelle();        
+                if(siblings.contains(user)) throw new NotAllowedException("sp_sib");
+
+                // Se {user} è un antenato
+                listautenti anchestors = this.getAntenati();        
+                if(anchestors.contains(user)) throw new NotAllowedException("sp_anc");
+
+                // Se {user} è un discendente
+                listautenti offsprings = this.getDiscendenti();    
+                if(!offsprings.contains(user)) throw new NotAllowedException("sp_off");
+            }
+            /**
+             * Verifica se un dato utente può essere aggiunto come fratello
+             * Nota:    due utenti sono fratelli se hanno entrambi i genitori in comune, 
+             *          per cui due utenti possono diventare fratelli sono se entrambi posso avere gli stessi genitori
+             *          e solo se dopo l'aggiunta risultano avere sia il padre che la madre
+             * @return  true se l'utente è stato aggiunto con successo, false altrimenti
+             */
+            private void canAddLikeSibling(utente user) throws SQLException, NotAllowedException {
+
+                // Se i due utenti sono già fratelli
+                if(this.getFratelliSorelle().contains(user)) throw new NotAllowedException("sib_alt");
+
+                utente u1 = this;
+                utente u2 = user;
+
+                // Recupera i genitori dei due utenti
+                listautenti u1_parents = u1.getGenitori();
+                listautenti u2_parents = u2.getGenitori();
+
+                // Recupera il numero di genitori dei due utenti
+                int u1_size = u1_parents.size();
+                int u2_size = u2_parents.size();
+
+                utente u1_parent, u2_parent;
+
+                // Se entrambi gli utenti non hanno nessun genitore, non è possibile verificare la parentela
+                if(u2_size == 0 && u1_size == 0) throw new NotAllowedException("sib_1");
+
+                // Se i due utenti hanno già entrambi i genitori, non è possibile che i due utenti siano fratelli
+                if(u2_size == 2 && u1_size == 2) throw new NotAllowedException("sib_2");
+
+                // Se entrambi gli utenti hanno un solo genitore
+                if(u2_size == 1 && u1_size == 1){
+                    // Recupera l'unico genitore di {u1}
+                    u1_parent = (utente) u1_parents.iterator().next();
+                    // Reucpera l'unico genitore di {u2}
+                    u2_parent = (utente) u2_parents.iterator().next();
+                    
+                    // Se i due genitori identificano lo sesso utente, non è possibile verificare se i due utenti sono fratelli
+                    if(u1_parent.equals(u2_parents)) throw new NotAllowedException("sib_1");
+                    // Se il genitore di {u1} e il genitore di {u2} sono dello stesso sesso, non è possibile che i due utenti siano fratelli
+                    if(!u1_parent.getSesso().equals(u2_parent.getSesso())) throw new NotAllowedException("sib_3");
+                    
+                    try{
+                        // Verifica se i due genitori possono essere coniugi
+                        u2_parent.canAddLike(u1_parent, "spouse");
+                    }catch(NotAllowedException ex){
+                        // i due utenti non possono essere fratelli
+                        throw new NotAllowedException("sib_3");
+                    }
+                    
+
+                }
+
+                do{
+                    // Se {u2} non ha genitori e {u1} ne ha solo uno
+                    if(u2_size == 0 && u1_size == 1) throw new NotAllowedException("sib_1");
+
+                    // Se {u2} non ha genitori
+                    if(u2_size == 0){
+
+                        for(utente parent: u1_parents){
+                            try{
+                                // Verifica se {u2} può avere entrambi i genitori di {u1}
+                                u2.canAddLike(parent, "parent");
+                            }catch(NotAllowedException ex){
+                                // i due utenti non possono essere fratelli
+                                throw new NotAllowedException("sib_3");
+                            }
+                        }
+
+                    }
+
+                    // Se {u2} ha un solo genitore e {u1} gli ha entrmabi
+                    if(u2_size == 1 && u1_size == 2){
+                        // Recupera l'unico genitore di {u2}
+                        u2_parent = u2_parents.iterator().next();
+
+                        // Se il genitore di {u2} non è anche genitore di {u1}
+                        if(!u1_parents.contains(u2_parent)) throw new NotAllowedException("sib_3");
+
+                        utente other_parent;
+                        // Se {u2} ha solo la madre
+                        if(u2.getByParentela("mother") != null){
+                            // Recupera il padre di {u1}
+                            other_parent = u1.getByParentela("father");
+                        }else{
+                            // Altrimenti recupara la madre di {u1}
+                            other_parent = u1.getByParentela("mother");
+                        }
+                        try{
+                            // Verifica se l'altro genitore di {u1} può essere aggiunto come genitore di {u2}
+                            u2.canAddLike(other_parent, "parent");
+                        }catch(NotAllowedException ex){
+                            // i due utenti non possono essere fratelli
+                            throw new NotAllowedException("sib_3");
+                        }
+                    }
+
+                    /* 
+                        Le ultime due condizioni vanno considerate anche con gli utenti a parti invertite, 
+                        perciò si fa lo swap dei due utenti
+                    */
+
+                    // Se gli utenti sono già stati swappati, esci dal ciclo
+                    if(u1.equals(user)) break;
+
+                    // Swappa utenti
+                    u1 = user;
+                    u2 = this;
+
+                    u1_parents = u1.getGenitori();
+                    u2_parents = u2.getGenitori();
+
+                    u1_size = u1_parents.size();
+                    u2_size = u2_parents.size();
+
+                }while(true);
+
+            }
+            /**
+             * Verifica se un dato utente può essere aggiunto come figlio
+             * @return  true se l'utente è stato aggiunto con successo, false altrimenti
+             */
+            private void canAddLikeChild(utente user) throws SQLException, NotAllowedException { 
+                try{
+                    // Verifica se {user} può aggiungere l'utente corrente come genitore
+                    user.canAddLike(this, "parent");
+                }catch(NotAllowedException ex){
+                    throw new NotAllowedException("ch_" + ex.getMessage());
+                }
+                
+            }
+        //</editor-fold>
+    
     //</editor-fold>
 } 
 
