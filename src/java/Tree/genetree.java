@@ -87,7 +87,7 @@ public class genetree {
         
         // Aggiungi i fratelli/sorelle
         for(utente sibling: user.getFratelliSorelle()){
-            if(sibling.getSesso().equals("m")){
+            if(sibling.getSesso().equals("M")){
                 // Aggiungi i figli
                 this.add(sibling, label, "brother");
             }else{
@@ -96,7 +96,7 @@ public class genetree {
             }
         }
 
-        if(user.getSesso().equals("m")){
+        if(user.getSesso().equals("F")){
             // Aggiungi la moglie
             this.add(user.getByParentela("moglie"), label, "wife");
         }else{
