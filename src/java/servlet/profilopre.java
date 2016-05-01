@@ -95,9 +95,10 @@ public class profilopre extends HttpServlet {
         
             Map<String, Object> data = new HashMap<>();
             data.put("password", password);
+            data.put("email", email);
             
                 try {
-                    Database.updateRecord("user", data, "password = ' " + password + " ' ");
+                    Database.updateRecord("user", data, "email='"+ email+"'");
                 } catch (SQLException ex) {
                     Logger.getLogger(profilopre.class.getName()).log(Level.SEVERE, null, ex);
                 }
