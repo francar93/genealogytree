@@ -495,7 +495,7 @@ public class utente {
         } catch (SQLException ex) {
             session.setAttribute("family_tree", null);
         }
-    }
+    } 
     
     public boolean checkFamilyTreeCache(HttpSession session){
             try {
