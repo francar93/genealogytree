@@ -110,6 +110,8 @@ public class addparent extends HttpServlet {
             
                 // Se è attiva una sessiona
                 if (session != null) {
+                    
+                            
                                    
                         String nome            = DataUtil.spaceTrim(request.getParameter("nome"));
                         String cognome         = DataUtil.spaceTrim(request.getParameter("cognome"));
@@ -117,6 +119,11 @@ public class addparent extends HttpServlet {
                         String citta           = DataUtil.spaceTrim(request.getParameter("citta").trim());
                         String email           = request.getParameter("email").trim();
                         String sesso           = request.getParameter("sesso");
+                        String relative        = request.getParameter("relationship");
+                        
+                        utente user_logged = (utente) session.getAttribute("user_logged");
+                        treenode user_current_node = ((genetree) session.getAttribute("family_tree")).getUserById(user_logged.getId());
+                        utente user_current = user_current_node.getUser();
                      
 
                         Message check = null;
@@ -165,6 +172,7 @@ public class addparent extends HttpServlet {
                             data.put("sesso", sesso);
                             data.put("email", email);
                             data.put("info", "");
+                            
 
 
                             Date sqlDate = null;
@@ -177,9 +185,14 @@ public class addparent extends HttpServlet {
 
                             try {
                                 Database.insertRecord("user", data);
+                                
+                                utente user_added = utente.getUserById(user_id);
+                                
+                                //user_current.setRelative(user_added, relative);
+                                
                             } catch (SQLException ex) {
                                 Logger.getLogger(signup.class.getName()).log(Level.SEVERE, null, ex);
-                            }
+                            } 
             
 
                            

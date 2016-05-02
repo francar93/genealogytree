@@ -133,11 +133,11 @@
             </div>
             <div class="profile-name">
                <#assign relative = spouse>
-               <#if relative.label == "spouse">
+               
                     <a href="profilo?id=${relative.user.id}">
                          <h5>${relative.user.nome?capitalize} ${relative.user.cognome?capitalize}</h5>
                     </a>
-               </#if>
+              
             </div>
             <div class="profile-info">
                 INFORMAZIONI ${relative.user.info?cap_first}<br>
@@ -146,8 +146,12 @@
                 <p> ${relative.label?capitalize}</p>
 
                 </#if>
-                <div id="profile-data-nascita">Data di nascita: ${relative.user.dataNascita?date?string("dd/MM/yyyy")}</div><br>
-                <div id="profile-luogo-nascita">Luogo di nascita: ${relative.user.citta?capitalize}</div>
+                <div id="profile-data-nascita">
+                    Data di nascita: ${relative.user.dataNascita?date?string("dd/MM/yyyy")}
+                </div><br>
+                <div id="profile-luogo-nascita">
+                    Luogo di nascita: ${relative.user.citta?capitalize}
+                </div>
             </div>
         </div>
     </div>

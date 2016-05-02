@@ -121,7 +121,7 @@ public class profilo extends HttpServlet {
                     // Recupero del coniuge
                     treenode spouse = null;
                     try {
-                        spouse = family_tree.getUser(user_current.getByParentela("partner"));
+                        spouse = family_tree.getUser(user_current.getByParentela("compagno"));
                     } catch (SQLException ex) { }
 
                     // Recupero dei fratelli
