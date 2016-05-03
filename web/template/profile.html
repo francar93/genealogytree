@@ -1,239 +1,191 @@
 <#include "frame_public.html">
-<div>
-    <div class="container-left">
-        <div class="box-profile-container">
-            <div class="box-img-profile">
-                <div class="img-profile"> 
-                    <img src="#" id="profile-img">
-                </div>
-            </div>
-            <div class="profile-name">
-                <h5> ${user_current.nome?capitalize} ${user_current.cognome?capitalize} </h5>
-            </div>
-            <div class="profile-info">
-                <h6> INFORMAZIONI <br> ${user_current.info?cap_first} </h6> <br>
-
-                <#if relative_grade !="">
-
-                <p> ${relative_grade?capitalize}</p>
-
-                </#if>
-                <div id="profile-data-nascita"> 
-                    <h6> Data di nascita: ${user_current.dataNascita?date?string("dd/MM/yyyy")}</h6></div>
-                <div id="profile-luogo-nascita"> 
-                    <h6>Luogo di nascita: ${user_current.citta?capitalize}</h6></div>
-                <div>
-                    <#if user_logged.id == user_current.id>
-                        <a href="addparent">add parent</a>
-                    </#if>
-
-                </div>
+<div class="container-left">
+    <div class="box-profile-container">
+        <div class="box-img-profile">
+            <div class="img-profile">
+                <img src="#" id="profile-img">
             </div>
         </div>
-
+        <div class="profile-name">
+            <h5>  ${user_current.nome?capitalize} ${user_current.cognome?capitalize} </h5>
+        </div>
+        <div class="profile-info">
+            INFORMAZIONI<br> ${user_current.info?cap_first}
+            <#if relative_grade !="">
+                <p> ${relative_grade?capitalize}</p>
+            </#if>
+            <div id="profile-data-nascita">
+                Data di nascita: ${user_current.dataNascita?date?string("dd/MM/yyyy")}
+            </div><br>
+            <div id="profile-luogo-nascita">
+                Luogo di nascita: ${user_current.citta?capitalize}
+            </div>
+            <div>
+                <#if user_logged.id == user_current.id>
+                    <a href="addparent">add parent</a>
+                </#if>
+            </div>
+        </div>
     </div>
 </div>
-
-
-    
-<#if father?? || mother??>
-<div>
-    <div class="container-right">
-        <div class="box-profile-container">
-
-            <#if mother??>
-            <#assign relative = mother>
-
-
-
-            <div class="box-img-profile">
-                <div class="img-profile">
-                    <img src="#" id="profile-img">
-                </div>
-
+<div class="container-right">
+    <#if father?? || mother??>
+    <#if mother??>
+        <#assign relative = mother>
+    <div class="box-profile-container">
+        <div class="box-img-profile">
+            <div class="img-profile">
+                <img src="#" id="profile-img">
             </div>
-            <div class="profile-name">
-              <#if relative.label == "mother">
+        </div>
+        <div class="profile-name">
+           <#if relative.label == "mother">
                 <a href="profilo?id=${relative.user.id}">
                     <h5>${relative.user.nome?capitalize} ${relative.user.cognome?capitalize}</h5>
                 </a>
-                </#if>
-
-            </div>
-            <div class="profile-info">
-                INFORMAZIONI ${relative.user.info?cap_first}<br>
-                <#if relative.label!="">
-
-                <p> ${relative.label?capitalize}</p>
-
-                </#if>
-                <div id="profile-data-nascita">Data di nascita: ${relative.user.dataNascita?date?string("dd/MM/yyyy")}</div><br>
-                <div id="profile-luogo-nascita">Luogo di nascita: ${relative.user.citta?capitalize}</div>
-            </div>
             </#if>
-            </#if>
-
         </div>
-
-    </div>
-
-
-    <div>
-        <div>
-            <div class="container-right">
-                <div class="box-profile-container">
-                    <#if father??>
-                    <#assign relative = father>
-                    <div class="box-img-profile">
-                        <div class="img-profile">
-                            <img src="#" id="profile-img">
-                        </div>
-                    </div>   
-                    <div class="profile-name">
-                        <#if relative.label == "father">
-                        <a href="profilo?id=${relative.user.id}">
-                            <h5>${relative.user.nome?capitalize} ${relative.user.cognome?capitalize}</h5>
-                        </a>
-                        </#if>
-                    </div>
-                    <div class="profile-info">
-                        INFORMAZIONI ${relative.user.info?cap_first}<br>
-                        <#if relative.label!="">
-
-                        <p> ${relative.label?capitalize}</p>
-
-                        </#if>
-                        <div id="profile-data-nascita">Data di nascita: ${relative.user.dataNascita?date?string("dd/MM/yyyy")}</div><br>
-                        <div id="profile-luogo-nascita">Luogo di nascita: ${relative.user.citta?capitalize}</div>
-                    </div>
-                    </#if>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<#if spouse??>
-<div>
-    <div class="container-right">
-        <div class="box-profile-container">
-            <p>
-                <#if user_current.sesso == "male">
-                    Wife 
-                <#else>
-                    Husband
-                </#if>    
-            </p>
-
-            <div class="box-img-profile">
-                <div class="img-profile">
-                    <img src="#" id="profile-img">
-                </div>
-            </div>
-            <div class="profile-name">
-               <#assign relative = spouse>
-               
-                    <a href="profilo?id=${relative.user.id}">
-                         <h5>${relative.user.nome?capitalize} ${relative.user.cognome?capitalize}</h5>
-                    </a>
-              
-            </div>
-            <div class="profile-info">
-                INFORMAZIONI ${relative.user.info?cap_first}<br>
-                <#if relative.label!="">
-
+        <div class="profile-info">
+            INFORMAZIONI ${relative.user.info?cap_first}<br>
+            <#if relative.label!="">
                 <p> ${relative.label?capitalize}</p>
-
-                </#if>
-                <div id="profile-data-nascita">
-                    Data di nascita: ${relative.user.dataNascita?date?string("dd/MM/yyyy")}
-                </div><br>
-                <div id="profile-luogo-nascita">
-                    Luogo di nascita: ${relative.user.citta?capitalize}
-                </div>
+            </#if>
+            <div id="profile-data-nascita">
+                Data di nascita: ${relative.user.dataNascita?date?string("dd/MM/yyyy")}
+            </div><br>
+            <div id="profile-luogo-nascita">
+                Luogo di nascita: ${relative.user.citta?capitalize}
             </div>
         </div>
+        </#if>
+    </#if>
     </div>
-</div>
-</#if>
-
-<#if children??> 
+    <#if father??>
+        <#assign relative = father>
+    <div class="box-profile-container">
+        <div class="box-img-profile">
+            <div class="img-profile">
+                <img src="#" id="profile-img">
+            </div>
+        </div>
+        <div class="profile-name">
+            <#if relative.label == "father">
+                <a href="profilo?id=${relative.user.id}">
+                    <h5>${relative.user.nome?capitalize} ${relative.user.cognome?capitalize}</h5>
+                </a>
+            </#if>
+        </div>
+        <div class="profile-info">
+            INFORMAZIONI ${relative.user.info?cap_first}<br>
+            <#if relative.label!="">
+                <p> ${relative.label?capitalize}</p>
+            </#if>
+            <div id="profile-data-nascita">
+                Data di nascita: ${relative.user.dataNascita?date?string("dd/MM/yyyy")}
+            </div><br>
+            <div id="profile-luogo-nascita">
+                Luogo di nascita: ${relative.user.citta?capitalize}
+            </div>
+        </div>
+        </#if>
+    </div>
+    <#if spouse??>
+    <div class="box-profile-container">
+        <p>
+            <#if user_current.sesso == "male">
+                Wife 
+            <#else>
+                Husband
+            </#if>    
+        </p>
+        <div class="box-img-profile">
+            <div class="img-profile">
+                <img src="#" id="profile-img">
+            </div>
+        </div>
+        <div class="profile-name">
+            <#assign relative = spouse>
+                <a href="profilo?id=${relative.user.id}">
+                     <h5>${relative.user.nome?capitalize} ${relative.user.cognome?capitalize}</h5>
+                </a>
+        </div>
+        <div class="profile-info">
+            INFORMAZIONI ${relative.user.info?cap_first}<br>
+            <#if relative.label!="">
+                <p> ${relative.label?capitalize}</p>
+            </#if>
+            <div id="profile-data-nascita">
+                Data di nascita: ${relative.user.dataNascita?date?string("dd/MM/yyyy")}
+            </div><br>
+            <div id="profile-luogo-nascita">
+                Luogo di nascita: ${relative.user.citta?capitalize}
+            </div>
+        </div>
+        </#if>
+    </div>
+    <#if children??> 
     <#list children>
-        <div>
-            <div class="container-right">
-                <div class="box-profile-container">
-
-                    <#items as child>
-                        <#assign relative = child>
-                            <div class="box-img-profile">
-                                <div class="img-profile">
-                                    <img src="#" id="profile-img">
-                                </div>
-                            </div>
-                            <div class="profile-name">
-                                <a href="profilo?id=${relative.user.id}"> 
-                                    <h5>${relative.user.nome?capitalize} ${relative.user.cognome?capitalize}</h5> 
-                                </a>
-                            </div>
-                            <div class="profile-info">
-                                INFORMAZIONI ${relative.user.info?cap_first}<br>
-                                <#if relative.label!="">
-
-                                    <p> ${relative.label?capitalize}</p>
-
-                                </#if>
-                                <div id="profile-data-nascita">
-                                    Data di nascita: ${relative.user.dataNascita?date?string("dd/MM/yyyy")}
-                                </div><br>
-                                <div id="profile-luogo-nascita">
-                                    Luogo di nascita: ${relative.user.citta?capitalize}
-                                </div>
-                            </div>
-                    </#items> 
-                </div>
+    <div class="box-profile-container">
+        <#items as child>
+            <#assign relative = child>
+        <div class="box-img-profile">
+            <div class="img-profile">
+                <img src="#" id="profile-img">
             </div>
         </div>
+        <div class="profile-name">
+            <a href="profilo?id=${relative.user.id}">
+                 <h5>${relative.user.nome?capitalize} ${relative.user.cognome?capitalize}</h5>
+            </a>
+        </div>
+        <div class="profile-info">
+            INFORMAZIONI ${relative.user.info?cap_first}<br>
+            <#if relative.label!="">
+                <p> ${relative.label?capitalize}</p>
+            </#if>
+            <div id="profile-data-nascita">
+                Data di nascita: ${relative.user.dataNascita?date?string("dd/MM/yyyy")}
+            </div><br>
+            <div id="profile-luogo-nascita">
+                Luogo di nascita: ${relative.user.citta?capitalize}
+            </div>
+        </div>
+        </#items>
     </#list>
-</#if>
-
-
-<#if siblings??>
+    </#if>
+    </div>
+    <#if siblings??>
     <#list siblings>
-        <div>
-            <div class="container-right">
-                <div class="box-profile-container">
-                    <#items as sibling>
-                      <#assign relative = sibling>
-                            <div class="box-img-profile">
-                                <div class="img-profile">
-                                    <img src="#" id="profile-img">
-                                </div>
-
-                            </div>
-                            <div class="profile-name">
-                                <a href="profilo?id=${relative.user.id}"> 
-                                    <h5>${relative.user.nome?capitalize} ${relative.user.cognome?capitalize}</h5> 
-                                </a>
-                            </div>
-                            <div class="profile-info">
-                                INFORMAZIONI ${relative.user.info?cap_first}<br>
-                                    <#if relative.label!="">
-                                        <p> ${relative.label?capitalize}</p>    
-                                    </#if>
-                                    <div id="profile-data-nascita">
-                                        Data di nascita: ${relative.user.dataNascita?date?string("dd/MM/yyyy")}
-                                    </div><br>
-                                    <div id="profile-luogo-nascita">
-                                        Luogo di nascita: ${relative.user.citta?capitalize}
-                                    </div>
-                            </div>
-                    </#items> 
-                </div>
+    <div class="box-profile-container">
+        <#items as siblings>
+            <#assign relative = siblings>
+        <div class="box-img-profile">
+            <div class="img-profile">
+                <img src="#" id="profile-img">
             </div>
         </div>
+        <div class="profile-name">
+            <a href="profilo?id=${relative.user.id}">
+                 <h5>${relative.user.nome?capitalize} ${relative.user.cognome?capitalize}</h5>
+            </a>
+        </div>
+        <div class="profile-info">
+            INFORMAZIONI ${relative.user.info?cap_first}<br>
+            <#if relative.label!="">
+                <p> ${relative.label?capitalize}</p>
+            </#if>
+            <div id="profile-data-nascita">
+                Data di nascita: ${relative.user.dataNascita?date?string("dd/MM/yyyy")}
+            </div><br>
+            <div id="profile-luogo-nascita">
+                Luogo di nascita: ${relative.user.citta?capitalize}
+            </div>
+        </div>
+        </#items>
     </#list>
-</#if>
+    </#if>
+    </div>
+    
 
-        
+</div> <!-- fine div container right -->
 <#include "footer.html">
