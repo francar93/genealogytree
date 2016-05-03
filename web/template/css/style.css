@@ -124,3 +124,6 @@ input{
 .container.search{
     width: 60%;
 }
+#profile-img{
+    background-image: url('../img/avatar.gif');
+}
