@@ -10,6 +10,7 @@ and open the template in the editor.
 body{
     background-image: url('../img/sfondo2.jpg');
     background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 input{
     color: white;
