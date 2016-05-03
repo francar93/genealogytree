@@ -57,9 +57,8 @@
                 Luogo di nascita: ${relative.user.citta?capitalize}
             </div>
         </div>
-        </#if>
-    </#if>
-    </div>
+      </div>
+    </#if>    
     <#if father??>
         <#assign relative = father>
     <div class="box-profile-container">
@@ -87,17 +86,12 @@
                 Luogo di nascita: ${relative.user.citta?capitalize}
             </div>
         </div>
-        </#if>
     </div>
+    </#if>
+    </#if>
+    
     <#if spouse??>
     <div class="box-profile-container">
-        <p>
-            <#if user_current.sesso == "male">
-                Wife 
-            <#else>
-                Husband
-            </#if>    
-        </p>
         <div class="box-img-profile">
             <div class="img-profile">
                 <img src="#" id="profile-img">
@@ -121,12 +115,14 @@
                 Luogo di nascita: ${relative.user.citta?capitalize}
             </div>
         </div>
-        </#if>
+        
     </div>
+    </#if>
+    
     <#if children??> 
     <#list children>
+    <#items as child>
     <div class="box-profile-container">
-        <#items as child>
             <#assign relative = child>
         <div class="box-img-profile">
             <div class="img-profile">
@@ -150,14 +146,15 @@
                 Luogo di nascita: ${relative.user.citta?capitalize}
             </div>
         </div>
+            </div>
         </#items>
     </#list>
     </#if>
-    </div>
+    
     <#if siblings??>
     <#list siblings>
+    <#items as siblings>
     <div class="box-profile-container">
-        <#items as siblings>
             <#assign relative = siblings>
         <div class="box-img-profile">
             <div class="img-profile">
@@ -181,10 +178,11 @@
                 Luogo di nascita: ${relative.user.citta?capitalize}
             </div>
         </div>
+            </div>
         </#items>
     </#list>
     </#if>
-    </div>
+    
     
 
 </div> <!-- fine div container right -->
