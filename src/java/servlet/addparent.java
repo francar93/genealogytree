@@ -102,7 +102,7 @@ public class addparent extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-                //Message check = new Message("dt_ok", false);;
+                Message check = new Message("dt_ok", false);;
                 // Recupera l'azione da svolgere
                 //String action = request.getRequestURI().substring(request.getContextPath().length() + 1); // create o invite
 
@@ -119,14 +119,15 @@ public class addparent extends HttpServlet {
                         String citta           = DataUtil.spaceTrim(request.getParameter("citta").trim());
                         String email           = request.getParameter("email").trim();
                         String sesso           = request.getParameter("sesso");
-                        String relative        = request.getParameter("relationship");
+                        String relazione        = request.getParameter("relationship");
                         
                         utente user_logged = (utente) session.getAttribute("user_logged");
                         treenode user_current_node = ((genetree) session.getAttribute("family_tree")).getUserById(user_logged.getId());
                         utente user_current = user_current_node.getUser();
+                        utente user_current1 = (utente) session.getAttribute("user_logged");
                      
 
-                        Message check = null;
+                        //Message check = null;
 
                         if(email.equals("")|| nome.equals("") || cognome.equals("") || sesso.equals("vuoto") || data_nascita.equals("")  || citta.equals("")){
                             check = new Message("fld", true);
@@ -187,18 +188,19 @@ public class addparent extends HttpServlet {
                                 Database.insertRecord("user", data);
                                 
                                 utente user_added = utente.getUserById(user_id);
+                                user_current1.setRelative(user_added, relazione);
                                 
-                                user_current.setRelative(user_added, relative);
-                                
+                               
                             } catch (SQLException ex) {
-                                Logger.getLogger(signup.class.getName()).log(Level.SEVERE, null, ex);
+                                check = new Message("srv", true);
                             } catch (NotAllowedException ex) { 
-                                Logger.getLogger(addparent.class.getName()).log(Level.SEVERE, null, ex);
+                                check = new Message(ex.getMessage(), true);
+                            } catch (Exception ex) {
+                                check = new Message("pho_err", true); // Not allowed
                             }
-            
-
-                           
-                                // Torna alla pagina del profilo
+                              
+                            
+                              // Torna alla pagina del profilo
                                 response.sendRedirect("profilo");
                             
 

@@ -536,19 +536,7 @@ public class utente {
         }
     } 
     
-    public boolean checkFamilyTreeCache(HttpSession session){
-            try {
-                ResultSet record = Database.selectRecord("user", "id='" + this.id + "'");
-                if(record.next()){
-                    if(record.getInt("refresh") != 0){
-                        this.initSession(session);
-                        return true;
-                    }
-                }
-            } catch (SQLException ex) { }
-            
-            return false;
-        }
+    
     
     @Override
     public int hashCode() {
@@ -694,7 +682,19 @@ public class utente {
         *               Alla luce di ciò, è comunque necessario aggiornare l'albero degli utenti loggati in quando è probabile
         *                   che delle label abbiano subito delle modifiche
         */      
-        
+        public boolean checkFamilyTreeCache(HttpSession session){
+            try {
+                ResultSet record = Database.selectRecord("user", "id='" + this.id + "'");
+                if(record.next()){
+                    if(record.getInt("refresh") != 0){
+                        this.initSession(session);
+                        return true;
+                    }
+                }
+            } catch (SQLException ex) { }
+            
+            return false;
+        }
         /**
          * Manda una segnalazione a tutti i parenti loggati dell'utente corrente, per aggiornare l'albero genealogico presente in cache
          * @throws SQLException
@@ -713,7 +713,7 @@ public class utente {
             }
             condition = condition.substring(0, condition.length()-4);
             // Aggoirna il numero di parenti
-            //Database.updateRecord("user", data, condition);
+            Database.updateRecord("user", data, condition);
 
         }
        
@@ -735,7 +735,7 @@ public class utente {
          */
         public void setRelative(utente relative, String relationship) throws SQLException, NotAllowedException{
             // Verifica se l'aggiunta può essere fatta
-            this.canAddLike(relative, relationship);
+           // this.canAddLike(relative, relationship);
 
             switch(relationship){
 
@@ -750,7 +750,8 @@ public class utente {
                 default: throw new NotAllowedException("tmp");
             }
             
-            this.sendRefreshAck();
+            
+            //this.sendRefreshAck();
 
         }
         /**
@@ -762,9 +763,9 @@ public class utente {
         private void setParent(utente user) throws SQLException, NotAllowedException{
 
             if(user.getSesso().equals("female")){
-                this.updateAttribute("mother_id", user.getId());
+                this.updateAttribute("idmadre", user.getId());
             }else{
-                this.updateAttribute("father_id", user.getId());
+                this.updateAttribute("idpadre", user.getId());
             }
 
             // Aggiorna numero parenti
@@ -781,12 +782,15 @@ public class utente {
         private void setSpouse(utente spouse) throws NotAllowedException, SQLException{
 
             // Aggiungi il coniuge
-            this.updateAttribute("spouse_id", spouse.getId());
+            this.updateAttribute("idpartner", spouse.getId());
 
             // Se non è già stato fatto, cambia anche il coniuge dell'utente appena aggiunto
+            
             if(spouse.getPartner() == null) {
-                spouse.setSpouse(this);
-            }           
+                //spouse.setSpouse(this);
+                spouse.updateAttribute("idpartner", this.getId());
+            }  
+            
 
             // Aggiorna numeri parenti
             //-------da aggiungere per agg il num di parenti-----this.setNumRelatives();

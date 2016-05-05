@@ -29,7 +29,6 @@
     </div>
 </div>
 <div class="container-right">
-    <#if father?? || mother??>
     <#if mother??>
         <#assign relative = mother>
     <div class="box-profile-container">
@@ -39,11 +38,11 @@
             </div>
         </div>
         <div class="profile-name">
-           <#if relative.label == "mother">
+           
                 <a href="profilo?id=${relative.user.id}">
                     <h5>${relative.user.nome?capitalize} ${relative.user.cognome?capitalize}</h5>
                 </a>
-            </#if>
+                
         </div>
         <div class="profile-info">
             INFORMAZIONI ${relative.user.info?cap_first}<br>
@@ -68,11 +67,11 @@
             </div>
         </div>
         <div class="profile-name">
-            <#if relative.label == "father">
+            
                 <a href="profilo?id=${relative.user.id}">
                     <h5>${relative.user.nome?capitalize} ${relative.user.cognome?capitalize}</h5>
                 </a>
-            </#if>
+            
         </div>
         <div class="profile-info">
             INFORMAZIONI ${relative.user.info?cap_first}<br>
@@ -88,7 +87,7 @@
         </div>
     </div>
     </#if>
-    </#if>
+    
     
     <#if spouse??>
     <div class="box-profile-container">
