@@ -60,6 +60,23 @@ public class Database {
         ResultSet in = Database.executeQuery(query);
         return(in.next());
      }
+    public static boolean nameIn(String name) throws SQLException{
+        String query = "SELECT * FROM user WHERE nome='"+ name +"'";
+        ResultSet in = Database.executeQuery(query);
+        return(in.next());
+     }
+    
+    public static boolean surnameIn(String cognome) throws SQLException{
+        String query = "SELECT * FROM user WHERE cognome='"+ cognome +"'";
+        ResultSet in = Database.executeQuery(query);
+        return(in.next());
+     }
+    
+    public static boolean shortIn(String name,String cognome, String data_nascita, String citta) throws SQLException{
+        String query = "SELECT * FROM user WHERE nome='"+ name + "'" + "AND cognome=" +  "'" + cognome +  "'" + "AND data_nascita=" + "'" + data_nascita +  "'" + "AND citta=" +  "'" + citta +  "'";
+        ResultSet in = Database.executeQuery(query);
+        return(in.next());
+     }
     
     public static boolean controlloEmailPassword(String email, String password) throws SQLException{
         String query = "SELECT * FROM  user WHERE email=" + "'" + email + "'" + "AND password=" +  "'" + password +  "'" ;
