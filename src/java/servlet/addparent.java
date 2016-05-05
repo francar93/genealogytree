@@ -188,11 +188,13 @@ public class addparent extends HttpServlet {
                                 
                                 utente user_added = utente.getUserById(user_id);
                                 
-                                //user_current.setRelative(user_added, relative);
+                                user_current.setRelative(user_added, relative);
                                 
                             } catch (SQLException ex) {
                                 Logger.getLogger(signup.class.getName()).log(Level.SEVERE, null, ex);
-                            } 
+                            } catch (NotAllowedException ex) { 
+                                Logger.getLogger(addparent.class.getName()).log(Level.SEVERE, null, ex);
+                            }
             
 
                            
