@@ -3,7 +3,25 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/carus/OneDrive/Documents/GitHub/genealogytree/src/java/servlet/ricercalog.java</file>
+=======
+            <file>file:/Users/matteocapodicasa/Desktop/genealogytree/genealogytree/web/META-INF/context.xml</file>
+            <file>file:/Users/matteocapodicasa/Desktop/genealogytree/genealogytree/web/template/addparent.html</file>
+            <file>file:/Users/matteocapodicasa/Desktop/genealogytree/genealogytree/src/java/servlet/ContextInitializer.java</file>
+            <file>file:/Users/matteocapodicasa/Desktop/genealogytree/genealogytree/src/java/Tree/NodeList.java</file>
+            <file>file:/Users/matteocapodicasa/Desktop/genealogytree/genealogytree/src/java/servlet/profilo.java</file>
+            <file>file:/Users/matteocapodicasa/Desktop/genealogytree/genealogytree/src/java/servlet/addparent.java</file>
+            <file>file:/Users/matteocapodicasa/Desktop/genealogytree/genealogytree/src/java/classi/utente.java</file>
+            <file>file:/Users/matteocapodicasa/Desktop/genealogytree/genealogytree/web/template/provastampadb.html</file>
+            <file>file:/Users/matteocapodicasa/Desktop/genealogytree/genealogytree/src/java/utilita/Database.java</file>
+            <file>file:/Users/matteocapodicasa/Desktop/genealogytree/genealogytree/src/java/Tree/genetree.java</file>
+            <file>file:/Users/matteocapodicasa/Desktop/genealogytree/genealogytree/src/java/classi/request.java</file>
+            <file>file:/Users/matteocapodicasa/Desktop/genealogytree/genealogytree/src/java/Tree/treenode.java</file>
+            <file>file:/Users/matteocapodicasa/Desktop/genealogytree/genealogytree/src/java/servlet/login.java</file>
+            <file>file:/Users/matteocapodicasa/Desktop/genealogytree/genealogytree/web/template/profile.html</file>
+            <file>file:/Users/matteocapodicasa/Desktop/genealogytree/genealogytree/src/java/servlet/logout.java</file>
+>>>>>>> origin/master
         </group>
     </open-files>
 </project-private>
