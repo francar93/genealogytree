@@ -735,7 +735,7 @@ public class utente {
          */
         public void setRelative(utente relative, String relationship) throws SQLException, NotAllowedException{
             // Verifica se l'aggiunta può essere fatta
-           // this.canAddLike(relative, relationship);
+            this.canAddLike(relative, relationship);
 
             switch(relationship){
 
@@ -951,7 +951,7 @@ public class utente {
                 if(this.getPartner() != null || user.getPartner() != null) throw new NotAllowedException("sp_alr");
 
                 // Se {user} ha lo stesso sesso
-                //if(this.sesso.equals(user.getSesso())) throw new NotAllowedException("sp_gen");
+                if(this.sesso.equals(user.getSesso())) throw new NotAllowedException("sp_gen");
 
                 // Se {user} è già il coniuge
                 if(this.getPartner() != null && this.getPartner().equals(user)) throw new NotAllowedException("sp_your");

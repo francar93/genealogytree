@@ -281,6 +281,12 @@ public class Database {
         return Database.updateQuery(query); 
     }
 
+    public static boolean deleteUtente(String id) throws SQLException{
+        // Generazione query
+        String query = "DELETE FROM user WHERE id='" + id +"'";
+        // Esecuzione query
+        return Database.updateQuery(query);
+    }
     // <editor-fold defaultstate="collapsed" desc="Metodi ausiliari.">
     
     /**

@@ -102,9 +102,9 @@ public class addparent extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-                Message check = new Message("dt_ok", false);;
+                Message check = new Message("dt_ok", false);
                 // Recupera l'azione da svolgere
-                //String action = request.getRequestURI().substring(request.getContextPath().length() + 1); // create o invite
+                String action = request.getRequestURI().substring(request.getContextPath().length() + 1); // create o invite
 
                 HttpSession session = request.getSession(false);
             
@@ -184,7 +184,13 @@ public class addparent extends HttpServlet {
 
 
 
-                            try {
+                            
+                                
+                                
+                                
+                                
+                                
+                                try {
                                 Database.insertRecord("user", data);
                                 
                                 utente user_added = utente.getUserById(user_id);
@@ -195,19 +201,34 @@ public class addparent extends HttpServlet {
                                 check = new Message("srv", true);
                             } catch (NotAllowedException ex) { 
                                 check = new Message(ex.getMessage(), true);
-                            } catch (Exception ex) {
-                                check = new Message("pho_err", true); // Not allowed
                             }
-                              
                             
-                              // Torna alla pagina del profilo
+                                
+                                
+                                
+                                
+                                
+                            if(!check.isError()){
+                                // Torna alla pagina del profilo
                                 response.sendRedirect("profilo");
-                            
+                              
+                                
+                            }else{
+                                try {
+                                    //cancella l'utente
+                                    Database.deleteUtente(user_id);
+                                } catch (SQLException ex) {
+                                    Logger.getLogger(addparent.class.getName()).log(Level.SEVERE, null, ex);
+                                }
+                                // Mostra messaggio di errore
+                            response.sendRedirect(action + "?msg=" + check.getCode());
+                                
+                            }
 
         
                         }else{
                             // Mostra messaggio di errore
-                            response.sendRedirect("addparent?msg=" + check.getCode());
+                            response.sendRedirect(action + "?msg=" + check.getCode());
                         }
         
                 }else {

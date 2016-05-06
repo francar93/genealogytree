@@ -3,7 +3,7 @@
     <form class="col s12" action="addparent" method="post">
         <div class="row">
             <div class="<#if !(message.msg??)>hide</#if>">
-            <p>${message.msg!}</p>
+            <p id="error-msg">${message.msg!}</p>
             </div>
             <div class="input-field col s12">
                 <input id="first_name" type="text" class="validate" name="nome">
