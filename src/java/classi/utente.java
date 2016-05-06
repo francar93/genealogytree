@@ -762,7 +762,7 @@ public class utente {
          */
         private void setParent(utente user) throws SQLException, NotAllowedException{
 
-            if(user.getSesso().equals("female")){
+            if(user.getSesso().equals("F")){
                 this.updateAttribute("idmadre", user.getId());
             }else{
                 this.updateAttribute("idpadre", user.getId());
@@ -840,10 +840,10 @@ public class utente {
                 if(u1_size == 1 && u2_size == 2){
                     // Recupera il genitore di {u2} che non ha {u1}
                     utente other_parent;
-                    if(u1.getByParentela("mother") != null){
-                        other_parent = u2.getByParentela("father");
+                    if(u1.getByParentela("madre") != null){
+                        other_parent = u2.getByParentela("padre");
                     }else{
-                        other_parent = u2.getByParentela("mother");
+                        other_parent = u2.getByParentela("madre");
                     }
 
                     u1.setParent(other_parent);
@@ -926,7 +926,7 @@ public class utente {
 
                         
                 }catch(NotAllowedException ex){
-                    if(user.getSesso().equals("female")){
+                    if(user.getSesso().equals("F")){
                         throw new NotAllowedException("mot_" + ex.getMessage());
                     }else{
                         throw new NotAllowedException("fat_" + ex.getMessage());
@@ -1051,12 +1051,12 @@ public class utente {
 
                         utente other_parent;
                         // Se {u2} ha solo la madre
-                        if(u2.getByParentela("mother") != null){
+                        if(u2.getByParentela("madre") != null){
                             // Recupera il padre di {u1}
-                            other_parent = u1.getByParentela("father");
+                            other_parent = u1.getByParentela("padre");
                         }else{
                             // Altrimenti recupara la madre di {u1}
-                            other_parent = u1.getByParentela("mother");
+                            other_parent = u1.getByParentela("madre");
                         }
                         try{
                             // Verifica se l'altro genitore di {u1} può essere aggiunto come genitore di {u2}
