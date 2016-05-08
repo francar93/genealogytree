@@ -18,8 +18,13 @@ input{
 .header{
     height: 150px;
 }
+.header.logged{
+    height: 300px;
+}
 .row.login{
     max-width: 400px;
+    background: black;
+    border-radius: 10px;
 }
 .row.submit{
     max-width: 150px;
@@ -127,3 +132,17 @@ input{
 #profile-img{
     background-image: url('../img/avatar.gif');
 }
+.btn-user{
+    position: fixed;
+    top: 0;
+    right: 0;
+}
+/* RICERCA LOGGATA */
+.search-logged{
+    max-width: 400px;
+    height: 400px;
+    position: relative;
+    left: 7%;
+    display: none;
+}
+/* FINE RICERCA LOGGATA */
