@@ -137,6 +137,13 @@ input{
     top: 0;
     right: 0;
 }
+#btn-name-logged{
+    margin-right: 5px;
+}
+.fixed {
+  position: fixed;
+  top: 0px;
+}
 /* RICERCA LOGGATA */
 .search-logged{
     max-width: 400px;

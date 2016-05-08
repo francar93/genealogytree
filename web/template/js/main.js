@@ -15,3 +15,15 @@ if(x.length){
     });
 }
 
+$(document).ready(function() {
+  var myProfile = $(".container-left");
+  var posizione = myProfile.position();
+
+  $(window).scroll(function() {
+    if ($(window).scrollTop() >= posizione.top) {
+      myProfile.addClass("fixed");
+    } else {
+      myProfile.removeClass("fixed"); 
+    }
+  });
+});
