@@ -190,7 +190,7 @@ public class controlli {
         boolean error = false;
 
         //Controllo su 'male' oppure 'female'
-        if(!toCheck.equals("M") && !toCheck.equals("F") ){
+        if(!toCheck.equals("maschio") && !toCheck.equals("femmina") ){
             msg = "gnd"; // You can be only male or female
             error = true;
         }
