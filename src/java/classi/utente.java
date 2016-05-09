@@ -687,7 +687,7 @@ public class utente {
                 ResultSet record = Database.selectRecord("user", "id='" + this.id + "'");
                 if(record.next()){
                     if(record.getInt("refresh") != 0){
-                        this.initSession(session);
+                        this.initSession2(session);
                         return true;
                     }
                 }
@@ -751,7 +751,7 @@ public class utente {
             }
             
             
-            //this.sendRefreshAck();
+            this.sendRefreshAck();
 
         }
         /**
@@ -762,7 +762,7 @@ public class utente {
          */
         private void setParent(utente user) throws SQLException, NotAllowedException{
 
-            if(user.getSesso().equals("F")){
+            if(user.getSesso().equals("femmina")){
                 this.updateAttribute("idmadre", user.getId());
             }else{
                 this.updateAttribute("idpadre", user.getId());
@@ -926,7 +926,7 @@ public class utente {
 
                         
                 }catch(NotAllowedException ex){
-                    if(user.getSesso().equals("F")){
+                    if(user.getSesso().equals("femmina")){
                         throw new NotAllowedException("mot_" + ex.getMessage());
                     }else{
                         throw new NotAllowedException("fat_" + ex.getMessage());
