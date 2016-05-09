@@ -27,3 +27,19 @@ $(document).ready(function() {
     }
   });
 });
+//al click su genitori chiudo tutti i div dei genitori connessi
+$('#genitori').click(function(){
+    $('.genitori').toggleClass('not-visible');
+});
+//al click su partner chiudo il div del partner connesso
+$('#partner').click(function(){
+    $('.partner').toggleClass('not-visible');
+});
+//al click su sons chiudo tutti i div dei figli connessi
+$('#figli').click(function(){
+    $('.figli').toggleClass('not-visible');
+});
+//al click su brthers and sisters chiudo tutti i div dei fratelli connessi
+$('#fratelli').click(function(){
+    $('.fratelli').toggleClass('not-visible');
+});

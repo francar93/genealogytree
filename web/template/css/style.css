@@ -161,6 +161,12 @@ input{
 .btns-add a{
     margin-left: 105px;
 }
+.parentela{
+    border-bottom: 2px solid red;
+}
+.not-visible{
+    display: none;
+}
 /* RICERCA LOGGATA */
 .search-logged{
     max-width: 400px;
