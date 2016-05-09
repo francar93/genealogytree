@@ -14,6 +14,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
@@ -336,5 +338,38 @@ public class Database {
         return result;
     }
    // </editor-fold>
+ 
+    public static listautenti search2(Map<String,String> input){
+        listautenti result = new listautenti();
+        
+        String condition_string = "";
+        for(Map.Entry<String, String> entry : input.entrySet()){
+            
+            
+                if(!entry.getValue().equals("")){
+                    if(!condition_string.equals("")){
+                        condition_string += " AND ";
+                    }
+                    if(!entry.getKey().equals("birthdate")){
+                        condition_string += entry.getKey() + " COLLATE UTF8_GENERAL_CI LIKE '%" + entry.getValue()+"%'";
+                    }else{
+                        condition_string += entry.getKey() + "='" + entry.getValue() + "'";
+                    }
+                }     
+        }
+        
+        try {
+            ResultSet record = Database.selectRecord("user", condition_string);
+            while(record.next()){
+                result.add(new utente(record));  
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return result;
+    }
+    
+    
     
 }

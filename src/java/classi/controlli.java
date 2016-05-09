@@ -81,14 +81,7 @@ public class controlli {
     }public static Message controllodatishort(String nome, String cognome,String data_nascita, String citta){
        
             Message check = new Message("dt_ok", false);
-            
-            if(nome.equals("") || cognome.equals("") || data_nascita.equals("")  || citta.equals("")){
-                check = new Message("fld", true); // All fields required
-
-                // Se la data di nascita non è valida
-                }else {
-
-                    // Controllo del nome
+             // Controllo del nome
                     check = controllonome(nome, "nome");
                     if(!check.isError()) {
 
@@ -102,7 +95,7 @@ public class controlli {
 
                                     // Controllo della data di nascita
                                     check = controllodata(data_nascita);
-            }}}}
+            }}}
             
             return check; 
             
