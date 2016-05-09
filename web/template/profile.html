@@ -19,21 +19,22 @@
             </div><br>
             <div id="profile-luogo-nascita">
                 Luogo di nascita: ${user_current.citta?capitalize}
-            </div>
-            <div>
-                <#if user_logged.id == user_current.id>
-                    <a href="addparent">add parent</a>
-                </#if>
-                <#if user_logged.id == user_current.id>
-                    <a href="addprofilobase">add profilobase</a>
-                </#if>
-            </div>
+            </div>   
+        </div>
+        <div class="btns-add">
+            <#if user_logged.id == user_current.id>
+                <a class="waves-effect waves-light btn" href="addparent">add parent</a>
+            </#if>
+            <#if user_logged.id == user_current.id>
+                <a class="waves-effect waves-light btn" href="addprofilobase">add profilobase</a>
+            </#if>
         </div>
     </div>
 </div>
 <div class="container-right">
 <#if mother?? || father??>
-Genitori
+<div class="parent-type" id="genitori">Genitori</div>
+<div class="parentela genitori">
     <#if mother??>
         <#assign relative = mother>
     <div class="box-profile-container">
@@ -91,12 +92,14 @@ Genitori
             </div>
         </div>
     </div>
+</div>
     </#if>
 </#if> 
     
     
     <#if spouse??>
-    Partner
+<div class="parent-type" id="partner">Partner</div>
+<div class="parentela partner">
     <div class="box-profile-container">
         <div class="box-img-profile">
             <div class="img-profile">
@@ -123,10 +126,12 @@ Genitori
         </div>
         
     </div>
+</div>
     </#if>
     
     <#if children??>
-    Figli
+<div class="parent-type" id="figli">Sons</div>
+<div class="parentela figli">
     <#list children>
     <#items as child>
     <div class="box-profile-container">
@@ -153,13 +158,15 @@ Genitori
                 Luogo di nascita: ${relative.user.citta?capitalize}
             </div>
         </div>
-            </div>
+    </div>
         </#items>
     </#list>
+</div>
     </#if>
     
     <#if siblings??>
-    Fratelli e Sorelle
+<div class="parent-type" id="fratelli">Brothers and Sisters</div>
+<div class="parentela fratelli">
     <#list siblings>
     <#items as siblings>
     <div class="box-profile-container">
@@ -186,9 +193,10 @@ Genitori
                 Luogo di nascita: ${relative.user.citta?capitalize}
             </div>
         </div>
-            </div>
+    </div>
         </#items>
     </#list>
+</div>
     </#if>
     
     
