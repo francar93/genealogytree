@@ -46,6 +46,7 @@ public class Message {
         map= new HashMap<>();
         //errore generico
         map.put("err", "Si è rilevato un errore");
+        map.put("null", "nessun utente trovato");
         //errore User
         
         map.put("usr_0", "Inserisci tutti i campi");

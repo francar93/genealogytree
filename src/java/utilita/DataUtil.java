@@ -154,8 +154,43 @@ public class DataUtil {
         return  sb.toString();
     }
     
-    /*
-    */ 
+    public static Message checkBirthplace(String toCheck){
     
+        String msg = null;
+        boolean error = false;
+
+        //Check solo caratteri
+        if(!(DataUtil.isAlphanumeric(toCheck, true))){
+            msg = "plc"; // The birthplace must be alphanumeric
+            error = true;
+        }
+
+        return new Message(msg, error);
+    }
+    
+    public static Message checkBirthdate(String toCheck){
+        
+        String msg = null;
+        boolean error = true;
+        
+        if(!DataUtil.validateDateFormat(toCheck)){
+            msg = "date_1"; // The date isn't in the right format
+        }else{
+            // Converti la data da String a Date
+            Date date;
+            try {
+                date = DataUtil.stringToDate(toCheck, "dd/MM/yyyy");
+                if(DataUtil.validateDateRange(date)){
+                    error = false;
+                }
+            } catch (ParseException ex) {
+                msg = "date_2"; // The date in not valid
+            }
+            // Se la data non rientra nel range valido
+            
+        }
+            
+        return new Message(msg, error);
+    }
    
 }

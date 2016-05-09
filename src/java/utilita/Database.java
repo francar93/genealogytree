@@ -339,33 +339,33 @@ public class Database {
     }
    // </editor-fold>
  
-    public static listautenti search2(Map<String,String> input){
+    public static listautenti search2(Map<String, String> input) throws SQLException{
         listautenti result = new listautenti();
         
         String condition_string = "";
         for(Map.Entry<String, String> entry : input.entrySet()){
             
-            
+                
                 if(!entry.getValue().equals("")){
                     if(!condition_string.equals("")){
                         condition_string += " AND ";
                     }
-                    if(!entry.getKey().equals("birthdate")){
+                    if(!entry.getKey().equals("datanascita")){
                         condition_string += entry.getKey() + " COLLATE UTF8_GENERAL_CI LIKE '%" + entry.getValue()+"%'";
                     }else{
                         condition_string += entry.getKey() + "='" + entry.getValue() + "'";
                     }
-                }     
+                }   
+                
+                
         }
         
-        try {
+      
             ResultSet record = Database.selectRecord("user", condition_string);
             while(record.next()){
                 result.add(new utente(record));  
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
         
         return result;
     }
