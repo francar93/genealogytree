@@ -75,7 +75,7 @@ public class Database {
      }
     
     public static boolean shortIn(String name,String cognome, String data_nascita, String citta) throws SQLException{
-        String query = "SELECT * FROM user WHERE nome='"+ name + "'" + "AND cognome=" +  "'" + cognome +  "'" + "AND data_nascita=" + "'" + data_nascita +  "'" + "AND citta=" +  "'" + citta +  "'";
+        String query = "SELECT * FROM user WHERE nome='"+ name + "'" + "OR cognome=" +  "'" + cognome +  "'" + "OR datanascita=" + "'" + data_nascita +  "'" + "OR citta=" +  "'" + citta +  "'";
         ResultSet in = Database.executeQuery(query);
         return(in.next());
      }

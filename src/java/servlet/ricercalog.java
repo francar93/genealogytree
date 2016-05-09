@@ -61,7 +61,7 @@ public class ricercalog extends HttpServlet {
             throws ServletException, IOException {
         
         Map<String, String> data = new HashMap<>();
-        Map<String, Object> albero = new HashMap<>();
+        Map<String, Object> ricerca = new HashMap<>();
         
         //Gestione sessione
         HttpSession session=request.getSession(false);
@@ -74,15 +74,13 @@ public class ricercalog extends HttpServlet {
             
             utente user_logged = (utente)session.getAttribute("user_logged");
             user_logged.checkFamilyTreeCache(session);
-            albero.put("family_tree", (genetree)session.getAttribute("family_tree"));
-            albero.put("user_logged", (utente)session.getAttribute("user_logged"));
-        
+            
             /* ricerca nella barra da loggato */
             
-            String nome            = DataUtil.spaceTrim(request.getParameter("nome"));
-            String cognome         = DataUtil.spaceTrim(request.getParameter("cognome"));
-            String data_nascita    = request.getParameter("datanascita").trim();
-            String citta           = DataUtil.spaceTrim(request.getParameter("citta").trim());
+            String nome            = request.getParameter("nome-login").trim();
+            String cognome         = request.getParameter("cognome-login").trim();
+            String data_nascita    = request.getParameter("datanascita-login").trim();
+            String citta           = request.getParameter("luogonascita-login").trim();
             
             data.put("nome",nome);
             data.put("cognome",cognome);
@@ -112,12 +110,12 @@ public class ricercalog extends HttpServlet {
                 if (flag) {
                     // query db
                     listautenti results = Database.search2(data); 
-                    albero.put("risultati", results);
+                    ricerca.put("risultati", results);
                     
-                    FreeMarker.process("ricercalog.html", albero, response, getServletContext());
+                    FreeMarker.process("ricercalog.html", ricerca, response, getServletContext());
                 }else{
                     // se entro qui vuoldire che non ho trovato nessuna persona con quelle caratteristiche
-                    response.sendRedirect("profilo");
+                    response.sendRedirect("notfound");
                 }
             }else{
                 // se entro qui vuol dire che ho sbagliato a mettere qualche campo nella form

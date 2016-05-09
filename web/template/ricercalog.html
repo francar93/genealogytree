@@ -1,16 +1,35 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
-</html>
+<#include "frame_public.html">
+<div>
+    
+    <#list risultati>
+    <#items as child>
+    <div class="box-profile-container">
+            <#assign relative = child>
+        <div class="box-img-profile">
+            <div class="img-profile">
+                <img src="#" id="profile-img">
+            </div>
+        </div>
+        <div class="profile-name">
+            <a href="profilo?id=${relative.user.id}">
+                 <h5>${relative.user.nome?capitalize} ${relative.user.cognome?capitalize}</h5>
+            </a>
+        </div>
+        <div class="profile-info">
+            INFORMAZIONI ${relative.user.info?cap_first}<br>
+            <#if relative.label!="">
+                <p> ${relative.label?capitalize}</p>
+            </#if>
+            <div id="profile-data-nascita">
+                Data di nascita: ${relative.user.dataNascita?date?string("dd/MM/yyyy")}
+            </div><br>
+            <div id="profile-luogo-nascita">
+                Luogo di nascita: ${relative.user.citta?capitalize}
+            </div>
+        </div>
+    </div>
+        </#items>
+    </#list>
+    
+</div>
+<#include "footer.html">
