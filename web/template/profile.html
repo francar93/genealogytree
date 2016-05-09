@@ -29,6 +29,8 @@
     </div>
 </div>
 <div class="container-right">
+<#if mother?? || father??>
+Genitori
     <#if mother??>
         <#assign relative = mother>
     <div class="box-profile-container">
@@ -87,9 +89,11 @@
         </div>
     </div>
     </#if>
+</#if> 
     
     
     <#if spouse??>
+    Partner
     <div class="box-profile-container">
         <div class="box-img-profile">
             <div class="img-profile">
@@ -118,7 +122,8 @@
     </div>
     </#if>
     
-    <#if children??> 
+    <#if children??>
+    Figli
     <#list children>
     <#items as child>
     <div class="box-profile-container">
@@ -151,6 +156,7 @@
     </#if>
     
     <#if siblings??>
+    Fratelli e Sorelle
     <#list siblings>
     <#items as siblings>
     <div class="box-profile-container">
