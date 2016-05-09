@@ -7,6 +7,7 @@ package servlet;
 
 import Tree.genetree;
 import classi.controlli;
+import classi.listautenti;
 import classi.utente;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -57,11 +58,8 @@ public class ricercalog extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // si deve creare una form che passa la metodo post della servlete
-        // ricercalog questi 4 campi 
         
-        
-        Map<String, Object> data = new HashMap<>();
+        Map<String, String> data = new HashMap<>();
         Map<String, Object> albero = new HashMap<>();
         
         //Gestione sessione
@@ -84,19 +82,20 @@ public class ricercalog extends HttpServlet {
             String cognome         = DataUtil.spaceTrim(request.getParameter("cognome"));
             String data_nascita    = request.getParameter("datanascita").trim();
             String citta           = DataUtil.spaceTrim(request.getParameter("citta").trim());
-            String parentela       = request.getParameter("parentela");
+            
+            data.put("nome",nome);
+            data.put("cognome",cognome);
+            data.put("data_nascita",data_nascita);
+            data.put("citta",citta);
+            
             
             Message check = null;
             Boolean flag = false;
 
             // effettuo i controlli sui campi
-
-            if( nome.equals("") || cognome.equals("") || data_nascita.equals("")  || citta.equals("") || parentela.equalsIgnoreCase("")){
-                check = new Message("fld", true);
-            }else{
-                        // Controllo di dati
-                        check = controlli.controllodatishort(nome, cognome, data_nascita, citta);
-                }
+            // Controllo di dati
+            check = controlli.controllodatishort(nome, cognome, data_nascita, citta);
+                
                 if(!(check.isError())){
                     try {
                         flag = Database.shortIn(nome, cognome, data_nascita, citta);
@@ -113,21 +112,16 @@ public class ricercalog extends HttpServlet {
                 
                 if (flag) {
                     
-                    data.put("nome", nome);
-                    data.put("cognome", cognome);
-                    data.put("data_nascita", data_nascita);
-                    data.put("citta", citta);
-                    if(parentela != null) { // da sistemare
-                        data.put("seleziona parentela", parentela); 
-                    }
+                    // query db
+                    listautenti result = Database.search2(data); 
+                    albero.put("ricercalog", data);
                     
-                    
-                    
-                }else{
-                    // se entro qui vuoldire che non ho trovato nessuna persona con 
-                    // quelle caratteristiche
+                 }else{
+                    // se entro qui vuoldire che non ho trovato nessuna persona con quelle caratteristiche
+                    response.sendRedirect("profilo");
                 }
             }else{
+                
                 // se entro qui vuol dire che ho sbagliato a mettere qualche campo nella form
 
             }
