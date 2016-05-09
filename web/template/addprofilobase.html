@@ -1,0 +1,59 @@
+<#include "frame_public.html">
+<div class="row signup">
+    <form class="col s12" action="addprofilobase" method="post">
+        <div class="row">
+            <div class="<#if !(message.msg??)>hide</#if>">
+            <p id="error-msg">${message.msg!}</p>
+            </div>
+            <div class="input-field col s12">
+                <input id="first_name" type="text" class="validate" name="nome">
+                <label for="first_name">First Name</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <input id="last_name" type="text" class="validate" name="cognome">
+                <label for="last_name">Last Name</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <input placeholder="DD/MM/YY" id="birthday" type="text" class="validate" name="datanascita">
+                <label for="birthday">Birthday</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <input id="birthplace" type="text" class="validate" name="citta">
+                <label for="birthplace">Birthplace</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <select class="browser-default" name="sesso">
+                    <option value="vuoto" disabled selected>Scegli il sesso</option>
+                    <option value="maschio">Maschio</option>
+                    <option value="femmina">Femmina</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <select name="relationship" class="browser-default">
+                    <option value="vuoto" selected data-hidden="true" disabled selected>&nbsp;Relationship (with <#if relative_grade??>${relative_grade}<#else>you</#if>)</option>
+                    <option value="parent">Parent</option>
+                    <option value="child">Child</option>
+                    <option value="sibling">Sibling</option>
+                    <option value="spouse">Spouse</option>
+                </select>
+            </div>
+        </div>
+        <div class="row submit">
+            <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+                <i class="material-icons right"></i>
+            </button>
+        </div>
+        
+    </form>
+</div>
+<#include "footer.html">
