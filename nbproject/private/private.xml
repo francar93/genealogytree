@@ -3,6 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
+            <file>file:/C:/Users/carus/OneDrive/Documents/GitHub/genealogytree/web/template/ricerca.html</file>
+            <file>file:/C:/Users/carus/OneDrive/Documents/GitHub/genealogytree/web/template/ricercalog.html</file>
+            <file>file:/C:/Users/carus/OneDrive/Documents/GitHub/genealogytree/src/java/servlet/ricercalog.java</file>
+            <file>file:/C:/Users/carus/OneDrive/Documents/GitHub/genealogytree/src/java/utilita/Database.java</file>
+            <file>file:/C:/Users/carus/OneDrive/Documents/GitHub/genealogytree/src/java/classi/controlli.java</file>
+            <file>file:/C:/Users/carus/OneDrive/Documents/GitHub/genealogytree/web/template/frame_public.html</file>
+=======
 <<<<<<< Updated upstream
 <<<<<<< HEAD
             <file>file:/C:/Users/carus/OneDrive/Documents/GitHub/genealogytree/src/java/servlet/ricercalog.java</file>
@@ -35,6 +43,7 @@
             <file>file:/Users/matteocapodicasa/Desktop/genealogytree/genealogytree/src/java/classi/utente.java</file>
             <file>file:/Users/matteocapodicasa/Desktop/genealogytree/genealogytree/src/java/servlet/login.java</file>
 >>>>>>> Stashed changes
+>>>>>>> origin/master
         </group>
     </open-files>
 </project-private>
