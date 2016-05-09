@@ -31,16 +31,7 @@ import utilita.Message;
  */
 public class ricercanolog extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-  
+
 
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -71,6 +62,13 @@ public class ricercanolog extends HttpServlet {
         
         listautenti results = new listautenti();
         Map<String, Object> data = new HashMap<>();
+        String action = (String) request.getAttribute("action");
+            // Se l'azione non è stata definita o non è valida, impostala come l'azione di login
+        if (action == null || (action.equals("login") && action.equals("signup"))) {
+            action = "login";
+        }
+        // Inserisci l'azione nel data-model
+        data.put("action", action);
         //Map<String, String> input_filter = new HashMap<>();
         //Gestione sessione
         HttpSession session=request.getSession(false);
