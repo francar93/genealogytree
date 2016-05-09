@@ -84,8 +84,13 @@ input{
 }
 .box-profile-container{
     border: 2px solid red;
+    border-radius: 10px;
     margin: 35px;
     height: 100%;
+    background: black;
+}
+.container-left .box-profile-container{
+    background: blue;
 }
 #profile-img{
     height: 100px;
