@@ -98,10 +98,10 @@ public class genetree {
 
         if(user.getSesso().equals("F")){
             // Aggiungi la moglie
-            this.add(user.getByParentela("moglie"), label, "wife");
+            this.add(user.getByParentela("moglie"), label, "husband");
         }else{
             // Aggiungi il marito
-            this.add(user.getByParentela("marito"), label, "husband");
+            this.add(user.getByParentela("marito"), label, "wife");
         }
         
         // Valuta il prossimo utente
