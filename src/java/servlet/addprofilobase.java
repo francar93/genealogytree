@@ -64,7 +64,7 @@ public class addprofilobase extends HttpServlet {
             
             //Codifica del messaggio di errore sulla base del codice inviato
             data.put("message", new Message(request.getParameter("msg"), true));
-            FreeMarker.process("addparent.html", data, response, getServletContext());
+            FreeMarker.process("addprofilobase.html", data, response, getServletContext());
 
         } else {
             response.sendRedirect("login?msg=log");
@@ -182,7 +182,7 @@ public class addprofilobase extends HttpServlet {
                                     //cancella l'utente
                                     Database.deleteUtente(user_id);
                                 } catch (SQLException ex) {
-                                    Logger.getLogger(addparent.class.getName()).log(Level.SEVERE, null, ex);
+                                    Logger.getLogger(addprofilobase.class.getName()).log(Level.SEVERE, null, ex);
                                 }
                                 // Mostra messaggio di errore
                             response.sendRedirect(action + "?msg=" + check.getCode());
