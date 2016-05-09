@@ -23,6 +23,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import utilita.DataUtil;
 import utilita.Database;
+import utilita.FreeMarker;
 import utilita.Message;
 
 /**
@@ -102,32 +103,27 @@ public class ricercalog extends HttpServlet {
                     } catch (SQLException ex) {
                         Logger.getLogger(ricercalog.class.getName()).log(Level.SEVERE, null, ex);
                     }
+                }else{
+                    // c'e un errore in shortIn
                 }
-
             // se non ci sono errori ti compilazione campi entro nel primo if
-            
             if(!check.isError()){
-                
                 // se trovo sul db i campi inseriti entro nel secondo if 
-                
                 if (flag) {
-                    
                     // query db
-                    listautenti result = Database.search2(data); 
-                    albero.put("ricercalog", data);
+                    listautenti results = Database.search2(data); 
+                    albero.put("risultati", results);
                     
-                 }else{
+                    FreeMarker.process("ricercalog.html", albero, response, getServletContext());
+                }else{
                     // se entro qui vuoldire che non ho trovato nessuna persona con quelle caratteristiche
                     response.sendRedirect("profilo");
                 }
             }else{
-                
                 // se entro qui vuol dire che ho sbagliato a mettere qualche campo nella form
-
             }
-
         }else{
-            // utente non loggato 
+                // utente non loggato 
         }
         
     
