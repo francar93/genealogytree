@@ -73,12 +73,12 @@ input{
 }
 .container-left{
     width: 50%;
-    height: 400px;
+    height: auto;
     float: left;
 }
 .container-right{
     width: 50%;
-    height: 400px;
+    height: auto;
     float: right;
     margin-bottom: 20px;
 }
@@ -116,7 +116,8 @@ input{
     width: 60%;
     position: relative;
     left: 20%;
-    top: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 #profile-data-nascita{
     text-align: left;
@@ -148,6 +149,17 @@ input{
 .fixed {
   position: fixed;
   top: 0px;
+}
+.parent-type{
+    color: red;
+}
+.btns-add{
+    height: 40px;
+    width: 100%;
+    margin-bottom: 20px;
+}
+.btns-add a{
+    margin-left: 105px;
 }
 /* RICERCA LOGGATA */
 .search-logged{

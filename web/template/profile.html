@@ -19,21 +19,22 @@
             </div><br>
             <div id="profile-luogo-nascita">
                 Luogo di nascita: ${user_current.citta?capitalize}
-            </div>
-            <div>
-                <#if user_logged.id == user_current.id>
-                    <a href="addparent">add parent</a>
-                </#if>
-                <#if user_logged.id == user_current.id>
-                    <a href="addprofilobase">add profilobase</a>
-                </#if>
-            </div>
+            </div>   
+        </div>
+        <div class="btns-add">
+            <#if user_logged.id == user_current.id>
+                <a class="waves-effect waves-light btn" href="addparent">add parent</a>
+            </#if>
+            <#if user_logged.id == user_current.id>
+                <a class="waves-effect waves-light btn" href="addprofilobase">add profilobase</a>
+            </#if>
         </div>
     </div>
 </div>
 <div class="container-right">
 <#if mother?? || father??>
-Genitori
+<span class="parent-type">Genitori</span>
+<div class="genitori">
     <#if mother??>
         <#assign relative = mother>
     <div class="box-profile-container">
@@ -91,12 +92,14 @@ Genitori
             </div>
         </div>
     </div>
+</div>
     </#if>
 </#if> 
     
     
     <#if spouse??>
-    Partner
+<span class="parent-type">Partner</span>
+<div class="partner">
     <div class="box-profile-container">
         <div class="box-img-profile">
             <div class="img-profile">
@@ -123,10 +126,11 @@ Genitori
         </div>
         
     </div>
+</div>
     </#if>
     
     <#if children??>
-    Figli
+    <span class="parent-type">Sons</span>
     <#list children>
     <#items as child>
     <div class="box-profile-container">
@@ -159,7 +163,7 @@ Genitori
     </#if>
     
     <#if siblings??>
-    Fratelli e Sorelle
+    <span class="parent-type">Brothers and Sisters</span>
     <#list siblings>
     <#items as siblings>
     <div class="box-profile-container">
