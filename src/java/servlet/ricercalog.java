@@ -150,6 +150,7 @@ public class ricercalog extends HttpServlet {
             user_logged.checkFamilyTreeCache(session);
             data.put("family_tree", (genetree)session.getAttribute("family_tree"));
             data.put("user_logged", (utente)session.getAttribute("user_logged"));
+            
         } 
         
         
