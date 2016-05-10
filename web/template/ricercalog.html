@@ -18,9 +18,11 @@
                         </div>
                     </div>
                     <div class="profile-name">
-                        <h5>${user.nome?capitalize} ${user.cognome?capitalize}</h5>
+                        
+                        <h5>${user.nome?capitalize} ${user.cognome?capitalize}
+                      </h5>
                     </div>
-                    <form action="requests" method="post" >
+                    <form action="aggiuntadaricerca" method="post" >
                     
                         <select name="relationship" class="browser-default">
                             <option value="" selected data-hidden="true">Select a relationship</option>

@@ -29,8 +29,8 @@ public final class request {
     }
     
     public request(ResultSet request) throws SQLException{
-        this.sender = utente.getUserById(request.getString("idreciver"));
-        this.receiver = utente.getUserById(request.getString("idsender"));
+        this.sender = utente.getUserById(request.getString("idsender"));
+        this.receiver = utente.getUserById(request.getString("idreciver"));
         this.relationship = request.getString("relazione");
     }
     

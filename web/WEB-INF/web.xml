@@ -51,6 +51,10 @@
         <servlet-name>aggiuntadaricerca</servlet-name>
         <servlet-class>servlet.aggiuntadaricerca</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>richieste</servlet-name>
+        <servlet-class>servlet.richieste</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ContextInitializer</servlet-name>
         <url-pattern>/ContextInitializer</url-pattern>
@@ -98,6 +102,10 @@
     <servlet-mapping>
         <servlet-name>aggiuntadaricerca</servlet-name>
         <url-pattern>/aggiuntadaricerca</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>richieste</servlet-name>
+        <url-pattern>/richieste</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

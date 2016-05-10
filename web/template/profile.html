@@ -1,6 +1,14 @@
 <#include "frame_public.html">
 <div class="container-left-profile">
+    <#if message.msg??>
+        <p id="error-msg">${message.msg}</p>
+    </#if>
     <div class="box-profile-container">
+        <#if request!=0>
+            <a href="richieste" id="btn-logout" class="btn btn-primary pull-right ellipsis waves-effect waves-light btn login-signup">
+                hai ${request} nuove richieste
+            </a>
+        </#if>
         <div class="box-img-profile">
             <div class="img-profile">
                 <img src="#" id="profile-img">
@@ -24,8 +32,6 @@
         <div class="btns-add">
             <#if user_logged.id == user_current.id>
                 <a class="waves-effect waves-light btn" href="addparent">add parent</a>
-            </#if>
-            <#if user_logged.id == user_current.id>
                 <a class="waves-effect waves-light btn" href="addprofilobase">add profilobase</a>
             </#if>
         </div>

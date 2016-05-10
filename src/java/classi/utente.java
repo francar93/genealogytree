@@ -97,7 +97,7 @@ public class utente {
         
         public String getPassword() throws SQLException{
 
-            ResultSet record = Database.selectRecord("utente", "id = '" + this.id + "'");
+            ResultSet record = Database.selectRecord("user", "id = '" + this.id + "'");
             if(record.next()){
                 return record.getString("password"); 
             }
@@ -233,7 +233,7 @@ public class utente {
         //<editor-fold defaultstate="collapsed" desc="metodi per il reperimento dell'utenza"> 
      /**
      * Recupera un utente attraverso il suo id
-     * @param user_id   email utente
+     * @param user_id   
      * @return          
      */
         public static utente getUserById(String user_id){
@@ -763,9 +763,9 @@ public class utente {
         private void setParent(utente user) throws SQLException, NotAllowedException{
 
             if(user.getSesso().equals("femmina")){
-                this.updateAttribute("idmadre", user.getId());
-            }else{
                 this.updateAttribute("idpadre", user.getId());
+            }else{
+                this.updateAttribute("idmadre", user.getId());
             }
 
             // Aggiorna numero parenti
@@ -816,8 +816,8 @@ public class utente {
          */
         private void setSibling(utente sibling) throws SQLException, NotAllowedException {
 
-            utente u1 = this;
-            utente u2 = sibling;
+            utente u1 = this; //te stesso
+            utente u2 = sibling; //chi ti ha aggiunto
             listautenti u1_parents;
             listautenti u2_parents;
             utente u1_parent = null;
@@ -841,9 +841,9 @@ public class utente {
                     // Recupera il genitore di {u2} che non ha {u1}
                     utente other_parent;
                     if(u1.getByParentela("madre") != null){
-                        other_parent = u2.getByParentela("padre");
-                    }else{
                         other_parent = u2.getByParentela("madre");
+                    }else{
+                        other_parent = u2.getByParentela("padre");
                     }
 
                     u1.setParent(other_parent);
@@ -992,6 +992,8 @@ public class utente {
                 int u2_size = u2_parents.size();
 
                 utente u1_parent, u2_parent;
+                
+                
 
                 // Se entrambi gli utenti non hanno nessun genitore, non è possibile verificare la parentela
                 if(u2_size == 0 && u1_size == 0) throw new NotAllowedException("sib_1");
@@ -1113,7 +1115,7 @@ public class utente {
          * @throws SQLException
          */
         public ResultSet getRequests() throws SQLException{   
-            return Database.selectRecord("request", "relative_id = '" + this.id + "'");
+            return Database.selectRecord("richieste", "idreciver = '" + this.id + "'");
         }
         /**
          * Invia una richiesta di parentela
@@ -1124,7 +1126,7 @@ public class utente {
          */
         public void sendRequest(utente relative, String relationship) throws NotAllowedException, SQLException {
             // Elimina un'eventuale richiesta in sospeso tra i due utenti
-            Database.deleteRecord("request", "user_id = '" + this.id + "' AND relative_id='" + relative.getId() + "'");
+            Database.deleteRecord("richieste", "idsender = '" + this.id + "' AND idreciver='" + relative.getId() + "'");
             // Verifica se l'utente corrente può aggiungere {relative} come parente
             this.canAddLike(relative, relationship);
             // Invia richiesta
@@ -1134,11 +1136,11 @@ public class utente {
             if(!(relative.getPassword()==null)){
                 //Se non è un profilo base manda la richiesta
                 Map<String, Object> data = new HashMap<>();
-                data.put("user_id", this.id);
-                data.put("relative_id", relative.getId());
-                data.put("relationship", relationship);
+                data.put("idsender", this.id);
+                data.put("idreciver", relative.getId());
+                data.put("relazione", relationship);
 
-                Database.insertRecord("request", data); 
+                Database.insertRecord("richieste", data); 
             } else {
                 //Altrimenti aggiungi direttamente l'utente tra i parenti
                 this.setRelative(relative, relationship);
@@ -1150,6 +1152,46 @@ public class utente {
 
         }
 
+    //</editor-fold>
+        
+        //<editor-fold defaultstate="collapsed" desc="Gestione rifiuto/accettazione di richieste di parentela">
+    
+        /**
+         * Accetta richiesta di parentela
+         * @param relative  parente che invia la richiesta
+         * @throws java.sql.SQLException
+         * @throws utilita.NotAllowedException
+         */
+        public void acceptRequest(utente relative) throws SQLException, NotAllowedException {
+        
+            ResultSet request = Database.selectRecord("richieste", "idsender = '" + relative.getId() + "' AND idreciver = '" + this.id + "'");
+            String relationship = "";
+
+            while(request.next()){
+                relationship = request.getString("relazione");
+            }
+            
+            try {
+                // Effettua il collegamento tra i due parenti
+                relative.setRelative(this, relationship);
+                
+            } finally {
+                // Rimuovi la richiesta dal database
+                Database.deleteRecord("richieste", "idsender = '" + relative.getId() + "' AND idreciver = '" + this.id + "'");
+            }
+            
+            
+            
+        }
+        /**
+         * Declina richiesta di parentela
+         * @param relative  parente a cui si è fatta la richiesta
+         * @throws java.sql.SQLException
+         */
+        public void declineRequest(utente relative) throws SQLException{
+            Database.deleteRecord("richieste", "idsender = '" + relative.getId() + "' AND idreciver = '" + this.id + "'");
+        }
+    
     //</editor-fold>
 } 
 

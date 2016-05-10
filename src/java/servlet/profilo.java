@@ -21,9 +21,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import utilita.FreeMarker;
 import classi.utente;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import utilita.Message;
 
 /**
  *
@@ -172,8 +174,23 @@ public class profilo extends HttpServlet {
                 
             
             
-            
-            
+                    //controllo dei messaggi
+                    Message message = new Message(request.getParameter("msg"), false);
+                    data.put("message", message);
+                    
+                    // Controllo richieste in arrivo
+                    int request_count = 0;
+                    try { 
+                        ResultSet record = user_logged.getRequests();
+                        while(record.next()){
+                            request_count++;
+                        }
+                    } catch (SQLException ex) {
+                        request_count = 0;
+                    } finally {
+                        data.put("request", request_count);
+                    }
+                    
                     FreeMarker.process("profile.html", data, response, getServletContext());
                 }else{
                     
