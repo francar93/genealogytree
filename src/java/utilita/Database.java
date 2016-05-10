@@ -19,6 +19,7 @@ import java.util.logging.Logger;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
+import servlet.ricercalog;
 
 /**
  *
@@ -337,6 +338,24 @@ public class Database {
         
         return result;
     }
+    
+    public static listautenti search1(String nome) throws SQLException{
+        listautenti result = new listautenti();
+       /* String condition = "(CONCAT(nome, ' ', cognome) COLLATE UTF8_GENERAL_CI LIKE '%" + input + "%' "
+                      + "OR CONCAT(cognome, ' ', nome) COLLATE UTF8_GENERAL_CI LIKE '%" + input + "%')"
+                      // Includi gli utenti non verificati ma escludi quelli invitati che non hanno ancora fatto la registrazione
+                    + "AND ((email IS NOT NULL AND password IS NOT NULL))";
+        */
+       String condition = "datanascita= '"+nome+"'";
+        
+            ResultSet record = Database.selectRecord("user", condition);
+            while(record.next()){
+                result.add(new utente(record));  
+            }
+        
+        
+        return result;
+    }
    // </editor-fold>
  
     public static listautenti search2(Map<String, String> input) throws SQLException{
@@ -345,22 +364,18 @@ public class Database {
         String condition_string = "";
         for(Map.Entry<String, String> entry : input.entrySet()){
             
-                
+            
                 if(!entry.getValue().equals("")){
                     if(!condition_string.equals("")){
                         condition_string += " AND ";
                     }
-                    if(!entry.getKey().equals("datanascita")){
-                        condition_string += entry.getKey() + " COLLATE UTF8_GENERAL_CI LIKE '%" + entry.getValue()+"%'";
-                    }else{
+                    
                         condition_string += entry.getKey() + "='" + entry.getValue() + "'";
-                    }
-                }   
-                
-                
+                   
+                }     
         }
         
-      
+        
             ResultSet record = Database.selectRecord("user", condition_string);
             while(record.next()){
                 result.add(new utente(record));  

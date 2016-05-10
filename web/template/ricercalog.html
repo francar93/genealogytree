@@ -1,72 +1,15 @@
-<!--
-<html>
-    <head>
-        <title>
-            
-        </title>
-    </head>
 
-    <div>
--->
-        <!--
-    <#if message??>
-    <div>
-        <p id="error-msg">${message.msg}</p>
-    </div>
-        -->
-        <!--
-    </#if>
-    
-    <#if risultati??>
-    <#list risultati>
-    <#items as relative>
-        <div class="box-profile-container">
-                
-            <div class="box-img-profile">
-                <div class="img-profile">
-                    <img src="#" id="profile-img">
-                </div>
-            </div>
-            <div class="profile-name">
-                
-                     <h5>${relative.user.nome?capitalize} ${relative.user.cognome?capitalize}</h5>
-                
-                     
-            </div>
-            <div class="profile-info">
-                INFORMAZIONI ${relative.user.info?cap_first}<br>
-                <#if relative.label!="">
-                    <p> ${relative.label?capitalize}</p>
-                </#if>
-                <div id="profile-data-nascita">
-                    Data di nascita: ${relative.user.dataNascita?date?string("dd/MM/yyyy")}
-                </div><br>
-                <div id="profile-luogo-nascita">
-                    Luogo di nascita: ${relative.user.citta?capitalize}
-                </div>
-            </div>
-        </div>
-    </#items>
-    </#list>
-    </#if>
-    
-    
-</div>
-        -->
-
-                                
-<!-- </html> -->
 
 <#include "frame_public.html">
 
-<#if message.msg!="false">
+<#if message??>
     <div>
         <p id="error-msg">${message.msg}</p>
     </div>
 </#if>
       <#if risultati??>
-            <div class="container search">
-        <#list sirultati as user>
+                <div class="container search">
+        <#list risultati as user>
             <div class="container-left search">
                 <div class="box-profile-container">
                     <div class="box-img-profile">
@@ -81,7 +24,6 @@
             </div>
         </#list> 
             </div>
-           
       <#else>
             <p>nulla</p>
       </#if>

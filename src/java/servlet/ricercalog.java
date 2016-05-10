@@ -11,6 +11,8 @@ import classi.listautenti;
 import classi.utente;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.HashMap;
@@ -152,8 +154,8 @@ public class ricercalog extends HttpServlet {
         
         
             // Recupero del nome
-            //String nome = DataUtil.spaceTrim(request.getParameter("nome"));
-            String nome = request.getParameter("nome").trim(); 
+            String nome = DataUtil.spaceTrim(request.getParameter("nome"));
+            //String nome = request.getParameter("nome").trim(); 
             // Recupero del cognome
             String cognome = DataUtil.spaceTrim(request.getParameter("cognome"));
             input_filter.put("nome", nome);
@@ -169,12 +171,20 @@ public class ricercalog extends HttpServlet {
                 datanascita = request.getParameter("datanascita").trim();
                 // Se è stata inserita una data di nascita
                 if(!datanascita.equals("")){
+                    /*
                     try {
                         // Prova a convertire la data di nascita in Date e inserisci il risultato del data-model
                         input_filter.put("datanascita", DataUtil.stringToDate(datanascita, "dd/MM/yyyy").toString());
                     } catch (ParseException ex) {}
-                }else{
-                    input_filter.put("datanascita", "");
+                    */
+                    Date sqlDate = null;
+                    try {
+                        sqlDate = DataUtil.stringToDate(datanascita, "dd/MM/yyyy");
+                        input_filter.put("datanascita", DataUtil.dateToString(sqlDate));
+                    } catch (ParseException ex) { }
+
+                    }else{
+                        input_filter.put("datanascita", "");
                 }     
                 // Inserisci il luogo di nascita nel data-model
                 input_filter.put("citta", citta);
@@ -207,14 +217,27 @@ public class ricercalog extends HttpServlet {
             
             // Se non sono stati trovati errori
             if(!check.isError()){
-            try {
+            
                 // Esegui la ricerca
                 //results = Database.search2(input_filter); 
-                results = Database.search(nome);
+                //results = Database.search(nome);
+                //nome= request.getParameter("nome").trim();
+                String data1="";
+               Date sqlDate = null;
+                    try {
+                        sqlDate = DataUtil.stringToDate(datanascita, "dd/MM/yyyy");
+                        data1= DataUtil.dateToString(sqlDate);
+                    } catch (ParseException ex) { }
+           
                 
+            try {
+                results = Database.search2(input_filter);
             } catch (SQLException ex) {
                 Logger.getLogger(ricercalog.class.getName()).log(Level.SEVERE, null, ex);
             }
+            
+                
+           
             }
             
             // Se c'è una sessione attiva
@@ -258,6 +281,7 @@ public class ricercalog extends HttpServlet {
     
     
     }
+    
 
     /**
      * Returns a short description of the servlet.
