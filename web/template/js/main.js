@@ -16,7 +16,7 @@ if(x.length){
 }
 
 $(document).ready(function() {
-  var myProfile = $(".container-left");
+  var myProfile = $(".container-left-profile");
   var posizione = myProfile.position();
 
   $(window).scroll(function() {
