@@ -1104,6 +1104,53 @@ public class utente {
         //</editor-fold>
     
     //</editor-fold>
+            
+        //<editor-fold defaultstate="collapsed" desc="Recupero e gestione richieste di parentela">
+    
+        /**
+         * Recupera le richieste di parentela ricevute
+         * @return
+         * @throws SQLException
+         */
+        public ResultSet getRequests() throws SQLException{   
+            return Database.selectRecord("request", "relative_id = '" + this.id + "'");
+        }
+        /**
+         * Invia una richiesta di parentela
+         * @param relative      utente che riceve la richiesta
+         * @param relationship  grado di parentela (parent, spouse, child, sibling)
+         * @throws NotAllowedException
+         * @throws SQLException
+         */
+        public void sendRequest(utente relative, String relationship) throws NotAllowedException, SQLException {
+            // Elimina un'eventuale richiesta in sospeso tra i due utenti
+            Database.deleteRecord("request", "user_id = '" + this.id + "' AND relative_id='" + relative.getId() + "'");
+            // Verifica se l'utente corrente può aggiungere {relative} come parente
+            this.canAddLike(relative, relationship);
+            // Invia richiesta
+            this.send_handler(relative, relationship);
+        }
+        private void send_handler(utente relative, String relationship) throws NotAllowedException, SQLException {
+            if(!(relative.getPassword()==null)){
+                //Se non è un profilo base manda la richiesta
+                Map<String, Object> data = new HashMap<>();
+                data.put("user_id", this.id);
+                data.put("relative_id", relative.getId());
+                data.put("relationship", relationship);
+
+                Database.insertRecord("request", data); 
+            } else {
+                //Altrimenti aggiungi direttamente l'utente tra i parenti
+                this.setRelative(relative, relationship);
+            }
+
+            /*
+                INVIARE EMAIL DI RICHIESTA  
+            */
+
+        }
+
+    //</editor-fold>
 } 
 
 

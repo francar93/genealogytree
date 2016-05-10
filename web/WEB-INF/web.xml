@@ -47,6 +47,10 @@
         <servlet-name>addprofilobase</servlet-name>
         <servlet-class>servlet.addprofilobase</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>aggiuntadaricerca</servlet-name>
+        <servlet-class>servlet.aggiuntadaricerca</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ContextInitializer</servlet-name>
         <url-pattern>/ContextInitializer</url-pattern>
@@ -90,6 +94,10 @@
     <servlet-mapping>
         <servlet-name>addprofilobase</servlet-name>
         <url-pattern>/addprofilobase</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>aggiuntadaricerca</servlet-name>
+        <url-pattern>/aggiuntadaricerca</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
