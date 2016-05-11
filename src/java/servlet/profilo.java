@@ -53,9 +53,22 @@ public class profilo extends HttpServlet {
         //Se è stata generata la sessione
         if(session != null){
                 genetree family_tree = (genetree)session.getAttribute("family_tree");
+                
+                
+                
                 // Recupero dell'utente loggato
                 utente user_logged = (utente)session.getAttribute("user_logged");
                 
+
+                ///ultima messa prova
+                NodeList family_tree1;
+                int tree_size = 0;
+                try {
+                    family_tree1 = user_logged.getFamilyTree().getFamily_tree();
+                    tree_size = family_tree1.size() - 1;
+                } catch (SQLException ex) {
+                    Logger.getLogger(profilo.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 
                 
                  boolean refresh = user_logged.checkFamilyTreeCache(session);
@@ -156,6 +169,8 @@ public class profilo extends HttpServlet {
                 
                     //utente padre = father.getuser();
                     // data.put("forse", forse);
+                    
+                    
                     data.put("user_logged", user_logged);
                     data.put("user_current", user_current);
                     data.put("relative_grade", relative_grade);
@@ -166,12 +181,13 @@ public class profilo extends HttpServlet {
                     data.put("spouse", spouse);
                     
                     data.put("mother", mother);
-                    
+                   
                     data.put("io", io);
                     data.put("father", father);
                     data.put("mother", mother);
 
-                
+                    //ultima messa prova
+                    //data.put("parenti", tree_size);
             
             
                     //controllo dei messaggi

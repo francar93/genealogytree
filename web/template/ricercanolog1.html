@@ -1,0 +1,29 @@
+<#include "frame_public.html">
+      <#if utente??>
+            <div class="container search">
+        <#list utente>
+        <#items as ut>
+            <#assign relative = ut>
+       
+        
+            <div class="container-left search">
+                <div class="box-profile-container">
+                    <div class="box-img-profile">
+                        <div class="img-profile">
+                            <img src="#" id="profile-img">
+                        </div>
+                    </div>
+                    <div class="profile-name">
+                        <h5>${relative.getrelat().nome} ${relative.getrelat().cognome}</h5><br>
+                        parentele nell'albero genealogico ${relative.getNparent()}
+                    </div>
+                </div>
+            </div>
+        </#items>
+        </#list> 
+            </div>
+           
+      <#else>
+            <p>nulla</p>
+      </#if>
+<#include "footer.html">        

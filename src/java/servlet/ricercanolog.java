@@ -6,7 +6,9 @@
 package servlet;
 
 import Tree.genetree;
+import Tree.treenode;
 import classi.listautenti;
+import classi.listautenticonnumero;
 import classi.utente;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -60,6 +62,8 @@ public class ricercanolog extends HttpServlet {
             throws ServletException, IOException {
         //processRequest(request, response);
         
+        listautenticonnumero a = new listautenticonnumero();
+        
         listautenti results = new listautenti();
         Map<String, Object> data = new HashMap<>();
         String action = (String) request.getAttribute("action");
@@ -97,9 +101,20 @@ public class ricercanolog extends HttpServlet {
                     }
                     
                     
+                    try {
+                        // Cerca la stringa
+                        a = Database.searchnolog(input);
+                    } catch (SQLException ex) {
+                        Logger.getLogger(ricercanolog.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    
+                    
                 //}
-                data.put("results", results);
-                FreeMarker.process("ricerca.html", data, response, getServletContext());
+                
+                
+                data.put("utente", a);
+                //data.put("results", results);
+                FreeMarker.process("ricercanolog1.html", data, response, getServletContext());
                 //response.sendRedirect("ricerca");
             }else{
                 response.sendRedirect("login");

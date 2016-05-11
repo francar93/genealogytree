@@ -5,14 +5,18 @@
  */
 package utilita;
 
+import Tree.NodeList;
 import classi.listautenti;
+import classi.listautenticonnumero;
 import classi.utente;
+import classi.utenteconnumero;
 import com.mysql.jdbc.Connection;
 import static java.lang.System.out;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -339,6 +343,7 @@ public class Database {
         return result;
     }
     
+    
     public static listautenti search1(String nome) throws SQLException{
         listautenti result = new listautenti();
        /* String condition = "(CONCAT(nome, ' ', cognome) COLLATE UTF8_GENERAL_CI LIKE '%" + input + "%' "
@@ -351,6 +356,31 @@ public class Database {
             ResultSet record = Database.selectRecord("user", condition);
             while(record.next()){
                 result.add(new utente(record));  
+            }
+        
+        
+        return result;
+    }
+    
+    public static listautenticonnumero searchnolog(String input) throws SQLException{
+        listautenticonnumero result = new listautenticonnumero();
+       
+       String condition = "nome= '"+input+"'OR cognome='"+input+"'";
+        
+            ResultSet record = Database.selectRecord("user", condition);
+            while(record.next()){
+                
+                utente attuale= new utente(record);
+                
+                NodeList family_tree = attuale.getFamilyTree().getFamily_tree();
+
+                // Calcola il numero di parenti (-1 per non considerare l'utente stesso)
+                int tree_size = family_tree.size() - 1;
+
+                int num = 3;
+                result.add(new utenteconnumero(attuale,tree_size)); 
+                
+                
             }
         
         

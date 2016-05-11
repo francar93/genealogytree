@@ -227,7 +227,17 @@ public class utente {
             condition = condition.substring(0, condition.length()-4);
             // Aggoirna il numero di parenti
             Database.updateRecord("user", data, condition);
+            
+            
         }
+        
+        
+        public void setParentele2(utente prova) {
+           // NodeList family_tree = prova.getFamilyTree().getFamily_tree();
+           
+        
+        }
+
         //</editor-fold>
         
         //<editor-fold defaultstate="collapsed" desc="metodi per il reperimento dell'utenza"> 
@@ -770,7 +780,7 @@ public class utente {
 
             // Aggiorna numero parenti
             //-------da aggiungere per agg il num di parenti-----this.setNumRelatives();ù
-            //this.setParentele();
+            this.setParentele();
 
         }
         
@@ -795,7 +805,7 @@ public class utente {
 
             // Aggiorna numeri parenti
             //-------da aggiungere per agg il num di parenti-----this.setNumRelatives();
-                //        this.setParentele();
+                        this.setParentele();
 
             
 
