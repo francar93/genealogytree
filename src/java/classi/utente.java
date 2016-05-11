@@ -763,13 +763,14 @@ public class utente {
         private void setParent(utente user) throws SQLException, NotAllowedException{
 
             if(user.getSesso().equals("femmina")){
-                this.updateAttribute("idpadre", user.getId());
-            }else{
                 this.updateAttribute("idmadre", user.getId());
+            }else{
+                this.updateAttribute("idpadre", user.getId());
             }
 
             // Aggiorna numero parenti
-            //-------da aggiungere per agg il num di parenti-----this.setNumRelatives();
+            //-------da aggiungere per agg il num di parenti-----this.setNumRelatives();ù
+            //this.setParentele();
 
         }
         
@@ -794,6 +795,9 @@ public class utente {
 
             // Aggiorna numeri parenti
             //-------da aggiungere per agg il num di parenti-----this.setNumRelatives();
+                //        this.setParentele();
+
+            
 
         }
         
@@ -1174,6 +1178,7 @@ public class utente {
             try {
                 // Effettua il collegamento tra i due parenti
                 relative.setRelative(this, relationship);
+                 //this.setRelative(relative, relationship);
                 
             } finally {
                 // Rimuovi la richiesta dal database
