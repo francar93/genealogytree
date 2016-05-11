@@ -970,7 +970,7 @@ public class utente {
 
                 // Se {user} è un discendente
                 listautenti offsprings = this.getDiscendenti();    
-                if(!offsprings.contains(user)) throw new NotAllowedException("sp_off");
+                if(offsprings.contains(user)) throw new NotAllowedException("sp_off");
             }
             /**
              * Verifica se un dato utente può essere aggiunto come fratello
