@@ -85,7 +85,7 @@ public class profilo extends HttpServlet {
                         relative_grade = user_current_node.getLabel();
                     } else {
                         user_current = user_logged;
-                        relative_grade = "You";
+                        relative_grade = "Tu";
                     }
 
 

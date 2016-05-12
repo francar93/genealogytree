@@ -149,8 +149,10 @@
     
 
 <#if children??>
+<#if children?size=0>
+<#else>
+<div class="parent-type" id="figli">Figli</div>
 
-<div class="parent-type" id="figli">Sons</div>
 <div class="parentela figli">
     <#list children>
     <#items as child>
@@ -182,10 +184,13 @@
         </#items>
     </#list>
 </div>
+</#if>
     </#if>
     
     <#if siblings??>
-<div class="parent-type" id="fratelli">Brothers and Sisters</div>
+    <#if siblings?size=0>
+    <#else>
+<div class="parent-type" id="fratelli">Fratelli e Sorelle</div>
 <div class="parentela fratelli">
     <#list siblings>
     <#items as siblings>
@@ -217,6 +222,7 @@
         </#items>
     </#list>
 </div>
+</#if>
     </#if>
     
     
