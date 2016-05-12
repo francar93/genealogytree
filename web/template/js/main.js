@@ -15,18 +15,6 @@ if(x.length){
     });
 }
 
-$(document).ready(function() {
-  var myProfile = $(".container-left-profile");
-  var posizione = myProfile.position();
-
-  $(window).scroll(function() {
-    if ($(window).scrollTop() >= posizione.top) {
-      myProfile.addClass("fixed");
-    } else {
-      myProfile.removeClass("fixed"); 
-    }
-  });
-});
 //al click su genitori chiudo tutti i div dei genitori connessi
 $('#genitori').click(function(){
     $('.genitori').toggleClass('not-visible');

@@ -83,7 +83,7 @@ input{
     width: 50%;
     height: auto;
     float: left;
-    position: relative;
+    position: fixed;
     top: 100px;
     z-index: -1;
 }
@@ -160,10 +160,6 @@ input{
 }
 #btn-name-logged{
     margin-right: 5px;
-}
-.fixed {
-  position: fixed;
-  top: 0px;
 }
 .parent-type{
     color: red;
