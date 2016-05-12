@@ -86,6 +86,7 @@ input{
     height: auto;
     float: right;
     margin-bottom: 20px;
+    overflow: hidden;
 }
 .box-profile-container{
     border: 2px solid red;
