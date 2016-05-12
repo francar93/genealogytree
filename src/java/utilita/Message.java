@@ -143,7 +143,7 @@ public class Message {
         map.put("sib_1",        "Not allowed: this user can't be add as sibling, because this relationship is not verificable");
         map.put("sib_2",        "Not allowed: this user can't be your sibling, because you have different parents");
         map.put("sib_3",        "Not allowed: this user can't be your sibling, beacause you can't have the same parents");
-    
+        map.put("sib_alt",      "hai già un legame di parentela con tuo fratello");
                 }
     
         
