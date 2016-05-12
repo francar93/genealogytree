@@ -25,6 +25,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.ServletContext;
 import utilita.Message;
 
 /**
@@ -144,27 +145,27 @@ public class profilo extends HttpServlet {
                     try {
                         siblings = family_tree.getUsers(user_current.getFratelliSorelle());
                     } catch (SQLException ex) { }
-                    
+                    /*
                     if(siblings.size()==0){
                         data.put("siblings",null);
                     }else{
                         data.put("siblings", siblings);
                     }
-                   
+                   */
 
                     // Recupero dei figli
                     NodeList children = null;
                     try {
                         children = family_tree.getUsers(user_current.getFigli());
                     } catch (SQLException ex) { }
-                    
+                    /*
                      if(siblings.size()==0){
                         data.put("children",null);
                     }else{
                         data.put("children", children);
                     }
-                    
-
+                    */
+                     
                     /* Inserimento dei parenti nel data-model */
                     
                     /*
@@ -184,12 +185,16 @@ public class profilo extends HttpServlet {
                     // data.put("forse", forse);
                     
                     
+                    String filename =("template/img/");
+            
+                    
+                    data.put("foto", filename);
                     data.put("user_logged", user_logged);
                     data.put("user_current", user_current);
                     data.put("relative_grade", relative_grade);
 
-                    //data.put("siblings", siblings);
-                    //data.put("children", children);
+                    data.put("siblings", siblings);
+                    data.put("children", children);
 
                     data.put("spouse", spouse);
                     
@@ -201,7 +206,10 @@ public class profilo extends HttpServlet {
 
                     //ultima messa prova
                     //data.put("parenti", tree_size);
-            
+                    
+                    
+                    
+                    
             
                     //controllo dei messaggi
                     Message message = new Message(request.getParameter("msg"), false);
