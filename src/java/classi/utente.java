@@ -780,7 +780,7 @@ public class utente {
 
             // Aggiorna numero parenti
             //-------da aggiungere per agg il num di parenti-----this.setNumRelatives();ù
-            this.setParentele();
+           
 
         }
         
@@ -805,7 +805,7 @@ public class utente {
 
             // Aggiorna numeri parenti
             //-------da aggiungere per agg il num di parenti-----this.setNumRelatives();
-                        this.setParentele();
+                       
 
             
 
@@ -820,6 +820,8 @@ public class utente {
         private void setChild(utente user) throws NotAllowedException, SQLException{
             // Imposta l'utente corrente come genitore
             user.setParent(this);
+            
+           
         }
         
         /**
@@ -876,6 +878,7 @@ public class utente {
                 u2 = this;
 
             }while(true);
+           
 
         }
 
