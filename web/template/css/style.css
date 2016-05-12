@@ -86,6 +86,7 @@ input{
     height: auto;
     float: right;
     margin-bottom: 20px;
+    overflow: hidden;
 }
 .box-profile-container{
     border: 2px solid red;
@@ -171,6 +172,14 @@ input{
 }
 .not-visible{
     display: none;
+}
+.btn-img-profile{
+    height: 25px;
+    width: 25px;
+    background-image: url('../img/change-profile.png');
+    position: relative;
+    top: -45px;
+    left: 75px;
 }
 /* RICERCA LOGGATA */
 .search-logged{
