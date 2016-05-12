@@ -18,9 +18,14 @@
                 <img src="${foto}${user_current.id}.jpg" id="profile-img">
                 <!-- form prova immissione foto-->
                 <form action="profilo" method="post" enctype="multipart/form-data">
-                    <input type="file" name="file" />
-                    <input type="submit" value="upload" />
-                </form> 
+                    <div>
+                      <div>
+                        <input type="file" name="fileUpload"/>
+                        <input type="submit" value="Invia"/>
+                      </div>
+                    </div>
+                 </form>
+                
                 
                 <!--form moira
                 <form method="post" enctype="multipart/form-data">

@@ -24,6 +24,7 @@ import classi.utente;
 import java.io.File;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -215,58 +216,38 @@ public class profilo extends HttpServlet {
                     
                     
                     //////////////////////////////////////////// foto
-                    //process only if its multipart content
                     
-                   
+                    boolean isMultipart = ServletFileUpload.isMultipartContent(request);
 
+                        if(isMultipart){
+                            try {
+                            DiskFileItemFactory factory = new DiskFileItemFactory();
 
-        if(ServletFileUpload.isMultipartContent(request)){
+                            ServletFileUpload upload = new ServletFileUpload(factory);
 
-            try {
+                            List items = upload.parseRequest(request);
+                            Iterator itr = items.iterator();
 
-                List<FileItem> multiparts = new ServletFileUpload(
+                            while(itr.hasNext()) {
+                                FileItem item = (FileItem) itr.next();
 
-                                         new DiskFileItemFactory()).parseRequest(request);
+                                if(!item.isFormField()) {
+                                    File fullFile  = new File(item.getName()); 
+                                    File savedFile = new File(getServletContext().getRealPath("/template/img"), fullFile.getName());
+                                    //scrivo l'item nel file "savedFile"
+                                    item.write(savedFile);
+                                }
+                            }
 
-               
+                            } catch (Exception e) {
+                                new Message("fld",true);
+                            }
+                            
+                        }
 
-                for(FileItem item : multiparts){
+                    
 
-                    if(!item.isFormField()){
-
-                        String name = new File(item.getName()).getName();
-
-                        item.write( new File(request.getServletContext().getRealPath("/template/img/").replace("build\\", "")+ File.separator + name));
-
-                    }
-
-                }
-
-            
-
-               //File uploaded successfully
-
-               //request.setAttribute("message", "File Uploaded Successfully");
-
-            } catch (Exception ex) {
-
-               //request.setAttribute("message", "File Upload Failed due to " + ex);
-
-            }         
-
-          
-
-        }else{
-
-            request.setAttribute("message","Sorry this Servlet only handles file upload request");
-
-        }
-
-     
-
-        //request.getRequestDispatcher("/result.jsp").forward(request, response);
-
-      ///////////////////////////////////////
+                    ///////////////////////////////////////
 
                     
                     
