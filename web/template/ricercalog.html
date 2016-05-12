@@ -25,16 +25,16 @@
                     <form action="aggiuntadaricerca" method="post" >
                     
                         <select name="relationship" class="browser-default">
-                            <option value="" selected data-hidden="true">Select a relationship</option>
-                            <option value="parent">Parent</option>
-                            <option value="spouse">Spouse</option>
-                            <option value="sibling">Sibling</option>
-                            <option value="child">Child</option>
+                            <option value="" selected data-hidden="true">Seleziona una relazione</option>
+                            <option value="parent">Genitore</option>
+                            <option value="spouse">Marito/Moglie</option>
+                            <option value="sibling">Fratello/sorella</option>
+                            <option value="child">Figlio/a</option>
                         </select>
                     
                         <input type="hidden" value="${user_logged.id}" name="user_sender" class="hidden"/> 
                         <input type="hidden" value="${user.id}" name="user_receiver" class="hidden"/> 
-                        <button type="submit" name="send"> Add</button>
+                        <button type="submit" name="send">Aggiungi</button>
                     </form>
                 </div>
                 
