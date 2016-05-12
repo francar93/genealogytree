@@ -21,11 +21,16 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import utilita.FreeMarker;
 import classi.utente;
+import java.io.File;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletContext;
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import utilita.Message;
 
 /**
@@ -33,6 +38,8 @@ import utilita.Message;
  * @author matteocapodicasa
  */
 public class profilo extends HttpServlet {
+    
+    
 
 
     
@@ -184,9 +191,8 @@ public class profilo extends HttpServlet {
                     //utente padre = father.getuser();
                     // data.put("forse", forse);
                     
+                      String filename =("template/img/");
                     
-                    String filename =("template/img/");
-            
                     
                     data.put("foto", filename);
                     data.put("user_logged", user_logged);
@@ -207,6 +213,61 @@ public class profilo extends HttpServlet {
                     //ultima messa prova
                     //data.put("parenti", tree_size);
                     
+                    
+                    //////////////////////////////////////////// foto
+                    //process only if its multipart content
+                    
+                   
+
+
+        if(ServletFileUpload.isMultipartContent(request)){
+
+            try {
+
+                List<FileItem> multiparts = new ServletFileUpload(
+
+                                         new DiskFileItemFactory()).parseRequest(request);
+
+               
+
+                for(FileItem item : multiparts){
+
+                    if(!item.isFormField()){
+
+                        String name = new File(item.getName()).getName();
+
+                        item.write( new File(request.getServletContext().getRealPath("/template/img/").replace("build\\", "")+ File.separator + name));
+
+                    }
+
+                }
+
+            
+
+               //File uploaded successfully
+
+               //request.setAttribute("message", "File Uploaded Successfully");
+
+            } catch (Exception ex) {
+
+               //request.setAttribute("message", "File Upload Failed due to " + ex);
+
+            }         
+
+          
+
+        }else{
+
+            request.setAttribute("message","Sorry this Servlet only handles file upload request");
+
+        }
+
+     
+
+        //request.getRequestDispatcher("/result.jsp").forward(request, response);
+
+      ///////////////////////////////////////
+
                     
                     
                     
