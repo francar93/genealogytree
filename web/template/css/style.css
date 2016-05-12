@@ -67,6 +67,8 @@ input{
 .row.signup{
     float: right;
     width: 45%;
+    position: relative;
+    top: 100px;
     max-width: 400px;
     margin-right: 20px;
 }
@@ -150,6 +152,9 @@ input{
 }
 .container.search{
     width: 60%;
+    position: relative;
+    top: 100px;
+    z-index: -1;
 }
 #profile-img{
     background-image: url('../img/avatar.gif');
@@ -186,6 +191,16 @@ input{
     position: relative;
     top: -45px;
     left: 75px;
+}
+.img-richieste{
+    height: 25px;
+    width: 25px;
+    background-image: url('../img/change-profile.png');
+    position: relative;
+    left: 100%;
+    top: 10px;
+    margin-left: -35px;
+    
 }
 /* RICERCA LOGGATA */
 .search-logged{

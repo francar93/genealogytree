@@ -5,9 +5,11 @@
     </#if>
     <div class="box-profile-container">
         <#if request!=0>
-            <a href="richieste" id="btn-logout" class="btn btn-primary pull-right ellipsis waves-effect waves-light btn login-signup">
-                hai ${request} nuove richieste
-            </a>
+        <a href="richieste">
+            <div class="img-richieste">
+                ${request}
+            </div>
+        </a>
         </#if>
         
         <div class="box-img-profile">
