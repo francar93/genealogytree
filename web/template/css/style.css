@@ -199,8 +199,14 @@ input{
     position: relative;
     left: 100%;
     top: 10px;
-    margin-left: -35px;
-    
+    margin-left: -35px;   
+}
+.img-richieste p{
+    position: relative;
+    left: 80%;
+    bottom: 40%;
+    color: red;
+    font-weight: bold;
 }
 /* RICERCA LOGGATA */
 .search-logged{

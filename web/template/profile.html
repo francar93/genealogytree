@@ -7,7 +7,7 @@
         <#if request!=0>
         <a href="richieste">
             <div class="img-richieste">
-                ${request}
+                <p>${request}</p>
             </div>
         </a>
         </#if>
@@ -50,8 +50,12 @@
         </div>
         <div class="btns-add">
             <#if user_logged.id == user_current.id>
-                <a class="waves-effect waves-light btn" href="addparent">Aggiungi Parente</a>
-                <a class="waves-effect waves-light btn" href="addprofilobase">Aggiungi Antenato</a>
+                <a href="addparent" class="btn-floating btn-small waves-effect waves-light red">
+                    <i class="small material-icons">add</i>Parente
+                </a>
+                <a href="addprofilobase" class="btn-floating btn-small waves-effect waves-light red">
+                    <i class="small material-icons">email</i>Antenato
+                </a>
             </#if>
         </div>
     </div>
