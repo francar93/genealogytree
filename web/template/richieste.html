@@ -1,6 +1,6 @@
 <#include "frame_public.html">
 
-<div class="container">
+<div class="container richieste">
     
     <#if message.msg??>
         <p>${message.msg}</p>
@@ -8,15 +8,22 @@
     
     <#if requests??>
         <#list requests as request>
+        <div class="container-richiesta">
             Sei stato aggiunto da
             <h3>${request.sender.nome?capitalize} ${request.sender.cognome?capitalize}</h3>
                    
             come suo ${request.relationship}        
             <form action="richieste" method="post">
-                <button name="accept" value="${request.sender.id}" >Accetta</button>
-                <button name="decline" value="${request.sender.id}">Rifiuta</button>
-                
+                <i class="small material-icons">thumb_up</i>
+                <button name="accept" value="${request.sender.id}" >
+                    Accetta
+                </button>
+                <i class="small material-icons">thumb_down</i>
+                <button name="decline" value="${request.sender.id}">
+                    Rifiuta
+                </button>   
             </form>
+        </div>
         </#list>
     <#else>
         

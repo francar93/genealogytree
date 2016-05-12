@@ -216,4 +216,20 @@ input{
     left: 7%;
     display: none;
 }
+
 /* FINE RICERCA LOGGATA */
+.container.richieste{
+    position: relative;
+    top: 100px;
+    z-index: -1;
+    width: 100%;
+    left: 50%;
+    margin-left: -200px;
+}
+.container-richiesta{
+    width: 400px;
+    margin-top: 40px;
+    border: 2px solid red;
+    background: blue;
+    padding: 10px;
+}
