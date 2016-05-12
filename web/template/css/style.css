@@ -16,7 +16,10 @@ input{
     color: white;
 }
 .header{
-    height: 150px;
+    height: 80px;
+    width: 100%;
+    position: fixed;
+    background: blue;
 }
 .header.logged{
     height: 350px;
@@ -80,6 +83,9 @@ input{
     width: 50%;
     height: auto;
     float: left;
+    position: relative;
+    top: 100px;
+    z-index: -1;
 }
 .container-right{
     width: 50%;
@@ -87,6 +93,9 @@ input{
     float: right;
     margin-bottom: 20px;
     overflow: hidden;
+    position: relative;
+    top: 100px;
+    z-index: -1;
 }
 .box-profile-container{
     border: 2px solid red;
