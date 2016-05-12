@@ -24,7 +24,7 @@ public class genetree {
     
     public genetree(utente user){
         this.family_tree = new NodeList();
-        this.family_tree.add(new treenode(user, "You")); 
+        this.family_tree.add(new treenode(user, "Tu")); 
     }
     
     /**
@@ -68,20 +68,20 @@ public class genetree {
         String label = this.family_tree.get(index).getLabel();
         
         // Aggiungi la madre
-        this.add(user.getByParentela("madre"), label, "mother");
+        this.add(user.getByParentela("madre"), label, "Madre");
         // Aggiungi il padre
         //da non mettere this.family_tree.add(new treenode(user.getRelative("father"), "father"));
         
-        this.add(user.getByParentela("padre"), label, "father");
+        this.add(user.getByParentela("padre"), label, "Padre");
         
         // Aggiungi i figlie/figlie
         for(utente child: user.getFigli()){
             if(child.getSesso().equals("maschio")){
                 // Aggiungi i figli
-                this.add(child, label, "son");
+                this.add(child, label, "Figlio");
             }else{
                 // Aggiungi le figlie
-                this.add(child, label, "daughter");
+                this.add(child, label, "Figlia");
             }
         }
         
@@ -89,19 +89,19 @@ public class genetree {
         for(utente sibling: user.getFratelliSorelle()){
             if(sibling.getSesso().equals("maschio")){
                 // Aggiungi i figli
-                this.add(sibling, label, "brother");
+                this.add(sibling, label, "Fratello");
             }else{
                 // Aggiungi le figlie
-                this.add(sibling, label, "sister");
+                this.add(sibling, label, "Sorella");
             }
         }
 
         if(user.getSesso().equals("femmina")){
             // Aggiungi la moglie
-            this.add(user.getByParentela("moglie"), label, "husband");
+            this.add(user.getByParentela("moglie"), label, "Marito");
         }else{
             // Aggiungi il marito
-            this.add(user.getByParentela("marito"), label, "wife");
+            this.add(user.getByParentela("marito"), label, "Moglie");
         }
         
         // Valuta il prossimo utente
