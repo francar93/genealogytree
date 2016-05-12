@@ -20,14 +20,14 @@ input{
     width: 100%;
     position: fixed;
     top: 0;
-    background: blue;
+    background: #365899;
 }
 .header.logged{
     height: 350px;
 }
 .row.login{
     max-width: 400px;
-    background: black;
+    background: #365899;
     border-radius: 10px;
 }
 .row.submit{
@@ -102,14 +102,13 @@ input{
     z-index: -1;
 }
 .box-profile-container{
-    border: 2px solid red;
     border-radius: 10px;
     margin: 35px;
     height: 100%;
-    background: black;
+    background: #C6C6C6;
 }
 .container-left-profile .box-profile-container{
-    background: blue;
+    background: #365899;
 }
 #profile-img{
     height: 100px;
@@ -131,12 +130,13 @@ input{
 .profile-info{
     text-align: center;
     color: white;
-    border: 2px solid red;
+    border-radius: 10px;
     width: 60%;
     position: relative;
     left: 20%;
     margin-top: 20px;
     margin-bottom: 20px;
+    background: #AFADB2;
 }
 #profile-data-nascita{
     text-align: left;
@@ -232,4 +232,7 @@ input{
     border: 2px solid red;
     background: blue;
     padding: 10px;
+}
+.profile-info.my{
+    background: #1E4187;
 }
