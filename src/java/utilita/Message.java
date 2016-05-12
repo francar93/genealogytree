@@ -132,19 +132,19 @@ public class Message {
         map.put("ch_fat_anc",   "Non Autorizzato:  Tuo/a figlio/a non puo essere un tuo antenato");
         map.put("ch_fat_off",   "Non Autorizzato:  Tuo/a figlio/a non puo essere un tuo discendente");
         /* SIBLING */
-<<<<<<< HEAD
+
         map.put("sib_your",     "Not allowed: this user already is your sibling");
         map.put("sib_1",        "Not allowed: this user can't be add as sibling, because this relationship is not verificable");
         map.put("sib_2",        "Not allowed: this user can't be your sibling, because you have different parents");
         map.put("sib_3",        "Not allowed: this user can't be your sibling, beacause you can't have the same parents");
         map.put("sib_alt",      "hai già un legame di parentela con tuo fratello");
-=======
+
         map.put("sib_your",     "Non Autorizzato:  Questo utente è gia tuo/tua fratello/sorella");
         map.put("sib_1",        "Non Autorizzato:  Questo utente non puo essere tuo/tua fratello/sorella, perche questa relazione non è verificabile");
         map.put("sib_2",        "Non Autorizzato:  Questo utente non puo essere tuo/tua fratello/sorella, perche ha gia due genitori");
         map.put("sib_3",        "Non Autorizzato:  Questo utente non puo essere tuo/tua fratello/sorella, perche non avete gli stessi genitori");
     
->>>>>>> origin/master
+
                 }
     
         
