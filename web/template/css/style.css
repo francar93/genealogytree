@@ -71,6 +71,7 @@ input{
     top: 100px;
     max-width: 400px;
     margin-right: 20px;
+    z-index: -1;
 }
 #error-msg{
     color: red;
@@ -151,7 +152,7 @@ input{
     margin-top: 20px;
 }
 .container.search{
-    width: 60%;
+    width: 70%;
     position: relative;
     top: 100px;
     z-index: -1;
@@ -195,7 +196,6 @@ input{
 .img-richieste{
     height: 25px;
     width: 25px;
-    background-image: url('../img/change-profile.png');
     position: relative;
     left: 100%;
     top: 10px;

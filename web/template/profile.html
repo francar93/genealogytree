@@ -8,6 +8,7 @@
         <a href="richieste">
             <div class="img-richieste">
                 <p>${request}</p>
+                <i class="small material-icons">supervisor_account</i>
             </div>
         </a>
         </#if>
@@ -51,10 +52,10 @@
         <div class="btns-add">
             <#if user_logged.id == user_current.id>
                 <a href="addparent" class="btn-floating btn-small waves-effect waves-light red">
-                    <i class="small material-icons">add</i>Parente
+                    <i class="small material-icons">email</i>Parente
                 </a>
                 <a href="addprofilobase" class="btn-floating btn-small waves-effect waves-light red">
-                    <i class="small material-icons">email</i>Antenato
+                    <i class="small material-icons">add</i>Antenato
                 </a>
             </#if>
         </div>
