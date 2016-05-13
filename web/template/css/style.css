@@ -238,3 +238,9 @@ input{
 .profile-info.my{
     background: #1E4187;
 }
+.btn{
+    background: #1E4187;
+}
+.btn:hover{
+    background: #0059bc;
+}

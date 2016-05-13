@@ -10,6 +10,7 @@
 var x = $('#btn-name-logged');
 if(x.length){
     $('.search-nologin').click(function(){
+        $('#search').attr('id' , 'disabled');
         $('.header').addClass('logged');
         $('.search-logged').show();
     });
