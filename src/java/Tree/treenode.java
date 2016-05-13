@@ -67,7 +67,7 @@ public final class treenode {
 
                     case "Moglie":
                     case "Marito":
-                        new_label = "PadreAcquisito";
+                        new_label = "Suocero";
                         break;
 
                     case "Padre":
@@ -79,12 +79,12 @@ public final class treenode {
 
                     case "Nonno paterno":
                     case "Nonna paterna":
-                        new_label = " Paterno Bisnonno";
+                        new_label = "Bisnonno Paterno";
                         break;
 
                     case "Nonno materno":
                     case "Nonna materna":
-                        new_label = "Materno Bisnonno";
+                        new_label = "Bisnonno Materno";
                         break;
                 }
 
@@ -96,7 +96,7 @@ public final class treenode {
 
                     case "Moglie":
                     case "Marito":
-                        new_label = "MadreAcquisito";
+                        new_label = "Suocera";
                         break;
 
                     case "Padre":
@@ -108,12 +108,12 @@ public final class treenode {
 
                     case "Nonno paterno":
                     case "Nonna paterna":
-                        new_label = "Paterno Bisnonna";
+                        new_label = "Bisnonna Paterna";
                         break;
 
                     case "Nonno materno":
                     case "Nonna materna":
-                        new_label = "Materno Bisnonna";
+                        new_label = "Bisnonna Materna";
                         break;
                 }
 
@@ -123,16 +123,16 @@ public final class treenode {
 
                 switch (label) {
                     case "Figlio":
-                        new_label = "FigliaAcquisito";
+                        new_label = "Nuora";
                         break;
                     case "Fratello":
-                        new_label = "SorellaAcquisito";
+                        new_label = "Cognata";
                         break;
-                    case "Paterno Zio":
-                        new_label = "Paterno Zia Acquisito";
+                    case "Zio Paterno":
+                        new_label = "Zia Paterna Acquisita";
                         break;
-                    case "Materno Zio":
-                        new_label = "Materno Zia Acquisito";
+                    case "Zio Materno":
+                        new_label = "Zia Materna Acquisita";
                         break;
 
                     /*  
@@ -151,16 +151,16 @@ public final class treenode {
 
                 switch (label) {
                     case "Figlia":
-                        new_label = "Figlio Acquisito";
+                        new_label = "Genero";
                         break;
                     case "Sorella":
-                        new_label = "Fratello Acquisito";
+                        new_label = "Cognato";
                         break;
-                    case "Materno Zia":
-                        new_label = "Materno Zio Acquisito";
+                    case "Zia Materna":
+                        new_label = "Zio Materno Acquisito";
                         break;
-                    case "Paterno Zia":
-                        new_label = "Paterno Zio Acquisito";
+                    case "Zia Paterna":
+                        new_label = "Zio Paterno Acquisito";
                         break;
 
                     /*  
@@ -180,21 +180,21 @@ public final class treenode {
                 switch (label) {
                     case "Marito":
                     case "Moglie":
-                        new_label = "Fratello Acquisito";
+                        new_label = "Cognato";
                         break;
 
                     case "Madre":
-                        new_label = "Materno Zio";
+                        new_label = "Zio Materno";
                         break;
                     case "Nonno materno":
-                        new_label = "Materno Prozio";
+                        new_label = "Prozio Materno";
                         break;
 
                     case "Padre":
-                        new_label = "Paterno Zio";
+                        new_label = "Zio Paterno";
                         break;
                     case "Nonno paterno":
-                        new_label = "Paterno Prozio";
+                        new_label = "Prozio Paterno";
                         break;
 
                 }
@@ -207,21 +207,21 @@ public final class treenode {
 
                     case "Marito":                         // cognato
                     case "Moglie":
-                        new_label = "SorellaAcquisito";
+                        new_label = "Cognata";
                         break;
 
                     case "Madre":
-                        new_label = "Materno Zia";
+                        new_label = "Zia Materna";
                         break;
                     case "Nonno materno":
-                        new_label = "Materno Prozia";
+                        new_label = "Prozia Materna";
                         break;
 
                     case "Padre":
-                        new_label = "Paterno Zia";
+                        new_label = "Zia Paterna";
                         break;
                     case "Nonno paterno":
-                        new_label = "Paterno Prozia";
+                        new_label = "Prozia Paterna";
                         break;
 
                 }
@@ -251,10 +251,10 @@ public final class treenode {
                         new_label = "Pronipote m";
                         break;
 
-                    case "Materno Zia":
-                    case "Paterno Zia":
-                    case "Materno Zio":
-                    case "Paterno Zio":
+                    case "Zia Materna":
+                    case "Zia Paterna":
+                    case "Zio Materno":
+                    case "Zio Paterno":
                         new_label = "cugino";
                         break;
 
@@ -301,10 +301,10 @@ public final class treenode {
                         new_label = "Pronipote f";
                         break;
 
-                    case "Materno Zia":
-                    case "Paterno Zia":
-                    case "Materno Zio":
-                    case "Paterno Zio":
+                    case "Zia Materna":
+                    case "Zia Paterna":
+                    case "Zio Materno":
+                    case "Zio Paterno":
                         new_label = "cugino";
                         break;
 
