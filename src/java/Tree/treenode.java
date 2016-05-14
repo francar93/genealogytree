@@ -10,11 +10,11 @@ import java.util.Objects;
 
 /**
  *
- * @author carus
+ * @author caruso
  */
-public final class treenode {
 
-    private final String label;
+public final class treenode {
+private final String label;
     private final utente user;
 
     public treenode(utente user, String label) {
@@ -42,10 +42,10 @@ public final class treenode {
 
         // Se bisogna aggiungere un genitore di un nonno/a o un Figlio di un nipote,
         if (((label.contains("Bisnonna") || label.contains("Bisnonno")) && (relationship.equals("Madre") || relationship.equals("Padre")))
-                || (((label.contains("Pronipote") || label.contains("Pronipote")) && (relationship.equals("Figlio") || relationship.equals("Figlia"))))) {
+                || (((label.contains("Pronipote m") || label.contains("Pronipote f")) && (relationship.equals("Figlio") || relationship.equals("Figlia"))))) {
 
             // Ritorna la label originale aggiungendo solamente un altro "great-"
-            return label.replace("great-", "great-great-");
+            return label.replace("bis-", "tris-");
         }
 
         String new_label = "";
@@ -317,11 +317,11 @@ public final class treenode {
 
                     case "Figlio":
                     case "Figlia":
-                        new_label = "Pronipote";
+                        new_label = "Pronipote f";
                         break;
 
-                    case "Pronipote":
-                    new_label = "Pro-Pronipote";
+                    case "Pronipote m":
+                    new_label = "Pro-Pronipote f";
                         break;
                 }
 
