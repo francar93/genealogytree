@@ -55,6 +55,10 @@
         <servlet-name>richieste</servlet-name>
         <servlet-class>servlet.richieste</servlet-class>
     </servlet>
+     <servlet>
+        <servlet-name>FileUpload</servlet-name>
+        <servlet-class>servlet.FileUpload</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ContextInitializer</servlet-name>
         <url-pattern>/ContextInitializer</url-pattern>
@@ -106,6 +110,10 @@
     <servlet-mapping>
         <servlet-name>richieste</servlet-name>
         <url-pattern>/richieste</url-pattern>
+    </servlet-mapping>
+     <servlet-mapping>
+        <servlet-name>FileUpload</servlet-name>
+        <url-pattern>/FileUpload</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
