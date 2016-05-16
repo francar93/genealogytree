@@ -175,11 +175,16 @@ input{
 }
 .btns-add{
     height: 40px;
-    width: 100%;
+    width: 60%;
     margin-bottom: 20px;
+    position: relative;
+    left: 20%;
 }
-.btns-add a{
-    margin-left: 105px;
+#btn-parente{
+    float: left;
+}
+#btn-antenato{
+    float: right;
 }
 .parentela{
     border-bottom: 2px solid red;
