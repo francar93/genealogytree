@@ -244,3 +244,11 @@ input{
 .btn:hover{
     background: #0059bc;
 }
+#btn-logout{
+    padding-left: 10px;
+    padding-right: 10px;
+}
+#btn-name-logged{
+    padding-left: 10px;
+    padding-right: 10px;
+}
