@@ -11,8 +11,10 @@ import java.io.InputStream;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletContext;
@@ -25,6 +27,7 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import utilita.FreeMarker;
 import utilita.Message;
 
 
@@ -48,7 +51,15 @@ public class FileUpload extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            Map<String, Object> data = new HashMap<>();
+            data.put("user_logged", session.getAttribute("user_logged"));
+            FreeMarker.process("foto.html", data, response, getServletContext());
+        } else {
+            response.sendRedirect("login");
+        }
     }
 
     /**
@@ -62,13 +73,13 @@ public class FileUpload extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException, IOException{
         
-            
+        HttpSession session = request.getSession(false);
+        if (session != null) {    
         boolean isMultipart = ServletFileUpload.isMultipartContent(request);
         
-        if(isMultipart){
+        if(!isMultipart){
             try{
-         
-       
+                
         DiskFileItemFactory factory = new DiskFileItemFactory();
         ServletContext servletContext = this.getServletConfig().getServletContext();
         File repository = (File) servletContext.getAttribute("web/template/img");
@@ -84,7 +95,7 @@ public class FileUpload extends HttpServlet {
 
                 if (!item.isFormField()) {
                 String fieldName = item.getFieldName();
-                File fileName = new File( item.getName());
+                File fileName = new File(item.getName());
                 
                 item.write(fileName);
                 
@@ -100,13 +111,14 @@ public class FileUpload extends HttpServlet {
             } catch (Exception ex) {
                 Logger.getLogger(FileUpload.class.getName()).log(Level.SEVERE, null, ex);
             }          
-}
+}else{
         
             
+        response.sendRedirect("profilo");
+        }
+        }else{
         response.sendRedirect("login?msg=" + URLEncoder.encode("log", "UTF-8"));
-        
-
-
+        }
     }
     /**
      * Returns a short description of the servlet.
