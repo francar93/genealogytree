@@ -79,6 +79,8 @@ input{
     color: red;
     padding-left: 10px;
     margin-bottom: 0;
+    margin-left: 30px;
+    font-family: fantasy;
 }
 .container-left{
     width: 50%;
@@ -207,7 +209,7 @@ input{
     width: 25px;
     background-image: url('../img/change-profile.png');
     position: relative;
-    top: -45px;
+    top: -31px;
     left: 75px;
 }
 .img-richieste{

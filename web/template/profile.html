@@ -1,9 +1,9 @@
 <#include "frame_public.html">
 <div class="container-left-profile">
-    <#if message.msg??>
-        <p id="error-msg">${message.msg}</p>
-    </#if>
     <div class="box-profile-container">
+        <#if message.msg??>
+            <p id="error-msg">${message.msg}</p>
+        </#if>
         <#if request!=0>
         <a href="richieste">
             <div class="img-richieste">
@@ -18,7 +18,9 @@
             <div class="img-profile">
                 <img src="${foto}${user_current.id}.jpg" id="profile-img">
                  <!--form prova immissione foto-->
-                 <a href="FileUpload">ciao</a>
+                 <a href="FileUpload">
+                     <div class="btn-img-profile"></div>
+                 </a>
                 <!--form moira-->
                 
                 
