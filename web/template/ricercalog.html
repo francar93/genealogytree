@@ -33,7 +33,7 @@
                     </div>
                     
                     <form action="aggiuntadaricerca" method="post" >
-                        <select name="relationship" class="browser-default">
+                        <select name="relationship" class="browser-default select-search-login">
                             <option value="" selected data-hidden="true">Seleziona una relazione</option>
                             <option value="parent">Genitore</option>
                             <option value="spouse">Marito/Moglie</option>
@@ -43,7 +43,7 @@
                     
                         <input type="hidden" value="${user_logged.id}" name="user_sender" class="hidden"/> 
                         <input type="hidden" value="${user.id}" name="user_receiver" class="hidden"/> 
-                        <button type="submit" name="send">Aggiungi</button>
+                        <button class="btn waves-effect waves-light btn-search-login" type="submit" name="send">Aggiungi</button>
                     </form>
                 </div>
                 

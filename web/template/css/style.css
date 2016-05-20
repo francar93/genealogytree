@@ -174,13 +174,16 @@ input{
     margin-right: 5px;
 }
 .parent-type{
-    color: red;
+    color: white;
     height: 40px;
     background: #365899;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     max-width: 550px;
     margin-top: 35px;
+    text-align: center;
+    font-family: fantasy;
+    letter-spacing: 2px;
 }
 .btns-add{
     height: 40px;
@@ -274,4 +277,16 @@ input{
 }
 .container-left-profile .box-profile-container{
     max-width: 700px;
+}
+.btn-search-login{
+    position: relative;
+    left: 50%;
+    margin-left: -66px;
+    margin-bottom: 10px;
+}
+select{
+    background-color: #AFADB2;
+}
+.select-search-login{
+    margin-bottom: 10px;
 }
