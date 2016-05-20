@@ -72,7 +72,7 @@ public class FileUpload extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException, IOException{
-        
+        /*
         HttpSession session = request.getSession(false);
         if (session != null) {    
         boolean isMultipart = ServletFileUpload.isMultipartContent(request);
@@ -118,6 +118,50 @@ public class FileUpload extends HttpServlet {
         }
         }else{
         response.sendRedirect("login?msg=" + URLEncoder.encode("log", "UTF-8"));
+        } */
+                 HttpSession session = request.getSession(false);
+            
+        if(session!=null){
+            Message message = null;
+            
+        boolean isMultipart = ServletFileUpload.isMultipartContent(request);
+       
+        if (isMultipart){
+            try{
+                DiskFileItemFactory factory= new DiskFileItemFactory();
+                
+                ServletFileUpload upload=new ServletFileUpload(factory);
+                
+                List items = upload.parseRequest(request);
+                Iterator itr=items.iterator();
+                
+                while(itr.hasNext()){
+                    FileItem item=(FileItem) itr.next();
+                    
+                    if(!item.isFormField()){
+                        File fullFile= new File(item.getName());       
+                        String path = session.getServletContext().getContextPath();
+                        File savedFile = savedFile = new File(session.getServletContext().getRealPath("/template/img/profilo/").replace("build\\","")+ File.separator + fullFile.getName());
+                        item.write(savedFile);
+                        message = new Message("pho_ok", false);
+                        
+            
+                    }
+                }
+            
+            } catch (FileUploadException ex) {
+                message = new Message("srv", true);
+                
+            } 
+                catch (Exception ex) { 
+                    Logger.getLogger(FileUpload.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            response.sendRedirect("profilo?msg=" + URLEncoder.encode(message.getCode(), "UTF-8"));
+        }
+          
+        }
+        else{
+                response.sendRedirect("login?msg=" + URLEncoder.encode("log", "UTF-8"));
         }
     }
     /**
