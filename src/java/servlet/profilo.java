@@ -192,7 +192,7 @@ public class profilo extends HttpServlet {
                     //utente padre = father.getuser();
                     // data.put("forse", forse);
                     
-                      String filename =("template/img/");
+                    String filename =("template/img/profilo/");
                     
                     
                     data.put("foto", filename);
@@ -216,7 +216,7 @@ public class profilo extends HttpServlet {
                     
                     
                     //////////////////////////////////////////// foto
-                    
+                    /*
                     boolean isMultipart = ServletFileUpload.isMultipartContent(request);
 
                         if(isMultipart){
@@ -246,7 +246,7 @@ public class profilo extends HttpServlet {
                         }
 
                     
-
+*/
                     ///////////////////////////////////////
 
                     
