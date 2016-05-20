@@ -10,9 +10,9 @@
 var x = $('#btn-name-logged');
 if(x.length){
     $('.search-nologin').click(function(){
-        $('#search').attr('id' , 'disabled');
-        $('.header').addClass('logged');
-        $('.search-logged').show();
+        $('#search').attr("disabled", "true"); //disattivo la ricerca nolog
+        $('.header').addClass('logged'); //setto alcune proprietà css per il box
+        $('.search-logged').show(); //mostro il tutto sopra il profilo
     });
 }
 
