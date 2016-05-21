@@ -138,8 +138,8 @@ public class FileUpload extends HttpServlet {
 
                         if (!item.isFormField()) {
                             File fullFile = new File(item.getName());
-                            String path = session.getServletContext().getContextPath();
-                            File savedFile = savedFile = new File(session.getServletContext().getRealPath("/template/img/profilo/").replace("build\\", "") + File.separator + fullFile.getName());
+                            //String path = session.getServletContext().getContextPath();
+                            File savedFile = new File(session.getServletContext().getRealPath("/template/img/profilo/").replace("build\\", "") + File.separator + fullFile.getName());
                             item.write(savedFile);
                             message = new Message("pho_ok", false);
 
