@@ -185,6 +185,7 @@ input{
     text-align: center;
     font-family: fantasy;
     letter-spacing: 2px;
+    line-height: 2.5;
 }
 .btns-add{
     height: 40px;
