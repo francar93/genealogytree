@@ -8,13 +8,17 @@
     Author     : Lorenzo
 */
 var x = $('#btn-name-logged');
-if(x.length){
+if(x.length){ //guardo se sono loggato
     $('.search-nologin').click(function(){
         $('#search').attr("disabled", "true"); //disattivo la ricerca nolog
         $('.header').addClass('logged'); //setto alcune proprietà css per il box
         $('.search-logged').show(); //mostro il tutto sopra il profilo
     });
 }
+$('.dropdown-my').click(function(){ 
+    $('.header').removeClass('logged'); //setto alcune proprietà css per il box
+    $('.search-logged').hide(); //nascondo il box ricerca loggata
+});
 
 //al click su genitori chiudo tutti i div dei genitori connessi
 $('#genitori').click(function(){

@@ -111,6 +111,7 @@ input{
     height: 100%;
     background: #C6C6C6;
     margin-top: 0;
+    padding-bottom: 10px;
 }
 .container-left-profile .box-profile-container{
     background: #365899;
@@ -290,4 +291,9 @@ select{
 }
 .select-search-login{
     margin-bottom: 10px;
+}
+.dropdown-my{
+    position: relative;
+    left: 90%;
+    margin-top: -30px;
 }
