@@ -5,6 +5,7 @@
  */
 package servlet;
 
+import classi.utente;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -48,8 +49,9 @@ public class FileUpload extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        
         HttpSession session = request.getSession(false);
+        
         if (session != null) {
             Map<String, Object> data = new HashMap<>();
             data.put("user_logged", session.getAttribute("user_logged"));
@@ -70,6 +72,7 @@ public class FileUpload extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException, IOException {
+        
         /*
         HttpSession session = request.getSession(false);
         if (session != null) {    
@@ -137,12 +140,15 @@ public class FileUpload extends HttpServlet {
                         FileItem item = (FileItem) itr.next();
 
                         if (!item.isFormField()) {
-                            File fullFile = new File(item.getName());
+                            
                             //String path = session.getServletContext().getContextPath();
-                            File savedFile = new File(session.getServletContext().getRealPath("/template/img/profilo/").replace("build\\", "") + File.separator + fullFile.getName());
+                            utente user_logged = (utente)session.getAttribute("user_logged");
+                            String id = user_logged.getId();
+                            
+                            File savedFile = new File(session.getServletContext().getRealPath("/template/img/profilo/").replace("build\\", "") + File.separator + id + ".jpg");
                             item.write(savedFile);
                             message = new Message("pho_ok", false);
-
+                            
                         }
                     }
 
