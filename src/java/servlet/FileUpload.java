@@ -55,6 +55,8 @@ public class FileUpload extends HttpServlet {
         if (session != null) {
             Map<String, Object> data = new HashMap<>();
             data.put("user_logged", session.getAttribute("user_logged"));
+            String filename =("template/img/profilo/");
+            data.put("foto", filename);
 
             FreeMarker.process("foto.html", data, response, getServletContext());
         } else {
