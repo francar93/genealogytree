@@ -94,6 +94,7 @@ input{
     position: fixed;
     top: 135px;
     z-index: -1;
+    overflow: hidden;
 }
 .container-right{
     width: 50%;
@@ -307,7 +308,9 @@ select{
 .container-foto form{
     width: 400px;
 }
+/*INIZIO RESPONSIVE CUSTOM*/
 @media only screen and (max-width: 450px){
+    /*responsive header*/
     .logo {
         display: none;
     }
@@ -321,13 +324,29 @@ select{
     .search-nologin{
         left: 4%;
     }
+    /*responsive mobile profilo con box 100% width*/
+    .container-left-profile{
+        width: 100%;
+        position: relative;
+        top: 135px;
+    }
+    .container-right{
+        width: 92%;
+    }
+    .parent-type{
+        margin-right: 32px;
+    }
+    .parentela{
+        margin-right: 32px;
+    }
 }
 @media only screen and (max-width: 340px){
     .search-nologin{
         width: 150px;
     }
 }
-@media only screen and (max-width: 1200px){
+/*responsive contenitore destro con il margine destro non max-width*/
+@media only screen and (max-width: 1200px) and (min-width:450px){ 
     .parentela{
         margin-right: 25px;
     }
@@ -335,3 +354,4 @@ select{
         margin-right: 25px;
     }
 }
+/*FINE RESPONSIVE CUSTOM*/
