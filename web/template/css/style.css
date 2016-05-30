@@ -298,3 +298,12 @@ select{
     left: 90%;
     margin-top: -30px;
 }
+.container-foto{
+    position: relative;
+    top: 200px;
+    left: 50%;
+    margin-left: -200px;
+}
+.container-foto form{
+    width: 400px;
+}
