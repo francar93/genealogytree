@@ -327,3 +327,11 @@ select{
         width: 150px;
     }
 }
+@media only screen and (max-width: 1200px){
+    .parentela{
+        margin-right: 25px;
+    }
+    .parent-type{
+        margin-right: 25px;
+    }
+}
