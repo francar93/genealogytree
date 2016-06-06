@@ -163,6 +163,7 @@ input{
     position: relative;
     top: 100px;
     z-index: -1;
+    overflow-x: hidden;
 }
 #profile-img{
     background-image: url('../img/avatar.gif');
@@ -339,6 +340,14 @@ select{
     .parentela{
         margin-right: 32px;
     }
+    /* responsive mobile ricerca loggata*/
+    .container.search{
+        width: 100%;
+    }
+    .container-left{
+        width: 100%;
+    }
+    
 }
 @media only screen and (max-width: 340px){
     .search-nologin{
