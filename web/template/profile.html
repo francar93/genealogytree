@@ -18,9 +18,11 @@
             <div class="img-profile">
                 <img src="${foto}${user_current.id}.jpg" id="profile-img">
                  <!--form prova immissione foto-->
+                 <#if user_current.id==user_logged.id>
                  <a href="FileUpload">
                      <div class="btn-img-profile"></div>
                  </a>
+                 </#if>
                 <!--form moira-->
                 
                 
