@@ -163,7 +163,6 @@ input{
     position: relative;
     top: 100px;
     z-index: -1;
-    overflow-x: hidden;
 }
 #profile-img{
     background-image: url('../img/avatar.gif');
