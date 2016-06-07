@@ -44,8 +44,8 @@ private final String label;
         if (((label.contains("Bisnonna") || label.contains("Bisnonno")) && (relationship.equals("Madre") || relationship.equals("Padre")))
                 || (((label.contains("Pronipote m") || label.contains("Pronipote f")) && (relationship.equals("Figlio") || relationship.equals("Figlia"))))) {
 
-            // Ritorna la label originale aggiungendo solamente un altro "great-"
-            return label.replace("bis-", "tris-");
+            // Ritorna la label originale aggiungendo solamente un altro "bis-"
+            return label.replace("Bis-", "Bis-Bis-");
         }
 
         String new_label = "";
@@ -205,7 +205,7 @@ private final String label;
 
                 switch (label) {
 
-                    case "Marito":                         // cognato
+                    case "Marito":                         
                     case "Moglie":
                         new_label = "Cognata";
                         break;
@@ -267,7 +267,7 @@ private final String label;
 
                     case "Figlio":
                     case "Figlia":
-                        new_label = "Pronipote m";
+                        new_label = "Nipote m";
                         break;
 
                     case "Pronipote f":
@@ -292,7 +292,7 @@ private final String label;
                         break;
 
                     case "Sorella":
-                    case "Fratello ":
+                    case "Fratello":
                         new_label = "Nipote f";
                         break;
 
@@ -317,7 +317,7 @@ private final String label;
 
                     case "Figlio":
                     case "Figlia":
-                        new_label = "Pronipote f";
+                        new_label = "Nipote f";
                         break;
 
                     case "Pronipote m":
