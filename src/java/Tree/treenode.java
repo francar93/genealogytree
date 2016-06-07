@@ -58,6 +58,14 @@ private final String label;
             // Segnala che è stata eliminata la dicitura "Acquisito" cosi da poterla riaggiungere in seguito
             in_law = true;
         }
+        
+        if (label.contains("Acquisita")) {
+            // Elimina la dicitura "Acquisita"
+            label = label.replace("Acquisita", "");
+            // Segnala che è stata eliminata la dicitura "Acquisita" cosi da poterla riaggiungere in seguito
+            in_law = true;
+        }
+        
 
         switch (relationship) {
 
@@ -133,6 +141,8 @@ private final String label;
                         break;
                     case "Zio Materno":
                         new_label = "Zia Materna Acquisita";
+                    case "Cognato":
+                        new_label = "Cognata Acquisita";
                         break;
 
                     /*  
@@ -162,6 +172,8 @@ private final String label;
                     case "Zia Paterna":
                         new_label = "Zio Paterno Acquisito";
                         break;
+                    case "Cognata":
+                        new_label = "Cognato Acquisito";
 
                     /*  
                         Se una madre deve inserire il proprio marito, 
@@ -272,7 +284,14 @@ private final String label;
 
                     case "Pronipote f":
                     case "Pronipote m": 
-                        new_label = "Prp-Pronipote m";
+                        new_label = "Pro-Pronipote m";
+                        
+                        
+                    case "Cognato":
+                    case "Cognata":
+                    case "Cognato Aquisito":
+                    case "Cognata Aquisita":
+                        new_label = "Nipote m Aquisito";
                         break;
                 }
 
@@ -305,7 +324,7 @@ private final String label;
                     case "Zia Paterna":
                     case "Zio Materno":
                     case "Zio Paterno":
-                        new_label = "cugino";
+                        new_label = "cugina";
                         break;
 
                     case "Madre":
@@ -322,6 +341,12 @@ private final String label;
 
                     case "Pronipote m":
                     new_label = "Pro-Pronipote f";
+                    
+                    case "Cognato":
+                    case "Cognata":
+                    case "Cognato Aquisito":
+                    case "Cognata Aquisita":
+                        new_label = "Nipote f Aquisita";
                         break;
                 }
 
@@ -330,7 +355,11 @@ private final String label;
 
         // Se è un parente acquisito, aggiungi la dicitura "Acquisito"
         if (in_law && !new_label.equals("") && !new_label.contains("Acquisito")) {
-            new_label = new_label + "Acquisito";
+            new_label = new_label + " Acquisito";
+        }
+        
+        if (in_law && !new_label.equals("") && !new_label.contains("Acquisita")) {
+            new_label = new_label + " Acquisita";
         }
 
         return new_label;
