@@ -10,9 +10,23 @@
         <#list requests as request>
         <div class="container-richiesta">
             Sei stato aggiunto da
+            <div class="img-profile">
+                <img src="template/img/profilo/${request.sender.id}.jpg" id="profile-img">
+            </div>
             <h3>${request.sender.nome?capitalize} ${request.sender.cognome?capitalize}</h3>
                    
-            come suo ${request.relationship}        
+            come suo 
+            <#if request.relationship=="sibling">
+            Fratello/Sorella
+            <#elseif request.relationship=="parent">
+            Genitore
+            <#elseif request.relationship=="spouse">
+            Marito/Moglie
+            <#else>
+            Figlio/a
+            </#if>
+            
+            
             <form action="richieste" method="post">
                 <i class="small material-icons">thumb_up</i>
                 <button name="accept" value="${request.sender.id}" >
