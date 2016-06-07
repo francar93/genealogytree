@@ -131,6 +131,7 @@
     
     <#if spouse??>
 <div class="parent-type" id="partner">Partner</div>
+<#assign relative = spouse>
 <div class="parentela partner">
     <div class="box-profile-container">
         <div class="box-img-profile">
@@ -139,7 +140,6 @@
             </div>
         </div>
         <div class="profile-name">
-            <#assign relative = spouse>
                 <a href="profilo?id=${relative.user.id}">
                      <h5>${relative.user.nome?capitalize} ${relative.user.cognome?capitalize}</h5>
                 </a>
