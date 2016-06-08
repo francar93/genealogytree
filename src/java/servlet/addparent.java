@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package servlet;
 
 import Tree.genetree;
@@ -10,8 +5,6 @@ import Tree.treenode;
 import classi.controlli;
 import classi.utente;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.net.URLEncoder;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -38,23 +31,7 @@ public class addparent extends HttpServlet {
      @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        /*
-        
-        HttpSession session = request.getSession(false);
-        Map<String, Object> data = new HashMap<>();
-        
-        
-        //Se è stata generata la sessione
-        if(session != null){
-            utente user_logged = (utente)session.getAttribute("user_logged");
-            data.put("user_logged", user_logged);
-            data.put("message", new Message(request.getParameter("msg"), true));
-                   
-            FreeMarker.process("addparent.html", data, response, getServletContext());
-        }else{
-            response.sendRedirect("login?msg=" + URLEncoder.encode("log", "UTF-8"));
-        }
-        */
+  
         HttpSession session = request.getSession(false);
 
         if (session != null) {
@@ -76,8 +53,6 @@ public class addparent extends HttpServlet {
                 user_current = user_logged;
             }
 
-            //data.put("action", "create");
-            //data.put("script", "create");
             data.put("user_logged", user_logged);
             data.put("user_current", user_current);
             
@@ -104,6 +79,7 @@ public class addparent extends HttpServlet {
             throws ServletException, IOException {
                 Message check = new Message("dt_ok", false);
                 // Recupera l'azione da svolgere
+                //non viene utilizzata
                 String action = request.getRequestURI().substring(request.getContextPath().length() + 1); // create o invite
 
                 HttpSession session = request.getSession(false);
@@ -126,8 +102,6 @@ public class addparent extends HttpServlet {
                         utente user_current = user_current_node.getUser();
                         utente user_current1 = (utente) session.getAttribute("user_logged");
                      
-
-                        //Message check = null;
 
                         if(email.equals("")|| nome.equals("") || cognome.equals("") || sesso.equals("vuoto") || data_nascita.equals("")  || citta.equals("")){
                             check = new Message("fld", true);
@@ -152,19 +126,12 @@ public class addparent extends HttpServlet {
                             
                         }
 
-
-
                         if(!check.isError()){
-
 
                             Map<String, Object> data = new HashMap<>();
 
-
-                            //** Generatore utente
-
                             // Genera l'id dell'utente
                             String user_id = utente.createUniqueUserId(10);
-
 
                             data.put("nome", nome);
                             data.put("cognome", cognome);
@@ -173,46 +140,29 @@ public class addparent extends HttpServlet {
                             data.put("sesso", sesso);
                             data.put("email", email);
                             data.put("info", "");
-                            
-
-
+           
                             Date sqlDate = null;
                                 try {
                                     sqlDate = DataUtil.stringToDate(data_nascita, "dd/MM/yyyy");
                                     data.put("datanascita", DataUtil.dateToString(sqlDate));
                                 } catch (ParseException ex) { }
 
-
-
-                            
-                                
-                                
-                                
-                                
-                                
                                 try {
                                 Database.insertRecord("user", data);
                                 
                                 utente user_added = utente.getUserById(user_id);
                                 user_current1.setRelative(user_added, relazione);
-                                
-                               
+               
                             } catch (SQLException ex) {
                                 check = new Message("srv", true);
                             } catch (NotAllowedException ex) { 
                                 check = new Message(ex.getMessage(), true);
                             }
-                            
-                                
-                                
-                                
-                                
-                                
+
                             if(!check.isError()){
                                 // Torna alla pagina del profilo
                                 response.sendRedirect("profilo");
-                              
-                                
+   
                             }else{
                                 try {
                                     //cancella l'utente
@@ -235,4 +185,14 @@ public class addparent extends HttpServlet {
                             response.sendRedirect("login?msg=log");
                         }
     }
+    
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
+        return "Servlet per l'aggiunta di un parente in possesso di indirizzo email";
+    }  
 }

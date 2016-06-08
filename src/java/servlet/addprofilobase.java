@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package servlet;
 
 import Tree.genetree;
@@ -10,7 +5,6 @@ import Tree.treenode;
 import classi.controlli;
 import classi.utente;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -92,8 +86,7 @@ public class addprofilobase extends HttpServlet {
                 // Se è attiva una sessiona
                 if (session != null) {
                     
-                            
-                                   
+              
                         String nome            = DataUtil.spaceTrim(request.getParameter("nome"));
                         String cognome         = DataUtil.spaceTrim(request.getParameter("cognome"));
                         String data_nascita    = request.getParameter("datanascita").trim();
@@ -105,10 +98,8 @@ public class addprofilobase extends HttpServlet {
                         treenode user_current_node = ((genetree) session.getAttribute("family_tree")).getUserById(user_logged.getId());
                         utente user_current = user_current_node.getUser();
                         utente user_current1 = (utente) session.getAttribute("user_logged");
-                     
-
+                    
                         
-
                         if(nome.equals("") || cognome.equals("") || sesso.equals("vuoto") || data_nascita.equals("")  || citta.equals("")){
                             check = new Message("fld", true);
                         }else{
@@ -131,12 +122,8 @@ public class addprofilobase extends HttpServlet {
 
                             Map<String, Object> data = new HashMap<>();
 
-
-                            //** Generatore utente
-
                             // Genera l'id dell'utente
                             String user_id = utente.createUniqueUserId(10);
-
 
                             data.put("nome", nome);
                             data.put("cognome", cognome);
@@ -144,8 +131,6 @@ public class addprofilobase extends HttpServlet {
                             data.put("citta", citta);
                             data.put("sesso", sesso);
                             data.put("info", "");
-                            
-
 
                             Date sqlDate = null;
                             try {
@@ -153,13 +138,11 @@ public class addprofilobase extends HttpServlet {
                                 data.put("datanascita", DataUtil.dateToString(sqlDate));
                             } catch (ParseException ex) { }
 
-
                             try {
                             Database.insertRecord("user", data);
 
                             utente user_added = utente.getUserById(user_id);
                             user_current1.setRelative(user_added, relazione);
-
                                
                             } catch (SQLException ex) {
                                 check = new Message("srv", true);
@@ -167,16 +150,10 @@ public class addprofilobase extends HttpServlet {
                                 check = new Message(ex.getMessage(), true);
                             }
                             
-                                
-                                
-                                
-                                
-                                
+    
                             if(!check.isError()){
                                 // Torna alla pagina del profilo
                                 response.sendRedirect("profilo");
-                              
-                                
                             }else{
                                 try {
                                     //cancella l'utente
@@ -199,4 +176,14 @@ public class addprofilobase extends HttpServlet {
                             response.sendRedirect("login?msg=log");
                         }
     }
+    
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
+        return "Servlet per l'aggiunta di un parente senza indirizzo email";
+    }  
 }

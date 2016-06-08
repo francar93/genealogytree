@@ -75,21 +75,26 @@ private final String label;
                 switch (label) {
 
                     case "Moglie":
-                    case "Marito":                                  new_label = "Suocero";
+                    case "Marito":
+                        new_label = "Suocero";
                         break;
 
-                    case "Padre":                                   new_label = "Nonno paterno";
+                    case "Padre":
+                        new_label = "Nonno paterno";
                         break;
 
-                    case "Madre":                                   new_label = "Nonno materno";
+                    case "Madre":
+                        new_label = "Nonno materno";
                         break;
 
                     case "Nonno paterno":
-                    case "Nonna paterna":                           new_label = "Bisnonno Paterno";
+                    case "Nonna paterna":
+                        new_label = "Bisnonno Paterno";
                         break;
 
                     case "Nonno materno":
-                    case "Nonna materna":                           new_label = "Bisnonno Materno";
+                    case "Nonna materna":
+                        new_label = "Bisnonno Materno";
                         break;
                 }
 
@@ -100,21 +105,26 @@ private final String label;
                 switch (label) {
 
                     case "Moglie":
-                    case "Marito":                                  new_label = "Suocera";
+                    case "Marito":
+                        new_label = "Suocera";
                         break;
 
-                    case "Padre":                                   new_label = "Nonna paterna";
+                    case "Padre":
+                        new_label = "Nonna paterna";
                         break;
-                        
-                    case "Madre":                                   new_label = "Nonna materna";
+
+                    case "Madre":
+                        new_label = "Nonna materna";
                         break;
 
                     case "Nonno paterno":
-                    case "Nonna paterna":                           new_label = "Bisnonna Paterna";
+                    case "Nonna paterna":
+                        new_label = "Bisnonna Paterna";
                         break;
 
                     case "Nonno materno":
-                    case "Nonna materna":                           new_label = "Bisnonna Materna";
+                    case "Nonna materna":
+                        new_label = "Bisnonna Materna";
                         break;
                 }
 
@@ -123,18 +133,23 @@ private final String label;
             case "Moglie":
 
                 switch (label) {
-                    
-                    case "Figlio":                                  new_label = "Nuora";
+
+                    case "Figlio":
+                        new_label = "Nuora";
                         break;
-                    
-                    case "Fratello":                                new_label = "Cognata";
+
+                    case "Fratello":
+                        new_label = "Cognata";
                         break;
-                        
-                    case "Zio Paterno":                             new_label = "Zia Paterna Acquisita";
+
+                    case "Zio Paterno":
+                        new_label = "Zia Paterna Acquisita";
                         break;
-                        
-                    case "Zio Materno":                             new_label = "Zia Materna Acquisita";
-                    case "Cognato":                                 new_label = "Cognata Acquisita";
+
+                    case "Zio Materno":
+                        new_label = "Zia Materna Acquisita";
+                    case "Cognato":
+                        new_label = "Cognata Acquisita";
                         break;
 
                     /*  
@@ -142,7 +157,8 @@ private final String label;
                         allora suo Figlio non ha inserito la moglie del padre
                         ciò vuol dire che quest'ultima non è la madre naturale del Figlio
                      */
-                    case "Padre":                                   new_label = "Matrigna";
+                    case "Padre":
+                        new_label = "Matrigna";
                         break;
                 }
 
@@ -151,20 +167,25 @@ private final String label;
             case "Marito":
 
                 switch (label) {
-                    
-                    case "Figlia":                                  new_label = "Genero";
+
+                    case "Figlia":
+                        new_label = "Genero";
                         break;
-                        
-                    case "Sorella":                                 new_label = "Cognato";
+
+                    case "Sorella":
+                        new_label = "Cognato";
                         break;
-                        
-                    case "Zia Materna":                             new_label = "Zio Materno Acquisito";
+
+                    case "Zia Materna":
+                        new_label = "Zio Materno Acquisito";
                         break;
-                        
-                    case "Zia Paterna":                             new_label = "Zio Paterno Acquisito";
+
+                    case "Zia Paterna":
+                        new_label = "Zio Paterno Acquisito";
                         break;
-                        
-                    case "Cognata":                                 new_label = "Cognato Acquisito";
+
+                    case "Cognata":
+                        new_label = "Cognato Acquisito";
 
                     /*  
                         Se una madre deve inserire il proprio marito, 
@@ -183,19 +204,24 @@ private final String label;
                 switch (label) {
 
                     case "Marito":
-                    case "Moglie":                                  new_label = "Cognato";
+                    case "Moglie":
+                        new_label = "Cognato";
                         break;
 
-                    case "Madre":                                   new_label = "Zio Materno";
-                        break;
-                        
-                    case "Nonno materno":                           new_label = "Prozio Materno";
+                    case "Madre":
+                        new_label = "Zio Materno";
                         break;
 
-                    case "Padre":                                   new_label = "Zio Paterno";
+                    case "Nonno materno":
+                        new_label = "Prozio Materno";
                         break;
-                        
-                    case "Nonno paterno":                           new_label = "Prozio Paterno";
+
+                    case "Padre":
+                        new_label = "Zio Paterno";
+                        break;
+
+                    case "Nonno paterno":
+                        new_label = "Prozio Paterno";
                         break;
 
                 }
@@ -207,19 +233,24 @@ private final String label;
                 switch (label) {
 
                     case "Marito":
-                    case "Moglie":                                  new_label = "Cognata";
+                    case "Moglie":
+                        new_label = "Cognata";
                         break;
 
-                    case "Madre":                                   new_label = "Zia Materna";
-                        break;
-                        
-                    case "Nonno materno":                           new_label = "Prozia Materna";
+                    case "Madre":
+                        new_label = "Zia Materna";
                         break;
 
-                    case "Padre":                                   new_label = "Zia Paterna";
+                    case "Nonno materno":
+                        new_label = "Prozia Materna";
                         break;
-                        
-                    case "Nonno paterno":                           new_label = "Prozia Paterna";
+
+                    case "Padre":
+                        new_label = "Zia Paterna";
+                        break;
+
+                    case "Nonno paterno":
+                        new_label = "Prozia Paterna";
                         break;
 
                 }
@@ -235,40 +266,48 @@ private final String label;
                         quindi l'utente che sta inserendo è il suo figliastro
                      */
                     case "Moglie":
-                    case "Marito":                                  new_label = "Figliastro";
+                    case "Marito":
+                        new_label = "Figliastro";
                         break;
 
                     case "Sorella":
-                    case "Fratello":                                new_label = "Nipote m";
+                    case "Fratello":
+                        new_label = "Nipote m";
                         break;
 
                     case "Nipote f":
-                    case "Nipote m":                                new_label = "Pronipote m";
+                    case "Nipote m":
+                        new_label = "Pronipote m";
                         break;
 
                     case "Zia Materna":
                     case "Zia Paterna":
                     case "Zio Materno":
-                    case "Zio Paterno":                             new_label = "cugino";
+                    case "Zio Paterno":
+                        new_label = "cugino";
                         break;
 
                     case "Madre":
                     case "Padre":
                     case "Matrigna":
-                    case "Patrigno":                                new_label = "Fratellastro";
+                    case "Patrigno":
+                        new_label = "Fratellastro";
                         break;
 
                     case "Figlio":
-                    case "Figlia":                                  new_label = "Nipote m";
+                    case "Figlia":
+                        new_label = "Nipote m";
                         break;
 
                     case "Pronipote f":
-                    case "Pronipote m":                             new_label = "Pro-Pronipote m";
+                    case "Pronipote m":
+                        new_label = "Pro-Pronipote m";
 
                     case "Cognato":
                     case "Cognata":
                     case "Cognato Aquisito":
-                    case "Cognata Aquisita":                        new_label = "Nipote m Aquisito";
+                    case "Cognata Aquisita":
+                        new_label = "Nipote m Aquisito";
                         break;
                 }
 
@@ -283,39 +322,47 @@ private final String label;
                         quindi l'utente che sta inserendo è la sua figliastra
                      */
                     case "Moglie":
-                    case "Marito":                                  new_label = "Figliastra";
+                    case "Marito":
+                        new_label = "Figliastra";
                         break;
 
                     case "Sorella":
-                    case "Fratello":                                new_label = "Nipote f";
+                    case "Fratello":
+                        new_label = "Nipote f";
                         break;
 
                     case "Nipote f":
-                    case "Nipote m":                                new_label = "Pronipote f";
+                    case "Nipote m":
+                        new_label = "Pronipote f";
                         break;
 
                     case "Zia Materna":
                     case "Zia Paterna":
                     case "Zio Materno":
-                    case "Zio Paterno":                             new_label = "cugina";
+                    case "Zio Paterno":
+                        new_label = "cugina";
                         break;
 
                     case "Madre":
                     case "Padre":
                     case "Matrigna":
-                    case "Patrigno":                                new_label = "Sorellastra";
+                    case "Patrigno":
+                        new_label = "Sorellastra";
                         break;
 
                     case "Figlio":
-                    case "Figlia":                                  new_label = "Nipote f";
+                    case "Figlia":
+                        new_label = "Nipote f";
                         break;
 
-                    case "Pronipote m":                             new_label = "Pro-Pronipote f";
+                    case "Pronipote m":
+                        new_label = "Pro-Pronipote f";
 
                     case "Cognato":
                     case "Cognata":
                     case "Cognato Aquisito":
-                    case "Cognata Aquisita":                        new_label = "Nipote f Aquisita";
+                    case "Cognata Aquisita":
+                        new_label = "Nipote f Aquisita";
                         break;
                 }
 

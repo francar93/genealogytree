@@ -1,16 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package servlet;
 
 import classi.utente;
 import java.io.IOException;
-import java.io.PrintWriter;
-import static java.lang.System.out;
 import java.net.URLEncoder;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
@@ -57,7 +49,8 @@ public class login extends HttpServlet {
             FreeMarker.process("login.html", data, response, getServletContext());
         } else {
 
-            //vai alla pagina del profilo(DA IMPLEMENTARE)
+            response.sendRedirect("profilo");
+            
         }
 
     }
@@ -131,23 +124,9 @@ public class login extends HttpServlet {
                 break;
 
             case 2:
-                
-                
-               
-                utente loggato= utente.getUserByEmail(email);
+                utente loggato = utente.getUserByEmail(email);
                 loggato.initSession2(request.getSession());
-                
-                
-                /*rimetti questo se non va la modifica sopra ^
-                HttpSession session = request.getSession(true);
-                utente loggato= utente.getUserByEmail(email);
-
-                String id = loggato.getId();
-               
-                session.setAttribute("id",id);
-                */
                 response.sendRedirect("profilo");
-                
                 break;
 
             default:

@@ -1,18 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package servlet;
 
 import classi.controlli;
 import classi.utente;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.net.URLEncoder;
-import java.sql.Date;
 import java.sql.SQLException;
-import java.text.ParseException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
@@ -22,7 +14,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import utilita.DataUtil;
 import utilita.Database;
 import utilita.FreeMarker;
 import utilita.Message;
@@ -118,5 +109,15 @@ public class profilopre extends HttpServlet {
         }else {
             response.sendRedirect("login?msg=" + URLEncoder.encode("log", "UTF-8"));
         }    
+    }
+   
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
+        return "Servlet per la gestione del Profilo Precompilato";
     }
 }

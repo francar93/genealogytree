@@ -4,7 +4,6 @@ package utilita;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Date;
-import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -12,12 +11,11 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Random;
 import org.apache.commons.validator.DateValidator;
-import org.apache.commons.validator.EmailValidator;
 
 
 /**
  *
- * @author Alex
+ * @author caruso
  */
 public class DataUtil {
     

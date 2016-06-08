@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package classi;
 
 import static java.lang.System.out;
@@ -117,24 +112,6 @@ public class controlli {
             }else{
                 error = false;
             }
-            
-            /*utente user = utente.getUserByEmail(email);
-            if(user != null){
-                try {
-                    if(user.getPassword() != null){
-                        msg = "usr_2"; // User already exist
-                    }else{
-                        Database.deleteRecord("user", "id = '" + user.getId() + "'");
-                        Database.deleteRecord("request", "user_id = '" + user.getId() + "' OR relative_id = '" + user.getId() + "'");
-       
-                        error = false;
-                    }
-                } catch (SQLException ex) {
-                    msg = "srv";
-                }
-            }else{
-                error = false;
-            }*/
         }
         return new Message(msg, error);
 

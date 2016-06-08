@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package classi;
 
 import Tree.NodeList;
@@ -23,6 +18,8 @@ import utilita.NotAllowedException;
 /**
  *
  * @author matteocapodicasa
+ * @author caruso
+ * @author moira
  */
 public class utente {
     
@@ -133,7 +130,7 @@ public class utente {
         public String getIdPartner() throws SQLException {
             return this.idPartner;
         }
-        //aka getNumRelatives
+        //aka getNumRelatives non utilizzata
         public int getParentele() throws SQLException {
 
             /* Il numero di parenti può essere modificato anche da altri utenti, per cui è necessario prelevare il valore ogni volta dal database*/
@@ -157,32 +154,8 @@ public class utente {
             data.put("datanascita", DataUtil.dateToString(sqlDate));
             data.put("citta", citta);
             data.put("info", info);
-            /*
-            boolean remove_tree = false;
-            String old_gender = this.gender;
-            if(!gender.equals(old_gender)){
-                remove_tree = true;
-            }
-            */
             
             Database.updateRecord("user", data, "id = '" + this.getId() + "'");
-            /*
-            if(remove_tree){
-                // Rimuovi i filgi
-                UserList children = this.getChildren();
-                for(User child: children){
-                    child.removeParent(old_gender);
-                }
-                // Rimuovi il padre
-                this.removeParent("male");
-                // Rimuovi la madre
-                this.removeParent("female");
-                // Rimuovi il coniuge
-                this.removeSpouse();
-                
-                this.sendRefreshAck();
-            }
-            */
             
             this.nome = nome;
             this.cognome = cognome;
@@ -231,11 +204,9 @@ public class utente {
             
         }
         
-        
+        //non utilizzata
         public void setParentele2(utente prova) {
            // NodeList family_tree = prova.getFamilyTree().getFamily_tree();
-           
-        
         }
 
         //</editor-fold>
@@ -362,16 +333,22 @@ public class utente {
         public utente getByParentela(String parentela) throws SQLException{
         utente effettivo = null;
         
-        switch(parentela){
+            switch (parentela) {
 
-            case "madre":       effettivo = this.getGenitore("femmina");    break;    
-            case "padre":       effettivo = this.getGenitore("maschio");      break;
-            
-            case "compagno":
-            case "marito": 
-            case "moglie":      effettivo = this.getPartner();            break;
-                
-        }
+                case "madre":
+                    effettivo = this.getGenitore("femmina");
+                    break;
+                case "padre":
+                    effettivo = this.getGenitore("maschio");
+                    break;
+
+                case "compagno":
+                case "marito":
+                case "moglie":
+                    effettivo = this.getPartner();
+                    break;
+
+            }
         
         return effettivo;
         
@@ -498,6 +475,7 @@ public class utente {
         //</editor-fold>
         
         //<editor-fold defaultstate="collapsed" desc="metodi vari">
+      
         private void updateAttribute(String attribute, Object value) throws SQLException{
         Map<String, Object> data = new HashMap();
         data.put(attribute, value);
@@ -730,9 +708,6 @@ public class utente {
     //</editor-fold>
       
         
-        
-        
-        
         //<editor-fold defaultstate="collapsed" desc="metodi aggiunta parentela">
     
         /**
@@ -747,17 +722,26 @@ public class utente {
             // Verifica se l'aggiunta può essere fatta
             this.canAddLike(relative, relationship);
 
-            switch(relationship){
+            switch (relationship) {
 
-                case "parent": this.setParent(relative);     break;
+                case "parent":
+                    this.setParent(relative);
+                    break;
 
-                case "child": this.setChild(relative);       break;
+                case "child":
+                    this.setChild(relative);
+                    break;
 
-                case "sibling": this.setSibling(relative);   break;
+                case "sibling":
+                    this.setSibling(relative);
+                    break;
 
-                case "spouse": this.setSpouse(relative);     break;
+                case "spouse":
+                    this.setSpouse(relative);
+                    break;
 
-                default: throw new NotAllowedException("tmp");
+                default:
+                    throw new NotAllowedException("tmp");
             }
             
             
@@ -777,11 +761,6 @@ public class utente {
             }else{
                 this.updateAttribute("idpadre", user.getId());
             }
-
-            // Aggiorna numero parenti
-            //-------da aggiungere per agg il num di parenti-----this.setNumRelatives();ù
-           
-
         }
         
         /**
@@ -801,14 +780,6 @@ public class utente {
                 //spouse.setSpouse(this);
                 spouse.updateAttribute("idpartner", this.getId());
             }  
-            
-
-            // Aggiorna numeri parenti
-            //-------da aggiungere per agg il num di parenti-----this.setNumRelatives();
-                       
-
-            
-
         }
         
         /**
@@ -898,17 +869,26 @@ public class utente {
             // Se l'utente prova ad aggiungere se stesso
             if(this.equals(user)) throw new NotAllowedException("yourself");
             
-            switch(relationship){
+            switch (relationship) {
 
-                case "parent": this.canAddLikeParent(user);     break;
+                case "parent":
+                    this.canAddLikeParent(user);
+                    break;
 
-                case "child": this.canAddLikeChild(user);       break;
+                case "child":
+                    this.canAddLikeChild(user);
+                    break;
 
-                case "sibling": this.canAddLikeSibling(user);   break;
+                case "sibling":
+                    this.canAddLikeSibling(user);
+                    break;
 
-                case "spouse": this.canAddLikeSpouse(user);     break;
+                case "spouse":
+                    this.canAddLikeSpouse(user);
+                    break;
 
-                default: throw new NotAllowedException("tmp");
+                default:
+                    throw new NotAllowedException("tmp");
             }
 
         }
@@ -1164,7 +1144,7 @@ public class utente {
             }
 
             /*
-                INVIARE EMAIL DI RICHIESTA  
+                Qui dovrebbe essere implementato il codice per effettuare l'invio della email di richiesta 
             */
 
         }

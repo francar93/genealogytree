@@ -8,10 +8,6 @@
         <servlet-class>servlet.ContextInitializer</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>provastampadb</servlet-name>
-        <servlet-class>servlet.provastampadb</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>login</servlet-name>
         <servlet-class>servlet.login</servlet-class>
     </servlet>
@@ -55,17 +51,13 @@
         <servlet-name>richieste</servlet-name>
         <servlet-class>servlet.richieste</servlet-class>
     </servlet>
-     <servlet>
+    <servlet>
         <servlet-name>FileUpload</servlet-name>
         <servlet-class>servlet.FileUpload</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ContextInitializer</servlet-name>
         <url-pattern>/ContextInitializer</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>provastampadb</servlet-name>
-        <url-pattern>/provastampadb</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>login</servlet-name>
@@ -111,7 +103,7 @@
         <servlet-name>richieste</servlet-name>
         <url-pattern>/richieste</url-pattern>
     </servlet-mapping>
-     <servlet-mapping>
+    <servlet-mapping>
         <servlet-name>FileUpload</servlet-name>
         <url-pattern>/FileUpload</url-pattern>
     </servlet-mapping>

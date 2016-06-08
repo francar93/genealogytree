@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package utilita;
 
 import Tree.NodeList;
@@ -10,20 +5,14 @@ import classi.listautenti;
 import classi.listautenticonnumero;
 import classi.utente;
 import classi.utenteconnumero;
-import com.mysql.jdbc.Connection;
-import static java.lang.System.out;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
-import servlet.ricercalog;
+
 
 /**
  *
@@ -327,12 +316,7 @@ public class Database {
     
     public static listautenti search(String input) throws SQLException{
         listautenti result = new listautenti();
-       /* String condition = "(CONCAT(nome, ' ', cognome) COLLATE UTF8_GENERAL_CI LIKE '%" + input + "%' "
-                      + "OR CONCAT(cognome, ' ', nome) COLLATE UTF8_GENERAL_CI LIKE '%" + input + "%')"
-                      // Includi gli utenti non verificati ma escludi quelli invitati che non hanno ancora fatto la registrazione
-                    + "AND ((email IS NOT NULL AND password IS NOT NULL))";
-        */
-       String condition = "nome= '"+input+"'OR cognome='"+input+"'";
+        String condition = "nome= '"+input+"'OR cognome='"+input+"'";
         
             ResultSet record = Database.selectRecord("user", condition);
             while(record.next()){
@@ -346,12 +330,7 @@ public class Database {
     
     public static listautenti search1(String nome) throws SQLException{
         listautenti result = new listautenti();
-       /* String condition = "(CONCAT(nome, ' ', cognome) COLLATE UTF8_GENERAL_CI LIKE '%" + input + "%' "
-                      + "OR CONCAT(cognome, ' ', nome) COLLATE UTF8_GENERAL_CI LIKE '%" + input + "%')"
-                      // Includi gli utenti non verificati ma escludi quelli invitati che non hanno ancora fatto la registrazione
-                    + "AND ((email IS NOT NULL AND password IS NOT NULL))";
-        */
-       String condition = "datanascita= '"+nome+"'";
+        String condition = "datanascita= '"+nome+"'";
         
             ResultSet record = Database.selectRecord("user", condition);
             while(record.next()){
