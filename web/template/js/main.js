@@ -23,16 +23,20 @@ $('.dropdown-my').click(function(){
 //al click su genitori chiudo tutti i div dei genitori connessi
 $('#genitori').click(function(){
     $('.genitori').toggleClass('not-visible');
+    $('#genitori').css('border-radius', '10px');
 });
 //al click su partner chiudo il div del partner connesso
 $('#partner').click(function(){
     $('.partner').toggleClass('not-visible');
+    $('#partner').css('border-radius', '10px');
 });
 //al click su sons chiudo tutti i div dei figli connessi
 $('#figli').click(function(){
     $('.figli').toggleClass('not-visible');
+    $('#figli').css('border-radius', '10px');
 });
 //al click su brthers and sisters chiudo tutti i div dei fratelli connessi
 $('#fratelli').click(function(){
     $('.fratelli').toggleClass('not-visible');
+    $('#fratelli').css('border-radius', '10px');
 });
