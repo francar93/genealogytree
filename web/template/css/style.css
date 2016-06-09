@@ -308,6 +308,9 @@ select{
 .container-foto form{
     width: 400px;
 }
+.radius{
+    border-radius: 10px;
+}
 /*INIZIO RESPONSIVE CUSTOM*/
 @media only screen and (max-width: 450px){
     /*responsive header*/
