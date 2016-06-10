@@ -24,6 +24,7 @@ input{
 }
 .header.logged{
     height: 350px;
+    opacity: 0.94;
 }
 .row.login{
     max-width: 400px;
@@ -113,11 +114,62 @@ input{
     background: #C6C6C6;
     margin-top: 0;
     padding-bottom: 10px;
+    
+    /*Aggiunto Matteo*/
+    box-shadow: 1px 1px 1px #000;
+    -webkit-box-shadow: 1px 1px 1px #000;
+    -moz-box-shadow: 1px 1px 1px #000;
+    -o-box-shadow: 1px 1px 1px #000;     
 }
 .container-left-profile .box-profile-container{
     background: #365899;
+    /*Aggiunto Matteo*/
+    box-shadow: 1px 1px 1px #000;
+    -webkit-box-shadow: 1px 1px 1px #000;
+    -moz-box-shadow: 1px 1px 1px #000;
+    -o-box-shadow: 1px 1px 1px #000;     
 }
 #profile-img{
+    /*photo like facebook*/
+    background: rgba(0, 0, 0, .3);
+    background-color: rgba(0, 0, 0, 0.3);
+    background-image: none;
+    background-repeat: repeat;
+    background-attachment: scroll;
+    background-position: 0% 0%;
+    background-clip: border-box;
+    background-origin: padding-box;
+    background-size: auto auto;
+    border-radius: 3px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .07);
+    
+    border: 4px solid #fff;
+    border-top-width: 4px;
+    border-right-width: 4px;
+    border-bottom-width: 4px;
+    border-left-width: 4px;
+    border-top-style: solid;
+    border-right-style: solid;
+    border-bottom-style: solid;
+    border-left-style: solid;
+    border-top-color: rgb(255, 255, 255);
+    border-right-color: rgb(255, 255, 255);
+    border-bottom-color: rgb(255, 255, 255);
+    border-left-color: rgb(255, 255, 255);
+    -moz-border-top-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    border-image-source: none;
+    border-image-slice: 100% 100% 100% 100%;
+    border-image-width: 1 1 1 1;
+    border-image-outset: 0 0 0 0;
+    border-image-repeat: stretch stretch;
+    
     height: 100px;
     width: 100px;
 }
@@ -187,6 +239,11 @@ input{
     font-family: fantasy;
     letter-spacing: 2px;
     line-height: 2.5;
+    /*Aggiunto Matteo*/
+    box-shadow: 1px 1px 1px #000;
+    -webkit-box-shadow: 1px 1px 1px #000;
+    -moz-box-shadow: 1px 1px 1px #000;
+    -o-box-shadow: 1px 1px 1px #000;    
 }
 .btns-add{
     height: 40px;
@@ -207,6 +264,12 @@ input{
     border-bottom-right-radius: 10px;
     max-width: 550px;
     padding-bottom: 1px;
+    
+    /*Aggiunto Matteo*/
+    box-shadow: 1px 1px 1px #000;
+    -webkit-box-shadow: 1px 1px 1px #000;
+    -moz-box-shadow: 1px 1px 1px #000;
+    -o-box-shadow: 1px 1px 1px #000;    
 }
 .not-visible{
     display: none;
@@ -241,6 +304,7 @@ input{
     position: relative;
     left: 7%;
     display: none;
+    
 }
 
 /* FINE RICERCA LOGGATA */
@@ -341,6 +405,7 @@ select{
     }
     .parentela{
         margin-right: 32px;
+        
     }
     /* responsive mobile ricerca loggata*/
     .container.search{
