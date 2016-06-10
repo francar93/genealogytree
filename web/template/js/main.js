@@ -19,6 +19,21 @@ $('.dropdown-my').click(function(){
     $('.header').removeClass('logged'); //setto alcune proprietà css per il box
     $('.search-logged').hide(); //nascondo il box ricerca loggata
 });
+//chiudere la ricerca loggata al click su qualsiasi parte della pagina 
+var dentro = false;
+$('.header').mouseenter(function(){ //setto la variabile in base alla posizione del mouse dentro
+   dentro = true; 
+});
+$('.header').mouseleave(function(){//setto la variabile in base alla posizione del mouse fuori
+   dentro = false; 
+});
+$('html').click(function(){ //se la variabile è falsa posso chiudere il div
+   if(!dentro){
+        $('.header').removeClass('logged'); //setto alcune proprietà css per il box
+        $('.search-logged').hide();
+   } 
+});
+
 
 //al click su genitori chiudo tutti i div dei genitori connessi
 $('#genitori').click(function(){
