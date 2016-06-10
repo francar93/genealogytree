@@ -390,6 +390,16 @@ select{
     font-family: monospace;
     font-weight: 900; 
 }
+.scegli-foto{
+    position: relative;
+    top: 90px;
+}
+.invia-img{
+    position: relative;
+    left: 50%;
+    margin-left: -55px;
+    margin-top: 50px;
+}
 /*INIZIO RESPONSIVE CUSTOM*/
 @media only screen and (max-width: 450px){
     /*responsive header*/

@@ -2,19 +2,19 @@
 <div>
     
 </div>
-<div class="container-foto">
-    
+<div class="container-foto"> 
     <form action="FileUpload" method="post" enctype="multipart/form-data">
-        
+        <div class="img-profile">
+            <img src="${foto}${user_logged.id}.jpg" id="profile-img">
+        </div>
+        <div class="scegli-foto">
             <div>
-                
                 <input type="file"  name="fileUpload">
-                <input type="submit" value="Invia">
-                <img src="${foto}${user_logged.id}.jpg" id="profile-img">
-                
             </div>
-        
-    </form>
-    
+            <div class="invia-img">
+                <input type="submit" value="Invia" class="btn btn-primary pull-right ellipsis waves-effect waves-light btn">
+            </div>
+        </div>
+    </form>  
 </div>
 <#include "footer.html">
