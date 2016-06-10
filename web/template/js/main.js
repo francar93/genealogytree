@@ -13,11 +13,15 @@ if(x.length){ //guardo se sono loggato
         $('#search').attr("disabled", "true"); //disattivo la ricerca nolog
         $('.header').addClass('logged'); //setto alcune proprietà css per il box
         $('.search-logged').show(); //mostro il tutto sopra il profilo
+        $('.container-left-profile').addClass('background-my');
+        $('.container-right').addClass('background-my');
     });
 }
 $('.dropdown-my').click(function(){ 
     $('.header').removeClass('logged'); //setto alcune proprietà css per il box
     $('.search-logged').hide(); //nascondo il box ricerca loggata
+    $('.container-left-profile').removeClass('background-my');
+    $('.container-right').removeClass('background-my');
 });
 //chiudere la ricerca loggata al click su qualsiasi parte della pagina 
 var dentro = false;
@@ -31,6 +35,8 @@ $('html').click(function(){ //se la variabile è falsa posso chiudere il div
    if(!dentro){
         $('.header').removeClass('logged'); //setto alcune proprietà css per il box
         $('.search-logged').hide();
+        $('.container-left-profile').removeClass('background-my');
+        $('.container-right').removeClass('background-my');
    } 
 });
 
