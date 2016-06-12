@@ -439,7 +439,17 @@ select{
     .container-left{
         width: 100%;
     }
-    
+    /*responsive mobile testo benvenuto*/
+    #testo-benvenuto{
+        display: none;
+    }
+}
+/* responsive mobile in landscape*/
+@media only screen and (max-width: 780px) and (orientation: landscape){
+    /* testo benvenuto nascosto */
+    #testo-benvenuto{
+        display: none;
+    }
 }
 @media only screen and (max-width: 340px){
     .search-nologin{
