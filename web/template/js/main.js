@@ -61,3 +61,10 @@ $('#fratelli').click(function(){
     $('.fratelli').toggleClass('not-visible');
     $('#fratelli').toggleClass('radius');
 });
+
+$('.btn-img-profile').mouseover(function(){
+    $('.testo-cambio-img').show();
+});
+$('.btn-img-profile').mouseleave(function(){
+    $('.testo-cambio-img').hide();
+});
