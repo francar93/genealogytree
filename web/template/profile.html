@@ -1,6 +1,7 @@
 <#include "frame_public.html">
 <div class="container-left-profile">
-    <div class="box-profile-container">
+    <div class="box-profile-container <#if user_current.noEmail()>no-email</#if> <#if user_current.noPsw()>no-psw</#if>">
+        <!--oppure al posto di getEamil prova email-->
         <#if message.msg??>
             <p id="error-msg">${message.msg}</p>
         </#if>
@@ -23,17 +24,6 @@
                      <div class="btn-img-profile"></div>
                  </a>
                  </#if>
-                <!--form moira-->
-                
-                
-                <!--<form method="post" enctype="multipart/form-data">
-                    <div class="file-field input-field">
-                      <div class="btn-img-profile">
-                        <input type="file">
-                      </div>
-                    </div>
-                  </form> -->
-               
             </div>
         </div>
         <div class="profile-name">
@@ -69,7 +59,8 @@
 <div class="parentela genitori">
     <#if mother??>
         <#assign relative = mother>
-    <div class="box-profile-container">
+    <div class="box-profile-container <#if relative.user.noEmail()>no-email</#if> <#if relative.user.noPsw()>no-psw</#if>">
+        <!--oppure al posto di getEamil prova email-->
         <div class="box-img-profile">
             <a href="profilo?id=${relative.user.id}">
             <div class="img-profile">
@@ -100,7 +91,8 @@
     </#if>    
     <#if father??>
         <#assign relative = father>
-    <div class="box-profile-container">
+    <div class="box-profile-container <#if relative.user.noEmail()>no-email</#if> <#if relative.user.noPsw()>no-psw</#if>">
+        <!--oppure al posto di getEamil prova email-->
         <div class="box-img-profile">
             <a href="profilo?id=${relative.user.id}">
             <div class="img-profile">
@@ -137,7 +129,8 @@
 <div class="parent-type" id="partner">Partner</div>
 <#assign relative = spouse>
 <div class="parentela partner">
-    <div class="box-profile-container">
+    <div class="box-profile-container <#if relative.user.noEmail()>no-email</#if> <#if relative.user.noPsw()>no-psw</#if>">
+        <!--oppure al posto di getEamil prova email-->
         <div class="box-img-profile">
             <a href="profilo?id=${relative.user.id}">
             <div class="img-profile">
@@ -177,8 +170,9 @@
 <div class="parentela figli">
     <#list children>
     <#items as child>
-    <div class="box-profile-container">
-            <#assign relative = child>
+    <#assign relative = child>
+    <div class="box-profile-container <#if relative.user.noEmail()>no-email</#if> <#if relative.user.noPsw()>no-psw</#if>">
+        <!--oppure al posto di getEamil prova email-->
         <div class="box-img-profile">
             <a href="profilo?id=${relative.user.id}">
             <div class="img-profile">
@@ -217,8 +211,9 @@
 <div class="parentela fratelli">
     <#list siblings>
     <#items as siblings>
-    <div class="box-profile-container">
-            <#assign relative = siblings>
+    <#assign relative = siblings>
+    <div class="box-profile-container <#if relative.user.noEmail()>no-email</#if> <#if relative.user.noPsw()>no-psw</#if>">
+        <!--oppure al posto di getEamil prova email-->
         <div class="box-img-profile">
             <a href="profilo?id=${relative.user.id}">
             <div class="img-profile">

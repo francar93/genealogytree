@@ -141,6 +141,15 @@ public class utente {
 
             return 0;
         }
+        
+
+        public boolean noEmail(){
+            return (this.email==null);
+        }
+        
+        public boolean noPsw(){
+            return (this.password==null);
+        }
         //</editor-fold>
         
         //<editor-fold defaultstate="collapsed" desc="metodi set">

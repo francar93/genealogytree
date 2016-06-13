@@ -119,7 +119,18 @@ input{
     -webkit-box-shadow: 1px 1px 1px #000;
     -moz-box-shadow: 1px 1px 1px #000;
     -o-box-shadow: 1px 1px 1px #000;     
+    
 }
+
+.no-email{
+    
+}
+
+.no-psw{
+    
+}
+
+
 .container-left-profile .box-profile-container{
     background: #365899;
     /*Aggiunto Matteo*/

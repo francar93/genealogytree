@@ -9,6 +9,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
@@ -341,12 +343,20 @@ public class Database {
         return result;
     }
     
+    
     public static listautenticonnumero searchnolog(String input) throws SQLException{
         listautenticonnumero result = new listautenticonnumero();
+        
+       String condition1 = "(CONCAT(nome, ' ', cognome) COLLATE UTF8_GENERAL_CI LIKE '%" + input + "%' "
+                      + "OR CONCAT(cognome, ' ', nome) COLLATE UTF8_GENERAL_CI LIKE '%" + input + "%')"
+                      // Includi gli utenti non verificati ma escludi quelli invitati che non hanno ancora fatto la registrazione
+                    + "AND ((email IS NOT NULL AND password IS NOT NULL) OR (email IS NULL AND password IS NULL))";
        
        String condition = "nome= '"+input+"'OR cognome='"+input+"'";
+       
+       String condition2 = "nome= '"+input+"'OR cognome='"+input+"' OR CONCAT(nome, ' ', cognome)='"+input+"'OR CONCAT(cognome, ' ', nome)='"+input+"'";
         
-            ResultSet record = Database.selectRecord("user", condition);
+            ResultSet record = Database.selectRecord("user", condition2);
             while(record.next()){
                 
                 utente attuale= new utente(record);
