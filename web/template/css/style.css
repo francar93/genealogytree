@@ -467,6 +467,7 @@ select{
     /* responsive mobile ricerca loggata*/
     .container.search{
         width: 100%;
+        overflow-x: hidden;
     }
     .container-left{
         width: 100%;
