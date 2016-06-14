@@ -15,7 +15,7 @@ and open the template in the editor.
     </head>
     <body>
         <div class="header">
-            <a href="profilo">    
+            <a href="<#if user_logged??>profilo<#else>login</#if>">    
                 <div class="logo">
                     <img src="template/img/logo.png" id="logo">
                 </div>
