@@ -124,11 +124,17 @@ input{
 }
 
 .box-profile-container.no-email{
-    background: red;
+    background: #1D5F3D;
+}
+.no-email .profile-info{
+    background: #133F29
 }
 
-.box-profile-container.no-psw{
-    background: yellow;
+.no-psw{
+    background: #5E9B7C;
+}
+.no-psw .profile-info{
+    background: #15844C;
 }
 
 
