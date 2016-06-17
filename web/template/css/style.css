@@ -421,6 +421,7 @@ select{
 #testo-benvenuto h5{
     font-family: monospace;
     font-weight: 900; 
+    margin-top: 0;
 }
 .scegli-foto{
     position: relative;
