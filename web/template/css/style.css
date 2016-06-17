@@ -127,7 +127,7 @@ input{
 }
 
 .box-profile-container.no-email{
-    background: #1D5F3D;
+    background: #15844C;
 }
 .no-email .profile-info{
     background: #133F29
@@ -137,7 +137,7 @@ input{
     background: #5E9B7C;
 }
 .no-psw .profile-info{
-    background: #15844C;
+    background: #1D5F3D;
 }
 
 
