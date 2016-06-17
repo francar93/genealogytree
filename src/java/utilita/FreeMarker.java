@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package utilita;
 
 import freemarker.template.Configuration;
@@ -11,11 +16,11 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Marco
+ * @author moira
  */
+
 public class FreeMarker {
-    
-    /**
+/**
      * 
      * @param data              dati da inserire nel template          
      * @param path_template     pathname del template da caricare
@@ -50,8 +55,4 @@ public class FreeMarker {
         
 
     }
-
-    
-    
 }
-
