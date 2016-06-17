@@ -499,4 +499,17 @@ select{
         margin-right: 25px;
     }
 }
+/* responsive box ricerca loggata in risuluzioni intermedie */
+@media only screen and (max-width: 780px) and (min-width: 450px){
+    .container.search{
+        width: 100%;
+        overflow-x: hidden;
+    }
+}
+/* responsive testi in risluzioni intermedie con ancora 2 box*/
+@media only screen and (max-width: 570px) and (min-width: 450px){
+    h5{
+        font-size: 1.3rem;
+    }
+}
 /*FINE RESPONSIVE CUSTOM*/
