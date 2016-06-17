@@ -3,9 +3,7 @@
 <#include "frame_public.html">
 
 <#if message??>
-    <div>
-        <p id="error-msg">${message}</p>
-    </div>
+
 </#if>
       <#if risultati??>
                 <div class="container search">
@@ -53,6 +51,11 @@
         </#list> 
             </div>
       <#else>
-            <p>nulla</p>
+            <div class="errore-ricerca">
+                <h5>
+                    Non è stato trovato nessun risultato secondo il criterio di ricerca. 
+                    Cercare ancora oppure tornare al proprio profilo.
+                </h5>
+            </div>
       </#if>
 <#include "footer.html">  

@@ -39,6 +39,12 @@ $('html').click(function(){ //se la variabile è falsa posso chiudere il div
         $('.container-right').removeClass('background-my');
    } 
 });
+var erroreRicerca = $('.errore-ricerca');
+if(erroreRicerca.length){
+    $('#search').attr("disabled", "true"); //disattivo la ricerca nolog
+    $('.header').addClass('logged'); //setto alcune proprietà css per il box
+    $('.search-logged').show(); //mostro il tutto sopra il profilo
+}
 
 
 //al click su genitori chiudo tutti i div dei genitori connessi

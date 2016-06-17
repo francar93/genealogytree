@@ -464,6 +464,18 @@ select{
 .testo-sinistra h3{
     line-height: 80px;
 }
+.errore-ricerca{
+    position: relative;
+    top: 450px;
+    color: red;
+    font-family: fantasy;
+    width: 500px;
+    left: 50%;
+    margin-left: -250px;
+}
+.errore-ricerca h5{
+    line-height: 35px;
+}
 /*INIZIO RESPONSIVE CUSTOM*/
 @media only screen and (max-width: 450px){
     /*responsive header*/
