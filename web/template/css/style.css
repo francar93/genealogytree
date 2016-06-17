@@ -324,7 +324,7 @@ input{
 .img-richieste p{
     position: relative;
     left: 80%;
-    bottom: 40%;
+   /* bottom: 40%;*/
     color: red;
     font-weight: bold;
 }
@@ -432,6 +432,11 @@ select{
     left: 50%;
     margin-left: -55px;
     margin-top: 50px;
+}
+.img-richieste i{
+    position: relative;
+    top: -35px;
+    right: 5px;
 }
 /*INIZIO RESPONSIVE CUSTOM*/
 @media only screen and (max-width: 450px){
