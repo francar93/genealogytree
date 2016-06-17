@@ -12,6 +12,9 @@ body{
     background-repeat: no-repeat;
     background-attachment: fixed;
 }
+a{
+    color: #365899;
+}
 input{
     color: white;
 }
