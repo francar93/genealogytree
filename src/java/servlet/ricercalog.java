@@ -96,11 +96,11 @@ public class ricercalog extends HttpServlet {
 
             // Controllo del nome
             if (!DataUtil.isAlphanumeric(nome, true)) {
-                check = new Message("name_1", true); // The name must be alphanumeric
+                check = new Message("name_1", true); 
 
                 // Controllo del cognome
             } else if (!DataUtil.isAlphanumeric(cognome, true)) {
-                check = new Message("surname_1", true); // The surname must be alphanumeric
+                check = new Message("surname_1", true); 
 
                 // Se c'è una sessione attiva
             } else if (session != null) {
@@ -142,7 +142,8 @@ public class ricercalog extends HttpServlet {
             } else // Se non è stato trovato qualche utente
             {
                 if (results.isEmpty()) {
-                    data.put("message", new Message("null", true)); // No users found
+                    //data.put("message", new Message("null", true)); // No users found
+                    data.put("message", "noresult");
                 } else {
                     // Mostra risultati
                     data.put("risultati", results);
