@@ -1,4 +1,10 @@
 <#include "frame_public.html">
+
+<#if message??>
+    <div>
+        <p id="error-msg">${message}</p>
+    </div>
+</#if>
       <#if utente??>
             <div class="container search">
         <#list utente>

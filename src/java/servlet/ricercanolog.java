@@ -68,8 +68,11 @@ public class ricercanolog extends HttpServlet {
             } catch (SQLException ex) {
                 Logger.getLogger(ricercanolog.class.getName()).log(Level.SEVERE, null, ex);
             }
-
-            //}
+            
+            if(a.isEmpty()){
+            data.put("message", "noresult");
+            }
+            
             data.put("utente", a);
             FreeMarker.process("ricercanolog1.html", data, response, getServletContext());
         } else {
