@@ -444,6 +444,18 @@ select{
 #richieste{
     color: white;
 }
+.testo-sinistra{
+    position: relative;
+    top: 200px;
+    left: 20px;
+    width: 50%;
+    float: left;
+    text-align: justify;
+    color: white;
+}
+.testo-sinistra h3{
+    line-height: 80px;
+}
 /*INIZIO RESPONSIVE CUSTOM*/
 @media only screen and (max-width: 450px){
     /*responsive header*/
