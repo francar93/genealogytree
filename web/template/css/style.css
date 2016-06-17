@@ -441,6 +441,9 @@ select{
     top: -35px;
     right: 5px;
 }
+#richieste{
+    color: white;
+}
 /*INIZIO RESPONSIVE CUSTOM*/
 @media only screen and (max-width: 450px){
     /*responsive header*/
