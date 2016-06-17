@@ -89,7 +89,8 @@ public class Message {
         map.put("dec", "Richiest cancellata");
         /* OTHER */
         map.put("srv", "Errore, per favore riprovare");
-        map.put("tmp", "File corrottii");
+        map.put("tmp", "File corrotti");
+        map.put("tmp1", "Non hai inserito la relazione! Ripova");
         map.put("alp", "Per favore, non inserire numeri");
         map.put("log", "Per favore, effettua il login per vedere questa pagina");
         map.put("fld", "Tutti i campi sono richiesti");
@@ -133,7 +134,7 @@ public class Message {
         map.put("sib_1", "Not allowed: this user can't be add as sibling, because this relationship is not verificable");
         map.put("sib_2", "Not allowed: this user can't be your sibling, because you have different parents");
         map.put("sib_3", "Not allowed: this user can't be your sibling, beacause you can't have the same parents");
-        map.put("sib_alt", "hai già un legame di parentela con tuo fratello");
+        map.put("sib_alt", "Non Autorizzato: Hai già un legame di parentela con tuo fratello");
 
         map.put("sib_your", "Non Autorizzato:  Questo utente è gia tuo/tua fratello/sorella");
         map.put("sib_1", "Non Autorizzato:  Questo utente non puo essere tuo/tua fratello/sorella, perche questa relazione non è verificabile");

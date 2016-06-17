@@ -4,6 +4,7 @@ import Tree.genetree;
 import classi.listautenti;
 import classi.utente;
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -55,104 +56,108 @@ public class ricercalog extends HttpServlet {
             data.put("family_tree", (genetree) session.getAttribute("family_tree"));
             data.put("user_logged", (utente) session.getAttribute("user_logged"));
 
-        }
+            // Recupero del nome
+            String nome = DataUtil.spaceTrim(request.getParameter("nome"));
+            //String nome = request.getParameter("nome").trim(); 
+            // Recupero del cognome
+            String cognome = DataUtil.spaceTrim(request.getParameter("cognome"));
+            input_filter.put("nome", nome);
+            input_filter.put("cognome", cognome);
 
-        // Recupero del nome
-        String nome = DataUtil.spaceTrim(request.getParameter("nome"));
-        //String nome = request.getParameter("nome").trim(); 
-        // Recupero del cognome
-        String cognome = DataUtil.spaceTrim(request.getParameter("cognome"));
-        input_filter.put("nome", nome);
-        input_filter.put("cognome", cognome);
+            // Inizializzazione della data e luogo di nascita
+            String citta = "";
+            String datanascita = "";
+            // Se c'è una sessiona attiva
+            if (session != null) {
+                // Recupera la data e il luogo di nascita
+                citta = DataUtil.spaceTrim(request.getParameter("citta"));
+                datanascita = request.getParameter("datanascita").trim();
+                // Se è stata inserita una data di nascita
+                if (!datanascita.equals("")) {
 
-        // Inizializzazione della data e luogo di nascita
-        String citta = "";
-        String datanascita = "";
-        // Se c'è una sessiona attiva
-        if (session != null) {
-            // Recupera la data e il luogo di nascita
-            citta = DataUtil.spaceTrim(request.getParameter("citta"));
-            datanascita = request.getParameter("datanascita").trim();
-            // Se è stata inserita una data di nascita
-            if (!datanascita.equals("")) {
+                    Date sqlDate = null;
+                    try {
+                        sqlDate = DataUtil.stringToDate(datanascita, "dd/MM/yyyy");
+                        input_filter.put("datanascita", DataUtil.dateToString(sqlDate));
+                    } catch (ParseException ex) {
+                    }
 
+                } else {
+                    input_filter.put("datanascita", "");
+                }
+                // Inserisci il luogo di nascita nel data-model
+                input_filter.put("citta", citta);
+
+                String relative = request.getParameter("relative");
+                if (relative != null) {
+                    data.put("selected_relative", relative);
+                }
+            }
+
+            // Controllo del nome
+            if (!DataUtil.isAlphanumeric(nome, true)) {
+                check = new Message("name_1", true); // The name must be alphanumeric
+
+                // Controllo del cognome
+            } else if (!DataUtil.isAlphanumeric(cognome, true)) {
+                check = new Message("surname_1", true); // The surname must be alphanumeric
+
+                // Se c'è una sessione attiva
+            } else if (session != null) {
+                // Controllo della città di nascita
+                check = DataUtil.checkBirthplace(citta);
+                if (!check.isError()) {
+                    // Se è stata inserita una data di nascita
+                    if (!datanascita.equals("")) {
+                        // Controllo della data di nascita
+                        check = DataUtil.checkBirthdate(datanascita);
+                    }
+                }
+            }
+
+            // Se non sono stati trovati errori
+            if (!check.isError()) {
+
+                // Esegui la ricerca
+                String data1 = "";
                 Date sqlDate = null;
                 try {
                     sqlDate = DataUtil.stringToDate(datanascita, "dd/MM/yyyy");
-                    input_filter.put("datanascita", DataUtil.dateToString(sqlDate));
+                    data1 = DataUtil.dateToString(sqlDate);
                 } catch (ParseException ex) {
                 }
 
-            } else {
-                input_filter.put("datanascita", "");
+                try {
+                    results = Database.search2(input_filter);
+                } catch (SQLException ex) {
+                    Logger.getLogger(ricercalog.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
             }
-            // Inserisci il luogo di nascita nel data-model
-            input_filter.put("citta", citta);
 
-            String relative = request.getParameter("relative");
-            if (relative != null) {
-                data.put("selected_relative", relative);
-            }
-        }
-
-        // Controllo del nome
-        if (!DataUtil.isAlphanumeric(nome, true)) {
-            check = new Message("name_1", true); // The name must be alphanumeric
-
-            // Controllo del cognome
-        } else if (!DataUtil.isAlphanumeric(cognome, true)) {
-            check = new Message("surname_1", true); // The surname must be alphanumeric
-
-            // Se c'è una sessione attiva
-        } else if (session != null) {
-            // Controllo della città di nascita
-            check = DataUtil.checkBirthplace(citta);
-            if (!check.isError()) {
-                // Se è stata inserita una data di nascita
-                if (!datanascita.equals("")) {
-                    // Controllo della data di nascita
-                    check = DataUtil.checkBirthdate(datanascita);
+            // Se è stato riscontrato qualche errore
+            if (check.isError()) {
+                // Messaggio di errore
+                data.put("message", check);
+            } else // Se non è stato trovato qualche utente
+            {
+                if (results.isEmpty()) {
+                    data.put("message", new Message("null", true)); // No users found
+                } else {
+                    // Mostra risultati
+                    data.put("risultati", results);
                 }
             }
-        }
 
-        // Se non sono stati trovati errori
-        if (!check.isError()) {
+            // Inserisci i campi compilati nel data-model
+            data.put("values", input_filter);
 
-            // Esegui la ricerca
-            String data1 = "";
-            Date sqlDate = null;
-            try {
-                sqlDate = DataUtil.stringToDate(datanascita, "dd/MM/yyyy");
-                data1 = DataUtil.dateToString(sqlDate);
-            } catch (ParseException ex) {
-            }
+            // Genera il data-model
+            FreeMarker.process("ricercalog.html", data, response, getServletContext());
 
-            try {
-                results = Database.search2(input_filter);
-            } catch (SQLException ex) {
-                Logger.getLogger(ricercalog.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-        }
-
-        // Se è stato riscontrato qualche errore
-        if (check.isError()) {
-            // Messaggio di errore
-            data.put("message", check);
-        } else // Se non è stato trovato qualche utente
-        if (results.isEmpty()) {
-            data.put("message", new Message("null", true)); // No users found
         } else {
-            // Mostra risultati
-            data.put("risultati", results);
+            response.sendRedirect("login?msg=" + URLEncoder.encode("log", "UTF-8"));
         }
-
-        // Inserisci i campi compilati nel data-model
-        data.put("values", input_filter);
-
-        // Genera il data-model
-        FreeMarker.process("ricercalog.html", data, response, getServletContext());
 
     }
 

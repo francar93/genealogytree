@@ -750,7 +750,7 @@ public class utente {
                     break;
 
                 default:
-                    throw new NotAllowedException("tmp");
+                    throw new NotAllowedException("tmp1");
             }
             
             
@@ -897,7 +897,7 @@ public class utente {
                     break;
 
                 default:
-                    throw new NotAllowedException("tmp");
+                    throw new NotAllowedException("tmp1");
             }
 
         }
