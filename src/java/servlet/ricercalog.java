@@ -24,7 +24,7 @@ import utilita.Message;
 
 /**
  *
- * @author carus
+ * @author caruso
  */
 public class ricercalog extends HttpServlet {
 
