@@ -17,7 +17,7 @@ if(x.length){ //guardo se sono loggato
         $('.container-right').addClass('background-my');
     });
 }
-$('.dropdown-my').click(function(){ 
+$('.dropdown-my').click(function(){
     $('.header').removeClass('logged'); //setto alcune proprietà css per il box
     $('.search-logged').hide(); //nascondo il box ricerca loggata
     $('.container-left-profile').removeClass('background-my');
