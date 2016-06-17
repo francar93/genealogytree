@@ -17,7 +17,7 @@
         <div class="box-img-profile">
     
             <div class="img-profile">
-                <img src="${foto}${user_current.id}.jpg" id="profile-img">
+                <img src="${foto}${user_current.id}.jpg" onerror="this.src='template/img/avatar.gif'" id="profile-img">
                  <!--form prova immissione foto-->
                  <#if user_current.id==user_logged.id>
                  <a href="FileUpload">
@@ -66,7 +66,7 @@
         <div class="box-img-profile">
             <a href="profilo?id=${relative.user.id}">
             <div class="img-profile">
-                <img src="${foto}${relative.user.id}.jpg" id="profile-img">
+                <img src="${foto}${relative.user.id}.jpg" onerror="this.src='template/img/avatar.gif'" id="profile-img">
             </div>
             </a>   
         </div>
@@ -98,7 +98,7 @@
         <div class="box-img-profile">
             <a href="profilo?id=${relative.user.id}">
             <div class="img-profile">
-                <img src="${foto}${relative.user.id}.jpg" id="profile-img">
+                <img src="${foto}${relative.user.id}.jpg" onerror="this.src='template/img/avatar.gif'" id="profile-img">
             </div>
             </a>
         </div>
@@ -136,7 +136,7 @@
         <div class="box-img-profile">
             <a href="profilo?id=${relative.user.id}">
             <div class="img-profile">
-                <img src="${foto}${relative.user.id}.jpg" id="profile-img">
+                <img src="${foto}${relative.user.id}.jpg" onerror="this.src='template/img/avatar.gif'" id="profile-img">
             </div>
             </a>
         </div>
@@ -178,7 +178,7 @@
         <div class="box-img-profile">
             <a href="profilo?id=${relative.user.id}">
             <div class="img-profile">
-                <img src="${foto}${relative.user.id}.jpg" id="profile-img">
+                <img src="${foto}${relative.user.id}.jpg" onerror="this.src='template/img/avatar.gif'" id="profile-img">
             </div>
             </a>
         </div>
@@ -219,7 +219,7 @@
         <div class="box-img-profile">
             <a href="profilo?id=${relative.user.id}">
             <div class="img-profile">
-                <img src="${foto}${relative.user.id}.jpg" id="profile-img">
+                <img src="${foto}${relative.user.id}.jpg" onerror="this.src='template/img/avatar.gif'" id="profile-img">
             </div>
             </a>
         </div>

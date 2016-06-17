@@ -3,13 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/matteocapodicasa/Desktop/genealogytree/genealogytree/src/java/servlet/aggiuntadaricerca.java</file>
+            <file>file:/Users/matteocapodicasa/Desktop/genealogytree/genealogytree/src/java/Tree/NodeList.java</file>
             <file>file:/Users/matteocapodicasa/Desktop/genealogytree/genealogytree/src/java/classi/utente.java</file>
-            <file>file:/Users/matteocapodicasa/Desktop/genealogytree/genealogytree/web/template/ricercalog.html</file>
-            <file>file:/Users/matteocapodicasa/Desktop/genealogytree/genealogytree/src/java/utilita/Message.java</file>
-            <file>file:/Users/matteocapodicasa/Desktop/genealogytree/genealogytree/src/java/utilita/FreeMarker.java</file>
-            <file>file:/Users/matteocapodicasa/Desktop/genealogytree/genealogytree/src/java/servlet/profilo.java</file>
-            <file>file:/Users/matteocapodicasa/Desktop/genealogytree/genealogytree/src/java/servlet/ricercalog.java</file>
+            <file>file:/Users/matteocapodicasa/Desktop/genealogytree/genealogytree/src/java/servlet/aggiuntadaricerca.java</file>
+            <file>file:/Users/matteocapodicasa/Desktop/genealogytree/genealogytree/web/template/profile.html</file>
         </group>
     </open-files>
 </project-private>
