@@ -587,6 +587,9 @@ select{
     top: 100px;
     z-index: -1;
 }
+#no-verificato{
+    text-align: center;
+}
 /*INIZIO RESPONSIVE CUSTOM*/
 @media only screen and (max-width: 450px){
     /*responsive header*/
