@@ -411,13 +411,13 @@ select{
 }
 .container-foto{
     position: relative;
-    top: 100px;
+    top: 80px;
     left: 50%;
     margin-left: -200px;
 }
 .container-foto form{
     width: 400px;
-    height: 420px;
+    height: 350px;
     overflow-x: hidden;
 }
 .radius{
@@ -440,7 +440,7 @@ select{
 }
 .scegli-foto{
     position: relative;
-    top: 90px;
+    top: 35px;
 }
 .invia-img{
     position: relative;
