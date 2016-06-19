@@ -15,6 +15,7 @@ if(x.length){ //guardo se sono loggato
         $('.search-logged').show(); //mostro il tutto sopra il profilo
         $('.container-left-profile').addClass('background-my');
         $('.container-right').addClass('background-my');
+        $('.box-profile-container').addClass('background-my');
     });
 }
 $('.dropdown-my').click(function(){
@@ -22,6 +23,7 @@ $('.dropdown-my').click(function(){
     $('.search-logged').hide(); //nascondo il box ricerca loggata
     $('.container-left-profile').removeClass('background-my');
     $('.container-right').removeClass('background-my');
+    $('.box-profile-container').removeClass('background-my');
 });
 //chiudere la ricerca loggata al click su qualsiasi parte della pagina 
 var dentro = false;
@@ -37,6 +39,7 @@ $('html').click(function(){ //se la variabile è falsa posso chiudere il div
         $('.search-logged').hide();
         $('.container-left-profile').removeClass('background-my');
         $('.container-right').removeClass('background-my');
+        $('.box-profile-container').removeClass('background-my');
    } 
 });
 var erroreRicerca = $('.errore-ricerca');
