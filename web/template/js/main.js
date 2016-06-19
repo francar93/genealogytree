@@ -49,21 +49,25 @@ if(erroreRicerca.length){
 
 //al click su genitori chiudo tutti i div dei genitori connessi
 $('#genitori').click(function(){
+    $('.genitori').slideToggle(); //slide box genitori
     $('.genitori').toggleClass('not-visible');
     $('#genitori').toggleClass('radius');
 });
 //al click su partner chiudo il div del partner connesso
 $('#partner').click(function(){
+    $('.partner').slideToggle(); //slide box partner
     $('.partner').toggleClass('not-visible');
     $('#partner').toggleClass('radius');
 });
 //al click su sons chiudo tutti i div dei figli connessi
 $('#figli').click(function(){
+    $('.figli').slideToggle(); //slide box figli
     $('.figli').toggleClass('not-visible');
     $('#figli').toggleClass('radius');
 });
 //al click su brthers and sisters chiudo tutti i div dei fratelli connessi
 $('#fratelli').click(function(){
+    $('.fratelli').slideToggle(); //slide box fratelli
     $('.fratelli').toggleClass('not-visible');
     $('#fratelli').toggleClass('radius');
 });
