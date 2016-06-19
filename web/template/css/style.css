@@ -665,4 +665,12 @@ select{
         font-size: 1.3rem;
     }
 }
+@media only screen and (max-width: 570px){
+    .container-left.add{
+        width: 100%;
+    }
+    .immagine-sinistra{
+        display: none;
+    }
+}
 /*FINE RESPONSIVE CUSTOM*/
