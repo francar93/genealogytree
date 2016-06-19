@@ -474,6 +474,9 @@ select{
     width: 500px;
     left: 50%;
     margin-left: -250px;
+    background-color: #C6C6C6;
+    border-radius: 10px;
+    padding: 8px;
 }
 .errore-ricerca h5{
     line-height: 35px;
