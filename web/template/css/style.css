@@ -411,12 +411,14 @@ select{
 }
 .container-foto{
     position: relative;
-    top: 200px;
+    top: 100px;
     left: 50%;
     margin-left: -200px;
 }
 .container-foto form{
     width: 400px;
+    height: 420px;
+    overflow-x: hidden;
 }
 .radius{
     border-radius: 10px;
@@ -549,6 +551,13 @@ select{
     
 #butt2.tooltip:hover span{
     display:inline; position:absolute; border:1px solid #cccccc; background:#ffffff; color:#6c6c6c;
+}
+.cambio-foto{
+    height: 200px !important;
+    width: 200px !important;
+}
+.img-profile.cambio{
+    margin-left: -100px;
 }
 
 /*INIZIO RESPONSIVE CUSTOM*/
