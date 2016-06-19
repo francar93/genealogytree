@@ -456,15 +456,18 @@ select{
 }
 .testo-sinistra{
     position: relative;
-    top: 200px;
+    top: 100px;
     left: 20px;
-    width: 50%;
+    width: 45%;
     float: left;
-    text-align: justify;
+    text-align: left;
     color: white;
+    background-color: #C6C6C6;
+    border-radius: 10px;
+    padding: 10px;
 }
 .testo-sinistra h3{
-    line-height: 80px;
+    line-height: 50px;
 }
 .errore-ricerca{
     position: relative;
