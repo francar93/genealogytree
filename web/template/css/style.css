@@ -442,8 +442,7 @@ select{
 }
 #testo-benvenuto h3{
 }
-#testo-benvenuto h5{
-    font-weight: 900; 
+#testo-benvenuto h5{ 
     margin-top: 0;
 }
 .scegli-foto{
