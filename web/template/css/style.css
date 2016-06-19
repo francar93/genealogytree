@@ -215,6 +215,12 @@ input{
 .box-img-profile{
     height: 140px;  /*140 px calcolati con 100 px img + 20px top + 20 per dare margine bottom*/
 }
+
+#imgg{
+    max-width:100%;
+    height:auto;
+}
+
 .profile-name{
     text-align: center;
     color: white;
@@ -479,7 +485,7 @@ select{
     position: relative;
     top: 110px;
     left: 25px;
-    background-image: url('../img/logo-scritta-quadrato.png');
+    /*background-image: url('../img/logo-scritta-quadrato.png');*/
 }
 .errore-ricerca{
     position: relative;
