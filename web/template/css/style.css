@@ -566,6 +566,10 @@ select{
 .img-profile.cambio{
     margin-left: -100px;
 }
+.row.login.precompilato{
+    position: relative;
+    top: 150px;
+}
 
 /*INIZIO RESPONSIVE CUSTOM*/
 @media only screen and (max-width: 450px){
