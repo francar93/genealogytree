@@ -45,12 +45,17 @@
         </div>
         <div class="btns-add">
             <#if user_logged.id == user_current.id>
-                <a href="addparent" class="btn-floating btn-small waves-effect waves-light red" id="btn-parente">
+            <div id="butt1" class='tooltip'><span>Aggiungi e invia una richiesta ad un utente non registrato</span>
+                
+                <a href="addparent" class="btn-floating btn-small waves-effect waves-light red tooltip" id="btn-parente">
                     <i class="small material-icons">email</i>Parente
                 </a>
+            </div>
+            <div id="butt2" class='tooltip'><span>Aggiungi un utente che non possiede l'e-mail</span>
                 <a href="addprofilobase" class="btn-floating btn-small waves-effect waves-light red" id="btn-antenato">
                     <i class="small material-icons">add</i>Antenato
                 </a>
+            </div>
             </#if>
         </div>
     </div>
