@@ -478,6 +478,7 @@ select{
 .testo-sinistra h3{
     font-size: 25px;
     text-align: center;
+    margin: 0;
 }
 .immagine-sinistra{
     height: 340px;
