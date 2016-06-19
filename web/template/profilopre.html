@@ -1,4 +1,9 @@
 <#include "frame_public.html">
+<div id="testo-benvenuto">
+    <h3>BENVENUTO IN FAMILY-TREE</h3><br>
+    <h5>Inserisci una nuova password.<br>
+    </h5>
+</div>
 <div class="row login precompilato">
     <form class="col s12" action="profilopre" method="post">
         <div class="row">
@@ -6,7 +11,7 @@
         </div>
         <div class="row">
             <div class="input-field col s12">
-                <input id="email" type="email" class="validate" name="email">
+                <input id="email" type="email" name="email" placeholder="${email}" disabled="disabled">
                 <label for="email">Email</label>
             </div>
         </div>

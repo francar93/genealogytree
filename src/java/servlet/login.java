@@ -120,7 +120,7 @@ public class login extends HttpServlet {
         switch (flag) {
 
             case 1:
-                response.sendRedirect("profilopre");
+                response.sendRedirect("profilopre"+"?email1="+email);
                 break;
 
             case 2:

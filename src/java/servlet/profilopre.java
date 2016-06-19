@@ -36,6 +36,8 @@ public class profilopre extends HttpServlet {
         if(session == null){ 
 
             String action = (String) request.getAttribute("action");
+            //String email1 = (String) request.getAttribute("email1");
+            String email2 = (String) request.getParameter("email1");
             // Se l'azione non è stata definita o non è valida, impostala come l'azione di login
             if (action == null || (action.equals("login") && action.equals("signup"))) {
                 action = "login";
@@ -46,6 +48,8 @@ public class profilopre extends HttpServlet {
             data.put("message", new Message(request.getParameter("msg"), true));
 
             data.put("script", "login");
+            
+            data.put("email",email2);
 
             FreeMarker.process("profilopre.html", data, response, getServletContext());
         }else {
@@ -71,6 +75,7 @@ public class profilopre extends HttpServlet {
             
             String password        = request.getParameter("password").trim();
             String email           = request.getParameter("email").trim();
+            
         
             Message check = null;
         
@@ -79,8 +84,9 @@ public class profilopre extends HttpServlet {
             }else{
                 // Controllo della password
                 check = controlli.controllopassword(password);
-                              
             }
+            
+            
         if(!check.isError()){
             
         
