@@ -589,7 +589,9 @@ select{
 /* responsive box ricerca loggata in risuluzioni intermedie */
 @media only screen and (max-width: 780px) and (min-width: 450px){
     .container.search{
-        width: 100%;
+        width: 100%;  
+    }
+    .container-left.search{
         overflow-x: hidden;
     }
 }
