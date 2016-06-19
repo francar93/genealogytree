@@ -9,11 +9,12 @@
                 <div class="container search">
         <#list risultati as user>
             <div class="container-left search">
-                <div class="box-profile-container">
+                <div class="box-profile-container <#if user.noEmail()>no-email</#if> <#if user.noPsw()>no-psw</#if>">
                     <div class="box-img-profile">
                         <div class="img-profile">
                             <img src="template/img/profilo/${user.id}.jpg" onerror="this.src='template/img/avatar.gif'" id="profile-img">
                         </div>
+                        <br><#if user.noPsw()>(Account non verificato)</#if>
                     </div>
                     <div class="profile-info">
                     <div class="profile-name">
