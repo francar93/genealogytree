@@ -471,14 +471,29 @@ select{
     top: 450px;
     color: red;
     font-family: fantasy;
-    width: 500px;
+    width: 450px;
     left: 50%;
-    margin-left: -250px;
+    margin-left: -225px;
     background-color: #C6C6C6;
     border-radius: 10px;
     padding: 8px;
 }
 .errore-ricerca h5{
+    line-height: 35px;
+}
+.errore-ricerca-nolog{
+    position: relative;
+    top: 250px;
+    color: red;
+    font-family: fantasy;
+    width: 450px;
+    left: 50%;
+    margin-left: -225px;
+    background-color: #C6C6C6;
+    border-radius: 10px;
+    padding: 8px;
+}
+.errore-ricerca-nolog h5{
     line-height: 35px;
 }
 .signup .col .row{
@@ -487,6 +502,12 @@ select{
 .signup .col .row.submit{
     margin-bottom: 10px;
     margin-top: 10px;
+}
+#btn-signup{
+    position: relative;
+    right: 50%;
+    width: 100px;
+    margin-left: -50px;
 }
 
 /*INIZIO RESPONSIVE CUSTOM*/
@@ -532,6 +553,16 @@ select{
     /*responsive mobile testo benvenuto*/
     #testo-benvenuto{
         display: none;
+    }
+    .errore-ricerca-nolog{
+        width: 100%;
+        margin-left: 0;
+        left: 0;
+    }
+    .errore-ricerca{
+        width: 100%;
+        margin-left: 0;
+        left: 0;
     }
 }
 /* responsive mobile in landscape*/
