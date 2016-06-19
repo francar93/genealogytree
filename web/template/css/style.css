@@ -15,6 +15,10 @@ body{
 a{
     color: #365899;
 }
+html{
+    font-family: 'Exo', sans-serif;
+}
+
 input{
     color: white;
 }
