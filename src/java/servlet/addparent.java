@@ -162,7 +162,7 @@ public class addparent extends HttpServlet {
 
                             if(!check.isError()){
                                 // Torna alla pagina del profilo
-                                response.sendRedirect("profilo");
+                                response.sendRedirect("profilo"+"?msg="+"basic_add");
    
                             }else{
                                 try {
