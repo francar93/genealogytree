@@ -457,7 +457,7 @@ select{
 .testo-sinistra{
     position: relative;
     top: 100px;
-    left: 20px;
+    left: 25px;
     width: 45%;
     float: left;
     text-align: left;
@@ -465,6 +465,7 @@ select{
     background-color: #C6C6C6;
     border-radius: 10px;
     padding: 10px;
+    z-index: -1;
 }
 .testo-sinistra h3{
     line-height: 50px;
@@ -566,6 +567,9 @@ select{
         width: 100%;
         margin-left: 0;
         left: 0;
+    }
+    .testo-sinistra{
+        width: 90%;
     }
 }
 /* responsive mobile in landscape*/
