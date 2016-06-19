@@ -79,6 +79,7 @@
            
                 <a href="profilo?id=${relative.user.id}">
                     <h5>${relative.user.nome?capitalize} ${relative.user.cognome?capitalize}</h5>
+                    <br><#if relative.user.noPsw()>(Account non verificato)</#if>
                 </a>
                 
         </div>
@@ -111,6 +112,7 @@
             
                 <a href="profilo?id=${relative.user.id}">
                     <h5>${relative.user.nome?capitalize} ${relative.user.cognome?capitalize}</h5>
+                    <br><#if relative.user.noPsw()>(Account non verificato)</#if>
                 </a>
             
         </div>
@@ -148,6 +150,7 @@
         <div class="profile-name">
                 <a href="profilo?id=${relative.user.id}">
                      <h5>${relative.user.nome?capitalize} ${relative.user.cognome?capitalize}</h5>
+                     <br><#if relative.user.noPsw()>(Account non verificato)</#if>
                 </a>
         </div>
         <div class="profile-info">
@@ -190,6 +193,7 @@
         <div class="profile-name">
             <a href="profilo?id=${relative.user.id}">
                  <h5>${relative.user.nome?capitalize} ${relative.user.cognome?capitalize}</h5>
+                 <br><#if relative.user.noPsw()>(Account non verificato)</#if>
             </a>
         </div>
         <div class="profile-info">
@@ -231,6 +235,7 @@
         <div class="profile-name">
             <a href="profilo?id=${relative.user.id}">
                  <h5>${relative.user.nome?capitalize} ${relative.user.cognome?capitalize}</h5>
+                 <br><#if relative.user.noPsw()>(Account non verificato)</#if>
             </a>
         </div>
         <div class="profile-info">

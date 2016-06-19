@@ -585,6 +585,7 @@ select{
 .container-left.signup{
     position: relative;
     top: 100px;
+    z-index: -1;
 }
 /*INIZIO RESPONSIVE CUSTOM*/
 @media only screen and (max-width: 450px){
