@@ -16,7 +16,7 @@ a{
     color: #365899;
 }
 html{
-    font-family: 'Exo', sans-serif;
+    font-family: 'Exo', sans-serif !important;
 }
 
 input{
@@ -98,7 +98,6 @@ input{
     padding-left: 10px;
     margin-bottom: 0;
     margin-left: 30px;
-    font-family: fantasy;
 }
 .container-left{
     width: 50%;
@@ -270,7 +269,6 @@ input{
     max-width: 550px;
     margin-top: 35px;
     text-align: center;
-    font-family: fantasy;
     letter-spacing: 2px;
     line-height: 2.5;
     /*Aggiunto Matteo*/
@@ -433,10 +431,8 @@ select{
     color: white;
 }
 #testo-benvenuto h3{
-    font-family: fantasy;
 }
 #testo-benvenuto h5{
-    font-family: monospace;
     font-weight: 900; 
     margin-top: 0;
 }
@@ -478,7 +474,6 @@ select{
     position: relative;
     top: 450px;
     color: red;
-    font-family: fantasy;
     width: 450px;
     left: 50%;
     margin-left: -225px;
@@ -493,7 +488,6 @@ select{
     position: relative;
     top: 250px;
     color: red;
-    font-family: fantasy;
     width: 450px;
     left: 50%;
     margin-left: -225px;
