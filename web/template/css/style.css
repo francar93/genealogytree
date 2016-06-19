@@ -219,7 +219,8 @@ input{
 #imgg{
     max-width:100%;
     height:auto;
-    z-index: -1;
+    float: right;
+    
 }
 
 .profile-name{
@@ -525,6 +526,9 @@ select{
     margin-bottom: 10px;
     margin-top: 10px;
 }
+.signup .col .row .input-field{
+    margin-top: 0.8rem;
+}
 #btn-signup{
     position: relative;
     right: 50%;
@@ -579,7 +583,10 @@ select{
     position: relative;
     top: 150px;
 }
-
+.container-left.signup{
+    position: relative;
+    top: 100px;
+}
 /*INIZIO RESPONSIVE CUSTOM*/
 @media only screen and (max-width: 450px){
     /*responsive header*/
