@@ -715,6 +715,9 @@ select{
     .nodo{
         display: none;
     }
+    .search-logged{
+        max-width: 310px;
+    }
 }
 /* responsive mobile in landscape*/
 @media only screen and (max-width: 780px) and (orientation: landscape){
