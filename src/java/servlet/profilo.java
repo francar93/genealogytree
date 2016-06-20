@@ -151,7 +151,7 @@ public class profilo extends HttpServlet {
                             }else{
                                 iter.remove();
                             }
-                    }
+                        }
 
 
                     breadcrumb.add(family_tree.getUser(user_current));
