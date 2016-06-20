@@ -607,6 +607,15 @@ select{
 #no-verificato{
     text-align: center;
 }
+.nodo{
+    height: 30px;
+    width: 100px;;
+    background-color: #C6C6C6;
+    border-radius: 10px;
+    padding: 6px;
+    margin-left: 20px;
+    float: left;
+}
 /*INIZIO RESPONSIVE CUSTOM*/
 @media only screen and (max-width: 450px){
     /*responsive header*/
