@@ -1,10 +1,11 @@
 <#include "frame_public.html">
-<div class="container-left-profile"> 
+<div class="container-left-profile <#if user_logged.id != user_current.id>fix-richiesta</#if>"> 
     <div class="box-profile-container <#if user_current.noEmail()>no-email</#if> <#if user_current.noPsw()>no-psw</#if>">
         <!--oppure al posto di getEamil prova email-->
         <#if message.msg??>
             <p id="error-msg">${message.msg}</p>
         </#if>
+        <#if user_logged.id == user_current.id>
         <#if request!=0>
         <a href="richieste" id="richieste">
             <div class="img-richieste">
@@ -12,6 +13,7 @@
                 <i class="small material-icons">supervisor_account</i>
             </div>
         </a>
+        </#if>
         </#if>
         
         <div class="box-img-profile">
