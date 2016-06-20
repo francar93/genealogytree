@@ -61,10 +61,12 @@
     </div>
     <#list breadcrumb as node>
     <div class="nodo">
+        <div class="tooltip"><span>(${node.label?capitalize})</span>
         <a href="profilo?id=${node.user.id}">
-            ${node.user.nome}(${node.label?capitalize})>
-        </a>
+            ${node.user.nome}
+        </a></div>
     </div>
+    <i class="small material-icons" id="freccia-nodo">fast_forward</i>
     </#list>
 </div>
 <div class="container-right">
