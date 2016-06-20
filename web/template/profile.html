@@ -1,11 +1,5 @@
 <#include "frame_public.html">
-<div class="container-left-profile">
-    <#list breadcrumb as node>
-        <a href="profilo?id=${node.user.id}">
-            ${node.user.nome}(${node.label?capitalize})>
-        </a>
-        </#list> 
-
+<div class="container-left-profile"> 
     <div class="box-profile-container <#if user_current.noEmail()>no-email</#if> <#if user_current.noPsw()>no-psw</#if>">
         <!--oppure al posto di getEamil prova email-->
         <#if message.msg??>
@@ -65,6 +59,13 @@
             </#if>
         </div>
     </div>
+    <#list breadcrumb as node>
+    <div class="nodo">
+        <a href="profilo?id=${node.user.id}">
+            ${node.user.nome}(${node.label?capitalize})>
+        </a>
+    </div>
+    </#list>
 </div>
 <div class="container-right">
 <#if mother?? || father??>
