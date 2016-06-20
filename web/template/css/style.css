@@ -283,7 +283,8 @@ input{
     box-shadow: 1px 1px 1px #000;
     -webkit-box-shadow: 1px 1px 1px #000;
     -moz-box-shadow: 1px 1px 1px #000;
-    -o-box-shadow: 1px 1px 1px #000;    
+    -o-box-shadow: 1px 1px 1px #000; 
+    padding-left: 25px;
 }
 .btns-add{
     height: 40px;

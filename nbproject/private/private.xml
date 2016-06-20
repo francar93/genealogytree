@@ -3,30 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/matteocapodicasa/Desktop/genealogytree/genealogytree/src/java/servlet/login.java</file>
-            <file>file:/Users/matteocapodicasa/Desktop/genealogytree/genealogytree/src/java/servlet/ricercanolog.java</file>
-            <file>file:/Users/matteocapodicasa/Desktop/genealogytree/genealogytree/src/java/servlet/aggiuntadaricerca.java</file>
-            <file>file:/Users/matteocapodicasa/Desktop/genealogytree/genealogytree/web/template/ricercanolog1.html</file>
-            <file>file:/Users/matteocapodicasa/Desktop/genealogytree/genealogytree/web/template/foto.html</file>
-            <file>file:/Users/matteocapodicasa/Desktop/genealogytree/genealogytree/src/java/servlet/profilopre.java</file>
-            <file>file:/Users/matteocapodicasa/Desktop/genealogytree/genealogytree/src/java/servlet/ricercalog.java</file>
-            <file>file:/Users/matteocapodicasa/Desktop/genealogytree/genealogytree/src/java/servlet/profilo.java</file>
-            <file>file:/Users/matteocapodicasa/Desktop/genealogytree/genealogytree/web/template/ricercalog.html</file>
-            <file>file:/Users/matteocapodicasa/Desktop/genealogytree/genealogytree/web/template/profilopre.html</file>
-            <file>file:/Users/matteocapodicasa/Desktop/genealogytree/genealogytree/web/template/css/materialize.css</file>
-            <file>file:/Users/matteocapodicasa/Desktop/genealogytree/genealogytree/src/java/Tree/treenode.java</file>
-            <file>file:/Users/matteocapodicasa/Desktop/genealogytree/genealogytree/web/template/addparent.html</file>
-            <file>file:/Users/matteocapodicasa/Desktop/genealogytree/genealogytree/src/java/servlet/addparent.java</file>
-            <file>file:/Users/matteocapodicasa/Desktop/genealogytree/genealogytree/src/java/Tree/NodeList.java</file>
             <file>file:/Users/matteocapodicasa/Desktop/genealogytree/genealogytree/web/template/css/style.css</file>
-            <file>file:/Users/matteocapodicasa/Desktop/genealogytree/genealogytree/src/java/utilita/Message.java</file>
-            <file>file:/Users/matteocapodicasa/Desktop/genealogytree/genealogytree/web/META-INF/context.xml</file>
-            <file>file:/Users/matteocapodicasa/Desktop/genealogytree/genealogytree/web/template/ricercanolog.html</file>
-            <file>file:/Users/matteocapodicasa/Desktop/genealogytree/genealogytree/web/template/login.html</file>
-            <file>file:/Users/matteocapodicasa/Desktop/genealogytree/genealogytree/web/template/addprofilobase.html</file>
             <file>file:/Users/matteocapodicasa/Desktop/genealogytree/genealogytree/web/template/profile.html</file>
-            <file>file:/Users/matteocapodicasa/Desktop/genealogytree/genealogytree/src/java/classi/utente.java</file>
-            <file>file:/Users/matteocapodicasa/Desktop/genealogytree/genealogytree/src/java/servlet/addprofilobase.java</file>
+            <file>file:/Users/matteocapodicasa/Desktop/genealogytree/genealogytree/web/template/frame_public.html</file>
+            <file>file:/Users/matteocapodicasa/Desktop/genealogytree/genealogytree/web/META-INF/context.xml</file>
         </group>
     </open-files>
 </project-private>
