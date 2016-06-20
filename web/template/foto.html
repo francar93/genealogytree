@@ -3,7 +3,7 @@
 <div class="container-foto container-richiesta"> 
     <form action="FileUpload" method="post" enctype="multipart/form-data">
         <div class="img-profile cambio">
-            <img src="${foto}${user_logged.id}.jpg" id="profile-img" class="cambio-foto">
+            <img src="${foto}${user_logged.id}.jpg" onerror="this.src='template/img/avatar.gif'" id="profile-img" class="cambio-foto">
         </div>
         <div class="scegli-foto">
             <div>
