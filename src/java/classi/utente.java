@@ -1049,7 +1049,7 @@ public class utente {
 
                     }
 
-                    // Se {u2} ha un solo genitore e {u1} gli ha entrmabi
+                    // Se {u2} ha un solo genitore e {u1} li ha entrmabi
                     if(u2_size == 1 && u1_size == 2){
                         // Recupera l'unico genitore di {u2}
                         u2_parent = u2_parents.iterator().next();
