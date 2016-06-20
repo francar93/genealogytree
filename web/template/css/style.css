@@ -712,6 +712,9 @@ select{
     .testo-sinistra{
         width: 90%;
     }
+    .nodo{
+        display: none;
+    }
 }
 /* responsive mobile in landscape*/
 @media only screen and (max-width: 780px) and (orientation: landscape){
