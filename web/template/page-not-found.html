@@ -1,19 +1,57 @@
-<#include "frame_public.html">
 
-        <nav> 
-         <div class="nav-wrapper">
-            <form>
-              <div class="input-field">
-                <input id="search" type="search" required>
-                <label for="search"> <i class="material-icons"> search</i> </label>
-              </div>  
-            </form>
-         </div>
-        </nav>
+
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Family Tree</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link type="text/css" rel="stylesheet" href="template/css/materialize.min.css"  media="screen,projection"/>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link type="text/css" rel="stylesheet" href="template/css/style.css"/>
+        <link href='https://fonts.googleapis.com/css?family=Exo' rel='stylesheet' type='text/css'>
+    </head>
+        <script type="text/javascript" src="template/js/jquery-3.0.0.min.js"></script>
+	<script type="text/javascript" src="template/js/materialize.min.js"></script>
+        <script type="text/javascript" src="template/js/main.js"></script>
+    <body>
+        
         <div class="header">
-            <h2>Pagina non trovata</h2>
-            <p>La pagina richiesta non è stata trovata o non esiste</p>
-            <p> <a href="profile.html">Vai al Profilo</a></p>   
-        </div>      
-  >
-<#include "footer.html">
+            <a href="login">    
+                <div class="logo">
+                    <img src="template/img/logo.png" id="logo">
+                </div>
+            </a>
+            <div class="search-nologin">
+                <form method="post" action="ricercanolog">
+                    <input type="text" placeholder="Cerca" name="cerca-nologin" id="search">
+                </form>
+            </div>
+           <!-- <#if user_logged??> -->
+            <div class="search-logged">
+                <form method="post" action="ricercalog">
+                    <input type="text" placeholder="Nome" name="nome" id="name-search">
+                    <input type="text" placeholder="Cognome" name="cognome" id="surname-search">
+                    <input type="text" placeholder="Data di nascita" name="datanascita" id="birthdate-search">
+                    <input type="text" placeholder="Luogo di nascita" name="citta" id="birtplace-search">
+                    <button class="btn waves-effect waves-light" type="submit" name="action">Cerca
+                        <i class="material-icons right"></i>
+                    </button>
+                </form>
+                <div class="dropdown-my">
+                    <i class="small material-icons">airplay</i>
+                </div>
+            </div>
+            </#if>
+            
+            <div class="not-found">  
+                <h5>Pagina non disponibile</h5>
+                <p>La pagina richiesta non è disponibile o non esiste</p>
+            </div>
+            
+            
