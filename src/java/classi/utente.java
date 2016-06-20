@@ -517,7 +517,7 @@ public class utente {
         // Inserisci l'utente corrente nella variabile di sessione
         session.setAttribute("user_logged", user_refresh);
         // Inizializza la breadcrumb
-        //session.setAttribute("breadcrumb", new NodeList());
+        session.setAttribute("breadcrumb", new NodeList());
         
         try {
             // Appena un utente fa il login non ha bisogno di fare il refresh dell'albero nella cache

@@ -16,6 +16,7 @@ import utilita.FreeMarker;
 import classi.utente;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import utilita.Message;
@@ -65,6 +66,7 @@ public class profilo extends HttpServlet {
                 treenode user_current_node;
                 String relative_grade = null;
                 if (request.getParameter("id") != null) {
+                    //data.put();
                     user_current_node = family_tree.getUserById((String) request.getParameter("id"));
                     user_current = user_current_node.getUser();
                     relative_grade = user_current_node.getLabel();
@@ -130,6 +132,44 @@ public class profilo extends HttpServlet {
                 data.put("father", father);
                 data.put("mother", mother);
 
+                
+                /* Gestione breadcrumb */
+
+                    // Recupero del breadcrumb
+                    NodeList breadcrumb = (NodeList)session.getAttribute("breadcrumb");
+                    if(user_current.equals(user_logged)){
+                        breadcrumb.clear();
+
+                    }else{
+
+                        Iterator iter = breadcrumb.iterator();
+                        boolean remove = false;
+                        while(iter.hasNext()){
+                            treenode node = (treenode)iter.next();
+                            if(!remove){
+                                // Se l'utente corrente è uguale a quello nella lista
+                                if(node.getUser().getId().equals(user_current.getId())){
+                                    // Elimina tutti gli utenti successivi
+                                    iter.remove();
+                                    remove = true;
+                                }
+                            }else{
+                                iter.remove();
+                            }
+                        }
+                    }
+
+
+                    breadcrumb.add(family_tree.getUser(user_current));
+
+
+                    // Inserimento del nuovo breadcrumb nella variabile di sessione
+                    session.setAttribute("breadcrumb", breadcrumb);
+                    // Inserimento del breadcrumb nel data-model
+                    data.put("breadcrumb", breadcrumb);
+                
+                
+                
                 //controllo dei messaggi
                 Message message = new Message(request.getParameter("msg"), false);
                 data.put("message", message);
