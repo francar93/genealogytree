@@ -649,6 +649,9 @@ select{
 .parent-type i{
     float: right;
 }
+.rotate{
+    transform: rotate(180deg);
+}
 /*INIZIO RESPONSIVE CUSTOM*/
 @media only screen and (max-width: 450px){
     /*responsive header*/
