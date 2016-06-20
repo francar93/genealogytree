@@ -137,7 +137,6 @@ public class profilo extends HttpServlet {
 
                     // Recupero del breadcrumb
                     NodeList breadcrumb = (NodeList)session.getAttribute("breadcrumb");
-
                         Iterator iter = breadcrumb.iterator();
                         boolean remove = false;
                         while(iter.hasNext()){
