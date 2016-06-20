@@ -555,23 +555,60 @@ select{
 /*Prova per tooltip*/
 
 #butt1{
-    font-family:Verdana, Arial, Helvetica, sans-serif; font-size:11px; float:left; 
+    font-family: Exo, Verdana, Arial, Helvetica, sans-serif; 
+    font-size:11px; 
+    float:left; 
 }
 #butt1:hover {
      text-decoration:none; 
 } /*BG color is a must for IE6*/
 .tooltip span {
-    display:none; padding:2px 3px; width:150px; margin-top:40px;
+    display:none; 
+    padding:2px 3px; 
+    width:150px; 
+    margin-top:40px;
 }
 .tooltip:hover span{
-    display:inline; position:absolute; border:1px solid #cccccc; background:#ffffff; color:#6c6c6c;
+    display:inline; 
+    position:absolute; 
+    border:1px solid #cccccc; 
+    background:#ffffff; 
+    color:#6c6c6c;
+    border-radius: 4px;
 }
 #butt2{
-    font-family:Verdana, Arial, Helvetica, sans-serif; font-size:11px; 
+    font-family: Exo,Verdana, Arial, Helvetica, sans-serif; 
+    font-size:11px; 
 }
 #butt2:hover {
     text-decoration:none; float: right;
-} /*BG color is a must for IE6*/
+}
+
+.but{
+    font-family: Exo,Verdana, Arial, Helvetica, sans-serif; 
+    font-size:11px; 
+    float:left; 
+}
+.but:hover {
+     text-decoration:none; 
+}
+
+.tooltip1 span {
+    display:none; 
+    padding:0px 0px; 
+    width:100px; 
+    margin-top:-35px;
+}
+.tooltip1:hover span{
+    display:inline; 
+    position:absolute; 
+    border:1px solid #cccccc; 
+    background:#ffffff; 
+    color:#6c6c6c;
+    border-radius: 4px;
+}
+
+/*BG color is a must for IE6*/
 .cambio-foto{
     height: 200px !important;
     width: 200px !important;
