@@ -586,8 +586,7 @@ select{
 
 .but{
     font-family: Exo,Verdana, Arial, Helvetica, sans-serif; 
-    font-size:11px; 
-    float:left; 
+     
 }
 .but:hover {
      text-decoration:none; 
@@ -598,6 +597,7 @@ select{
     padding:0px 0px; 
     width:100px; 
     margin-top:-35px;
+    margin-left:-28px;
 }
 .tooltip1:hover span{
     display:inline; 
