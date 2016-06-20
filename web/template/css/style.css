@@ -548,8 +548,8 @@ select{
 #btn-signup{
     position: relative;
     left: 50%;
-    width: 100px;
-    margin-left: -100px;
+    width: 112px;
+    margin-left: -112px;
 }
 
 /*Prova per tooltip*/
