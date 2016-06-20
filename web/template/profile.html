@@ -148,7 +148,7 @@
     
     
     <#if spouse??>
-<div class="parent-type" id="partner">Partner</div>
+<div class="parent-type" id="partner">Partner<i class="small material-icons">keyboard_arrow_down</i></div>
 <#assign relative = spouse>
 <div class="parentela partner">
     <div class="box-profile-container <#if relative.user.noEmail()>no-email</#if> <#if relative.user.noPsw()>no-psw</#if>">
@@ -188,7 +188,7 @@
 <#if children??>
 <#if children?size=0>
 <#else>
-<div class="parent-type" id="figli">Figli</div>
+<div class="parent-type" id="figli">Figli<i class="small material-icons">keyboard_arrow_down</i></div>
 
 <div class="parentela figli">
     <#list children>
@@ -231,7 +231,7 @@
     <#if siblings??>
     <#if siblings?size=0>
     <#else>
-<div class="parent-type" id="fratelli">Fratelli e Sorelle</div>
+<div class="parent-type" id="fratelli">Fratelli e Sorelle<i class="small material-icons">keyboard_arrow_down</i></div>
 <div class="parentela fratelli">
     <#list siblings>
     <#items as siblings>
