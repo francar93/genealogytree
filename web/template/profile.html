@@ -1,5 +1,5 @@
 <#include "frame_public.html">
-<div class="container-left-profile <#if user_logged.id != user_current.id>fix-richiesta</#if>"> 
+<div class="container-left-profile <#if user_logged.id != user_current.id || request==0>fix-richiesta</#if>"> 
     <div class="box-profile-container <#if user_current.noEmail()>no-email</#if> <#if user_current.noPsw()>no-psw</#if>">
         <!--oppure al posto di getEamil prova email-->
         <#if message.msg??>
