@@ -137,10 +137,6 @@ public class profilo extends HttpServlet {
 
                     // Recupero del breadcrumb
                     NodeList breadcrumb = (NodeList)session.getAttribute("breadcrumb");
-                    if(user_current.equals(user_logged)){
-                        breadcrumb.clear();
-
-                    }else{
 
                         Iterator iter = breadcrumb.iterator();
                         boolean remove = false;
@@ -156,7 +152,6 @@ public class profilo extends HttpServlet {
                             }else{
                                 iter.remove();
                             }
-                        }
                     }
 
 
