@@ -488,8 +488,8 @@ select{
     height: 340px;
     width: 90%;
     position: relative;
-    top: 110px;
-    left: 25px;
+    top: 168px;
+    left: -40px;
     z-index: -1;
     /*background-image: url('../img/logo-scritta-quadrato.png');*/
 }
