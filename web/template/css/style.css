@@ -800,6 +800,7 @@ select{
 @media only screen and (max-width: 570px){
     .container-left.add{
         width: 100%;
+        margin-left: -8px;
     }
     .immagine-sinistra{
         display: none;
