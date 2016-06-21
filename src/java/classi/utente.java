@@ -928,8 +928,10 @@ public class utente {
                 */
 
                 // Se l'utente corrente e/o {user} hanno già un coniuge
-                if(this.getPartner() != null || user.getPartner() != null) throw new NotAllowedException("sp_alr");
-
+                if(this.getPartner() != null) throw new NotAllowedException("sp_alr");
+                    
+                if(user.getPartner() != null) throw new NotAllowedException("sp_alr1");
+                
                 // Se {user} ha lo stesso sesso
                 if(this.sesso.equals(user.getSesso())) throw new NotAllowedException("sp_gen");
 
