@@ -750,6 +750,15 @@ select{
     #pollice-alto{
         margin-left: 40px;
     }
+    .container-foto{
+        margin-left: -150px;
+    }
+    .img-profile.cambio{
+        margin-left: -160px;
+    }
+    .invia-img{
+        margin-left: -110px;
+    }
 }
 /* responsive mobile in landscape*/
 @media only screen and (max-width: 780px) and (orientation: landscape){
