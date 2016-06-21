@@ -788,5 +788,8 @@ select{
     .testo-sinistra h3{
         font-size: 19px;
     }
+    .testo-search{
+        display: none;
+    }
 }
 /*FINE RESPONSIVE CUSTOM*/
