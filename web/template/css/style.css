@@ -643,7 +643,7 @@ select{
 #freccia-nodo{
     float: left;
     margin-left: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
 }
 .parent-type i{
     float: right;
