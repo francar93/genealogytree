@@ -367,7 +367,6 @@ input{
 .container.richieste{
     position: relative;
     top: 100px;
-    z-index: -1;
     width: 100%;
     left: 50%;
     margin-left: -200px;
@@ -378,7 +377,6 @@ input{
     background: #C6C6C6;
     border-radius: 10px;
     padding: 10px;
-    z-index: -1;
 }
 .profile-info.my{
     background: #1E4187;
