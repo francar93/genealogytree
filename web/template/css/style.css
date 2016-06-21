@@ -477,7 +477,8 @@ select{
     border-radius: 10px;
     padding: 10px;
     z-index: -1;
-    height: 180px;
+    height: auto;
+    /*height: 180px;*/
 }
 .testo-sinistra h3{
     font-size: 25px;
@@ -769,6 +770,11 @@ select{
     }
     .immagine-sinistra{
         display: none;
+    }
+}
+@media only screen and (max-width: 860px){
+    .testo-sinistra h3{
+        font-size: 19px;
     }
 }
 /*FINE RESPONSIVE CUSTOM*/
