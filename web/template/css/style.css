@@ -746,12 +746,14 @@ select{
     }
     .container.richieste{
         margin-left: -150px;
+        overflow-x: hidden;
     }
     #pollice-alto{
         margin-left: 40px;
     }
     .container-foto{
         margin-left: -150px;
+        overflow-x: hidden;
     }
     .img-profile.cambio{
         margin-left: -160px;
