@@ -507,6 +507,7 @@ select{
 }
 .errore-ricerca h5{
     line-height: 35px;
+    color: white;
 }
 .errore-ricerca-nolog{
     position: relative;
@@ -521,6 +522,7 @@ select{
 }
 .errore-ricerca-nolog h5{
     line-height: 35px;
+    color: white;
 }
 
 .not-found h5{
