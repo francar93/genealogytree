@@ -9,9 +9,9 @@
     <#if requests??>
         <#list requests as request>
         <div class="container-richiesta">
-            Sei stato aggiunto da
+            Sei stato aggiunto da:
             <div class="img-profile">
-                <img src="template/img/profilo/${request.sender.id}.jpg" id="profile-img">
+                <img src="template/img/profilo/${request.sender.id}.jpg" onerror="this.src='template/img/avatar.gif'" id="profile-img">
             </div>
             <h3>${request.sender.nome?capitalize} ${request.sender.cognome?capitalize}</h3>
                    
