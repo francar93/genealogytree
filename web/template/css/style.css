@@ -675,6 +675,9 @@ select{
     color: white;
     line-height: 35px;
 }
+#pollice-alto{
+    margin-left: 90px;
+}
 /*INIZIO RESPONSIVE CUSTOM*/
 @media only screen and (max-width: 450px){
     /*responsive header*/
@@ -737,6 +740,15 @@ select{
     }
     .search-logged{
         max-width: 310px;
+    }
+    .container-richiesta{
+        width: 300px;
+    }
+    .container.richieste{
+        margin-left: -150px;
+    }
+    #pollice-alto{
+        margin-left: 40px;
     }
 }
 /* responsive mobile in landscape*/
