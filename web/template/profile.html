@@ -62,7 +62,7 @@
         </div>
     </div>
     <#list breadcrumb as node>
-    <div class="nodo tooltip1"><span><a href="profilo?id=${node.user.id}">(${node.label?capitalize})</a></span>
+    <div class="nodo tooltip1"><span><a href="profilo?id=${node.user.id}">${node.label?capitalize}</a></span>
         <div class="but ">
         <a href="profilo?id=${node.user.id}">
             ${node.user.nome}
