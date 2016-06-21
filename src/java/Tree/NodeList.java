@@ -1,10 +1,8 @@
 package Tree;
 
-import classi.listautenti;
+
 import classi.utente;
-import java.sql.SQLException;
 import java.util.LinkedList;
-import java.util.ListIterator;
 
 /**
  *

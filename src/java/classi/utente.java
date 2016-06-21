@@ -220,7 +220,7 @@ public class utente {
 
         //</editor-fold>
         
-        //<editor-fold defaultstate="collapsed" desc="metodi per il reperimento dell'utenza"> 
+        //<editor-fold defaultstate="collapsed" desc="metodi per il reperimento dell'utenza dal db"> 
      /**
      * Recupera un utente attraverso il suo id
      * @param user_id   
@@ -553,6 +553,41 @@ public class utente {
         return Objects.equals(this.id, other.id);
     }
         
+    
+    public boolean checkFamilyTreeCache(HttpSession session){
+            try {
+                ResultSet record = Database.selectRecord("user", "id='" + this.id + "'");
+                if(record.next()){
+                    if(record.getInt("refresh") != 0){
+                        this.initSession2(session);
+                        return true;
+                    }
+                }
+            } catch (SQLException ex) { }
+            
+            return false;
+        }
+        /**
+         * Manda una segnalazione a tutti i parenti loggati dell'utente corrente, per aggiornare l'albero genealogico presente in cache
+         * @throws SQLException
+         */
+        public void sendRefreshAck() throws SQLException{
+            // Recupero i parenti dell'utente corrente
+            genetree family_tree = this.getFamilyTree();
+
+            Map<String, Object> data = new HashMap<>();
+            data.put("refresh", 1);
+
+            // Generazione della condizione: bisogna aggiornare l'albero genealogico di ogni parente
+            String condition = "";
+            for(treenode user: family_tree.getFamily_tree()){
+                condition = condition + "id = '" + user.getUser().getId() + "' OR ";
+            }
+            condition = condition.substring(0, condition.length()-4);
+            // Aggoirna il numero di parenti
+            Database.updateRecord("user", data, condition);
+
+        }
         
         //</editor-fold>
         
@@ -656,67 +691,6 @@ public class utente {
     
     //</editor-fold>
        
-        //<editor-fold defaultstate="collapsed" desc="Gestione albero genealogico nella cache">
-        
-        /**
-        *   PROBLEMA: durante la sessione di un utente, è possibile che venga aggiunto/rimosso qualche parente nel suo albero
-        *       In questo caso, l'albero presente nella cache dell'utente loggato risulterebbe non aggiornata
-        *       Per cui quando si aggiunge/rimuove un utente bisogna segnalare a tutti gli utenti nell'albero loggati 
-        *           in quel momento, di fare il refresh di quest'ultimo cosi da avere i PARENTI e le relative LABEL aggiornate.
-        *       Per segnalare a un utente che il proprio albero è da aggiornare, è stato aggiunto l'attributo "refresh" nel db
-        *           che, se posto a 1, indica che l'albero è da aggiornare. Il controllo su questo attributo deve essere fatto 
-        *           in ogni pagina in cui è necessario avere un albero aggiornato, ovvero la pagina del profilo
-        *           e la pagina di ricerca
-        *       Appena un utente effettua il login, pone a 0 l'attributo "refresh" in quanto non ha bisogno di 
-        *           aggiornare l'albero perchè è stato appena generato. 
-        * 
-        *       NOTA: la segnalazione sopra descritta, deve essere fatta DOPO l'aggiunta di un utente e PRIMA di una rimozione
-        *       
-        *       NOTA 2: Prima e dopo l'aggiornamento dell'albero è probabile che gli utenti presenti nell'albero non siano cambiati. 
-        *               Ciò avviene quando:
-        *                   1. un parente aggiunto da un altro già era presente nell'albero di quest'ultimo;
-        *                   2. un parente rimosso da un altro continua a essere presente nel suo albero
-        *               Alla luce di ciò, è comunque necessario aggiornare l'albero degli utenti loggati in quando è probabile
-        *                   che delle label abbiano subito delle modifiche
-        */      
-        public boolean checkFamilyTreeCache(HttpSession session){
-            try {
-                ResultSet record = Database.selectRecord("user", "id='" + this.id + "'");
-                if(record.next()){
-                    if(record.getInt("refresh") != 0){
-                        this.initSession2(session);
-                        return true;
-                    }
-                }
-            } catch (SQLException ex) { }
-            
-            return false;
-        }
-        /**
-         * Manda una segnalazione a tutti i parenti loggati dell'utente corrente, per aggiornare l'albero genealogico presente in cache
-         * @throws SQLException
-         */
-        public void sendRefreshAck() throws SQLException{
-            // Recupero i parenti dell'utente corrente
-            genetree family_tree = this.getFamilyTree();
-
-            Map<String, Object> data = new HashMap<>();
-            data.put("refresh", 1);
-
-            // Generazione della condizione: bisogna aggiornare l'albero genealogico di ogni parente
-            String condition = "";
-            for(treenode user: family_tree.getFamily_tree()){
-                condition = condition + "id = '" + user.getUser().getId() + "' OR ";
-            }
-            condition = condition.substring(0, condition.length()-4);
-            // Aggoirna il numero di parenti
-            Database.updateRecord("user", data, condition);
-
-        }
-       
-    //</editor-fold>
-      
-        
         //<editor-fold defaultstate="collapsed" desc="metodi aggiunta parentela">
     
         /**

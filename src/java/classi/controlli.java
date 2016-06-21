@@ -1,11 +1,8 @@
 package classi;
 
-import static java.lang.System.out;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.text.ParseException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.apache.commons.validator.EmailValidator;
 import utilita.DataUtil;
 import utilita.Database;
