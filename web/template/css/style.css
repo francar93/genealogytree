@@ -591,24 +591,21 @@ select{
     font-family: Exo,Verdana, Arial, Helvetica, sans-serif; 
      
 }
-.but:hover {
-     text-decoration:none; 
-}
+
 
 .tooltip1 span {
     display:none; 
     padding:0px 0px; 
-    width:100px; 
+    width:90px; 
     margin-top:-35px;
-    margin-left:-28px;
 }
 .tooltip1:hover span{
     display:inline; 
-    position:absolute; 
+    position:relative; 
     border:1px solid #cccccc; 
-    background:#ffffff; 
     color:#6c6c6c;
     border-radius: 4px;
+    
 }
 
 /*BG color is a must for IE6*/

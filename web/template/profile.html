@@ -62,11 +62,12 @@
         </div>
     </div>
     <#list breadcrumb as node>
-    <div class="nodo">
-        <div class="but tooltip1"><span>(${node.label?capitalize})</span>
+    <div class="nodo tooltip1"><span><a href="profilo?id=${node.user.id}">(${node.label?capitalize})</a></span>
+        <div class="but ">
         <a href="profilo?id=${node.user.id}">
             ${node.user.nome}
-        </a></div>
+        </a>
+        </div>
     </div>
     <#if user_logged.id == user_current.id || !(node_has_next)> 
     <#else>
