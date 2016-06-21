@@ -791,5 +791,8 @@ select{
     .testo-search{
         display: none;
     }
+    .header.logged{
+        overflow-x: hidden;
+    }
 }
 /*FINE RESPONSIVE CUSTOM*/
