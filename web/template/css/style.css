@@ -664,6 +664,18 @@ select{
 .ie-8 .parent-type i{
     display: none;
 }
+.testo-search{
+    width: 40%;
+    float: right;
+    height: 245px;
+    position: relative;
+    top: -300px;
+    padding-right: 35px;
+}
+.testo-search h5{
+    color: white;
+    line-height: 35px;
+}
 /*INIZIO RESPONSIVE CUSTOM*/
 @media only screen and (max-width: 450px){
     /*responsive header*/
