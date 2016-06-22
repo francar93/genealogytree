@@ -737,6 +737,9 @@ select{
     .nodo{
         display: none;
     }
+    #freccia-nodo{
+        display: none;
+    }
     .search-logged{
         max-width: 310px;
     }
