@@ -589,10 +589,6 @@ public class utente {
 
         }
         
-        //</editor-fold>
-        
-        //<editor-fold defaultstate="collapsed" desc="Gestione albero genealogico">
-
         /**
          * Recupera i componenti dell'alabero genealogico dell'utente con etichette
          * @return  lista di nodi dell'albero, a cui ad ogni utente è associata un'etichetta 
@@ -605,26 +601,8 @@ public class utente {
             tree.getFamilyTree();
             return tree;
         }
-        /**
-         * Recupera i componenti del nucleo familiare
-         * @return  lista digli utenti che compongono il nucleo familiare dell'utente
-         * @throws java.sql.SQLException
-         */
-        public listautenti getFamilyCore() throws SQLException{
-          
-            listautenti family_core = new listautenti();
-            // Aggiungi i genitori
-            family_core.addAll(this.getGenitori());
-            // Aggiungi i figli
-            family_core.addAll(this.getFigli());
-            // Aggiungi i fratelli
-            family_core.addAll(this.getFratelliSorelle());
-            // Aggiungi il coniuge
-            family_core.add(this.getByParentela("spouse"));
-            return family_core;
-        }
-    
-    //</editor-fold>
+        
+        //</editor-fold>
        
         //<editor-fold defaultstate="collapsed" desc="metodi aggiunta parentela">
     

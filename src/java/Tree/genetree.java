@@ -48,11 +48,6 @@ public class genetree {
         *   - Figli
         *   - Fratelli/sorelle
         *   - Coniuge
-        
-            N.B.: l'ordine con cui vengono inseriti i parenti è importante
-            Esempio: dopo aver aggiunto i propri figli, 
-                    i figli che aggiungerà il coniuge saranno sicuamente figliastri,
-                    per cui è importante aggiungere prima i figli di un'utente e poi il coniuge
         */
 
         // Se non ci sono più utenti da analizzare
